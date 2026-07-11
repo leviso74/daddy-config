@@ -1,6 +1,6 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use soroban_sdk::{Env, Address, testutils::Address as _};
-use swiftremit::{check_rate_limit, record_action, ActionType};
+use daddy-config::{check_rate_limit, record_action, ActionType};
 
 fn bench_abuse_check_empty_storage(c: &mut Criterion) {
     let env = Env::default();

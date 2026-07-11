@@ -2,13 +2,13 @@
 
 // TransferState is now a type alias for RemittanceStatus.
 // These tests validate the unified state machine through the storage layer.
-use crate::{ContractError, SwiftRemitContract, RemittanceStatus};
+use crate::{ContractError, Daddy-configContract, RemittanceStatus};
 use soroban_sdk::Env;
 
 #[test]
 fn test_transfer_state_transitions() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let transfer_id = 1u64;
 
@@ -39,7 +39,7 @@ fn test_transfer_state_transitions() {
 #[test]
 fn test_invalid_state_transitions() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let transfer_id = 2u64;
 
@@ -61,7 +61,7 @@ fn test_invalid_state_transitions() {
 #[test]
 fn test_terminal_states_cannot_transition() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let transfer_id = 3u64;
 
@@ -86,7 +86,7 @@ fn test_terminal_states_cannot_transition() {
 #[test]
 fn test_cancellation_path() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let transfer_id = 5u64;
 
@@ -114,7 +114,7 @@ fn test_cancellation_path() {
 #[test]
 fn test_idempotent_same_state() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let transfer_id = 7u64;
 
@@ -134,7 +134,7 @@ fn test_idempotent_same_state() {
 #[test]
 fn test_storage_efficiency() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let transfer_id = 8u64;
 

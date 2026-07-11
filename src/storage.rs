@@ -1,4 +1,4 @@
-//! Storage management for the SwiftRemit contract.
+//! Storage management for the Daddy-config contract.
 //!
 //! This module provides functions for reading and writing contract state,
 //! including configuration, remittance records, agent registration, and fee tracking.
@@ -9,7 +9,7 @@
 // Architecture: Storage Tiers
 // ============================================================================
 //
-// The SwiftRemit contract employs a tiered storage strategy to optimize for
+// The Daddy-config contract employs a tiered storage strategy to optimize for
 // Soroban's ledger entry limits and minimize storage operations:
 //
 // ## Tier 1: Instance Storage (Hot Tier)
@@ -49,7 +49,7 @@ use soroban_sdk::{contracttype, Address, Env, String, Vec};
 
 use crate::{AgentStats, ContractError, DailyLimit, Remittance, SenderVolumeEntry, TransferRecord};
 
-/// Storage keys for the SwiftRemit contract.
+/// Storage keys for the Daddy-config contract.
 ///
 /// Storage Layout:
 /// - Instance storage: Contract-level configuration and state (Admin, UsdcToken, PlatformFeeBps,

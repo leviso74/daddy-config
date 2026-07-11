@@ -1,12 +1,12 @@
 /**
- * React hooks for SwiftRemit React Native integration.
+ * React hooks for Daddy-config React Native integration.
  *
- * These hooks wrap the SwiftRemitRNClient and provide React-friendly
+ * These hooks wrap the Daddy-configRNClient and provide React-friendly
  * state management for common operations.
  */
 
 import { useState, useCallback } from 'react';
-import type { SwiftRemitRNClient } from './client.js';
+import type { Daddy-configRNClient } from './client.js';
 
 // ── useRemittance ─────────────────────────────────────────────────────────────
 
@@ -22,11 +22,11 @@ interface UseRemittanceState {
  * const { createRemittance, loading, error } = useCreateRemittance(client);
  * await createRemittance({ sender, agent, amount: toStroops(100) });
  */
-export function useCreateRemittance(client: SwiftRemitRNClient) {
+export function useCreateRemittance(client: Daddy-configRNClient) {
   const [state, setState] = useState<UseRemittanceState>({ loading: false, error: null });
 
   const createRemittance = useCallback(
-    async (params: Parameters<SwiftRemitRNClient['createRemittance']>[0]) => {
+    async (params: Parameters<Daddy-configRNClient['createRemittance']>[0]) => {
       setState({ loading: true, error: null });
       try {
         const tx = await client.createRemittance(params);

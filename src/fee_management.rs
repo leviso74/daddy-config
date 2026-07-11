@@ -1,6 +1,6 @@
 //! Safe fee accumulation with overflow protection and automatic flush mechanism.
 //!
-//! This module provides robust fee management for the SwiftRemit contract,
+//! This module provides robust fee management for the Daddy-config contract,
 //! preventing integer overflow through checked arithmetic and automatic flushing
 //! when accumulated fees reach a threshold.
 //!

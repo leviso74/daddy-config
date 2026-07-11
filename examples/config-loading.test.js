@@ -66,7 +66,7 @@ describe('Configuration Module Loading', () => {
     process.env.DEPLOYER_IDENTITY = 'custom-deployer';
     process.env.INITIAL_FEE_BPS = '300';
     process.env.ENABLE_DEBUG_LOG = 'false';
-    process.env.SWIFTREMIT_CONTRACT_ID = 'CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSC4';
+    process.env.DADDY-CONFIG_CONTRACT_ID = 'CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSC4';
     process.env.USDC_TOKEN_ID = 'CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSC5';
     
     // Clear the require cache to reload config

@@ -1,12 +1,12 @@
-# SwiftRemit
+# Daddy-config
 
-[![Soroban Contract CI](https://github.com/Haroldwonder/SwiftRemit/actions/workflows/contract-ci.yml/badge.svg)](https://github.com/Haroldwonder/SwiftRemit/actions/workflows/contract-ci.yml)
+[![Soroban Contract CI](https://github.com/Haroldwonder/Daddy-config/actions/workflows/contract-ci.yml/badge.svg)](https://github.com/Haroldwonder/Daddy-config/actions/workflows/contract-ci.yml)
 
 Production-ready Soroban smart contract for USDC remittance platform on Stellar blockchain.
 
 ## Overview
 
-SwiftRemit is an escrow-based remittance system that enables secure cross-border money transfers using USDC stablecoin. The platform connects senders with registered agents who handle fiat payouts, with the smart contract managing escrow, fee collection, and settlement.
+Daddy-config is an escrow-based remittance system that enables secure cross-border money transfers using USDC stablecoin. The platform connects senders with registered agents who handle fiat payouts, with the smart contract managing escrow, fee collection, and settlement.
 
 ## Features
 
@@ -209,7 +209,7 @@ Get up and running with testnet XLM, USDC, and a full end-to-end flow:
 
 This automated script will:
 - Generate and fund test accounts with XLM
-- Deploy SwiftRemit contract and mock USDC token
+- Deploy Daddy-config contract and mock USDC token
 - Register agents and mint test USDC
 - Run a complete test remittance flow
 - Save all configuration files
@@ -238,16 +238,16 @@ If you prefer to run steps manually:
 ### 1. Build the Contract
 
 ```bash
-cd SwiftRemit
+cd Daddy-config
 cargo build --target wasm32-unknown-unknown --release
-soroban contract optimize --wasm target/wasm32-unknown-unknown/release/swiftremit.wasm
+soroban contract optimize --wasm target/wasm32-unknown-unknown/release/daddy-config.wasm
 ```
 
 ### 2. Deploy to Testnet
 
 ```bash
 soroban contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/swiftremit.optimized.wasm \
+  --wasm target/wasm32-unknown-unknown/release/daddy-config.optimized.wasm \
   --source deployer \
   --network testnet
 ```
@@ -276,15 +276,15 @@ Every merge to `main` automatically triggers a deployment to the staging environ
 
 | Service  | Staging URL |
 |----------|-------------|
-| API      | `https://api.staging.swiftremit.io` |
-| Backend  | `https://backend.staging.swiftremit.io` |
-| Frontend | `https://staging.swiftremit.io` |
+| API      | `https://api.staging.daddy-config.io` |
+| Backend  | `https://backend.staging.daddy-config.io` |
+| Frontend | `https://staging.daddy-config.io` |
 
 > **Note:** The staging URLs above are placeholders. Configure the actual URLs as GitHub Actions variables `STAGING_API_URL` and `STAGING_BACKEND_URL` in the repository's *Settings → Environments → staging*.
 
 ### How it works
 
-1. Docker images for `backend`, `api`, and `frontend` are built and pushed to **GHCR** (`ghcr.io/<owner>/SwiftRemit/<service>:staging`).
+1. Docker images for `backend`, `api`, and `frontend` are built and pushed to **GHCR** (`ghcr.io/<owner>/Daddy-config/<service>:staging`).
 2. The workflow SSH-es into the staging VM and runs `docker compose up -d` with the new image tags.
 3. **Smoke tests** (`scripts/smoke-test-staging.sh`) run immediately after deploy to verify health and key API endpoints. The workflow fails if any check returns an unexpected status code.
 
@@ -313,7 +313,7 @@ Covers: root `.env.example`, `api/.env.example`, `backend/.env.example`, `fronte
 
 ## Configuration
 
-SwiftRemit uses environment variables for configuration. This allows you to easily configure the system for different environments (local development, testnet, mainnet) without modifying code.
+Daddy-config uses environment variables for configuration. This allows you to easily configure the system for different environments (local development, testnet, mainnet) without modifying code.
 
 ### Quick Setup
 
@@ -325,7 +325,7 @@ SwiftRemit uses environment variables for configuration. This allows you to easi
 2. Edit `.env` and fill in your configuration:
    ```bash
    # Required for client operations
-   SWIFTREMIT_CONTRACT_ID=your_contract_id_here
+   DADDY-CONFIG_CONTRACT_ID=your_contract_id_here
    USDC_TOKEN_ID=your_usdc_token_id_here
    
    # Optional: customize other settings
@@ -345,7 +345,7 @@ SwiftRemit uses environment variables for configuration. This allows you to easi
 
 - `NETWORK`: Network to connect to (`testnet` or `mainnet`)
 - `RPC_URL`: Soroban RPC endpoint URL
-- `SWIFTREMIT_CONTRACT_ID`: Deployed contract address
+- `DADDY-CONFIG_CONTRACT_ID`: Deployed contract address
 - `USDC_TOKEN_ID`: USDC token contract address
 - `DEFAULT_FEE_BPS`: Platform fee in basis points (0-10000)
 - `INITIAL_FEE_BPS`: Initial fee for contract deployment (0-10000)
@@ -364,7 +364,7 @@ SwiftRemit uses environment variables for configuration. This allows you to easi
 sequenceDiagram
     actor Sender
     actor Agent
-    participant Contract as SwiftRemit Contract
+    participant Contract as Daddy-config Contract
     participant USDC as USDC Token
     actor Admin
 
@@ -573,13 +573,13 @@ MIT
 ## Support
 
 For issues and questions:
-- GitHub Issues: [Create an issue](https://github.com/yourusername/swiftremit/issues)
+- GitHub Issues: [Create an issue](https://github.com/yourusername/daddy-config/issues)
 - Stellar Discord: https://discord.gg/stellar
 - Documentation: See [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## Contributing
 
-Contributions are welcome! We appreciate your help in making SwiftRemit better.
+Contributions are welcome! We appreciate your help in making Daddy-config better.
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
 - Setting up your development environment
@@ -596,7 +596,7 @@ Quick checklist:
 
 ## Asset Verification System
 
-SwiftRemit now includes a comprehensive asset verification system that validates Stellar assets against multiple trusted sources. See [ASSET_VERIFICATION.md](ASSET_VERIFICATION.md) for complete documentation.
+Daddy-config now includes a comprehensive asset verification system that validates Stellar assets against multiple trusted sources. See [ASSET_VERIFICATION.md](ASSET_VERIFICATION.md) for complete documentation.
 
 ### Features
 

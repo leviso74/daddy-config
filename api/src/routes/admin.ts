@@ -752,7 +752,7 @@ export function createAdminRouter(): Router {
             'x-webhook-signature': signature,
             'x-webhook-timestamp': timestamp,
             'x-webhook-id': `replay_${Date.now()}`,
-            'User-Agent': 'SwiftRemit-Webhook/1.0',
+            'User-Agent': 'Daddy-config-Webhook/1.0',
           },
           timeout: 30000,
           validateStatus: () => true,

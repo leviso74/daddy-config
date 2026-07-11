@@ -5,15 +5,15 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-swiftremit}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-swiftremit}
-      POSTGRES_DB: ${POSTGRES_DB:-swiftremit}
+      POSTGRES_USER: ${POSTGRES_USER:-daddy-config}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-daddy-config}
+      POSTGRES_DB: ${POSTGRES_DB:-daddy-config}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-swiftremit}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-daddy-config}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -38,9 +38,9 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3001
-      DATABASE_URL: postgres://${POSTGRES_USER:-swiftremit}:${POSTGRES_PASSWORD:-swiftremit}@postgres:5432/${POSTGRES_DB:-swiftremit}
+      DATABASE_URL: postgres://${POSTGRES_USER:-daddy-config}:${POSTGRES_PASSWORD:-daddy-config}@postgres:5432/${POSTGRES_DB:-daddy-config}
       OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
-      OTEL_SERVICE_NAME: swiftremit-backend
+      OTEL_SERVICE_NAME: daddy-config-backend
     env_file:
       - ./backend/.env.example
     volumes:
@@ -62,9 +62,9 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3000
-      DATABASE_URL: postgres://${POSTGRES_USER:-swiftremit}:${POSTGRES_PASSWORD:-swiftremit}@postgres:5432/${POSTGRES_DB:-swiftremit}
+      DATABASE_URL: postgres://${POSTGRES_USER:-daddy-config}:${POSTGRES_PASSWORD:-daddy-config}@postgres:5432/${POSTGRES_DB:-daddy-config}
       OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
-      OTEL_SERVICE_NAME: swiftremit-api
+      OTEL_SERVICE_NAME: daddy-config-api
     env_file:
       - ./api/.env.example
     volumes:
@@ -114,7 +114,7 @@ services:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./monitoring/provisioning/dashboards/swiftremit.yml:/etc/grafana/provisioning/dashboards/swiftremit.yml:ro
+      - ./monitoring/provisioning/dashboards/daddy-config.yml:/etc/grafana/provisioning/dashboards/daddy-config.yml:ro
       - ./monitoring/dashboards:/etc/grafana/provisioning/dashboards:ro
     depends_on:
       - prometheus

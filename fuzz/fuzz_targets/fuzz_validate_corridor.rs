@@ -1,7 +1,7 @@
 #![no_main]
 
 use libfuzzer_sys::fuzz_target;
-use swiftremit::validation::{validate_amount, validate_fee_bps, validate_escrow_ttl};
+use daddy-config::validation::{validate_amount, validate_fee_bps, validate_escrow_ttl};
 
 /// Fuzz target for corridor-level validation: fee basis points, amounts, and
 /// escrow TTLs all flow through corridor-gated logic.  None of these functions

@@ -1,6 +1,6 @@
 #![cfg(test)]
 
-use crate::{SwiftRemitContract, SwiftRemitContractClient, FeeStrategy, FeeBreakdown, FeeCorridor, ContractError};
+use crate::{Daddy-configContract, Daddy-configContractClient, FeeStrategy, FeeBreakdown, FeeCorridor, ContractError};
 use soroban_sdk::{
     testutils::{Address as _, AuthorizedFunction, AuthorizedInvocation},
     token, Address, Env, IntoVal, Symbol, String,
@@ -31,8 +31,8 @@ fn test_fee_breakdown_percentage_strategy_basic() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -64,8 +64,8 @@ fn test_fee_breakdown_percentage_different_amounts() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &1000000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Set 5% fee
     client.initialize(&admin, &token.address, &500, &0, &0, &treasury);
@@ -103,8 +103,8 @@ fn test_fee_breakdown_percentage_with_protocol_fee() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Set platform fee: 2.5%, protocol fee: 0.5%
     client.initialize(&admin, &token.address, &250, &0, &50, &treasury);
@@ -139,8 +139,8 @@ fn test_fee_breakdown_flat_strategy() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
 
@@ -174,8 +174,8 @@ fn test_fee_breakdown_flat_strategy_with_protocol_fee() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Flat fee: 100, Protocol fee: 1%
     client.initialize(&admin, &token.address, &250, &0, &100, &treasury);
@@ -211,8 +211,8 @@ fn test_fee_breakdown_dynamic_tier1() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
 
@@ -243,8 +243,8 @@ fn test_fee_breakdown_dynamic_tier2() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &1000000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
 
@@ -275,8 +275,8 @@ fn test_fee_breakdown_dynamic_tier3() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &10000000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
 
@@ -311,8 +311,8 @@ fn test_fee_breakdown_with_corridor_identifier() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -343,8 +343,8 @@ fn test_fee_breakdown_without_countries() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -369,8 +369,8 @@ fn test_fee_breakdown_partial_corridor_info() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -406,8 +406,8 @@ fn test_fee_breakdown_zero_amount() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -430,8 +430,8 @@ fn test_fee_breakdown_negative_amount() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -457,8 +457,8 @@ fn test_fee_breakdown_very_small_amount() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &100000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -484,8 +484,8 @@ fn test_fee_breakdown_very_large_amount() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &i128::MAX / 2);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);
@@ -516,8 +516,8 @@ fn test_fee_breakdown_consistency() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &1000000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &50, &treasury);
     client.register_agent(&agent, &None);
@@ -544,8 +544,8 @@ fn test_fee_breakdown_multiple_calls_consistent() {
     let (token, token_admin) = create_token_contract(&env, &admin);
     token_admin.mint(&sender, &200000);
 
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     client.initialize(&admin, &token.address, &250, &0, &0, &treasury);
     client.register_agent(&agent, &None);

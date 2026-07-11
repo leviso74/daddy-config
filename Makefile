@@ -19,7 +19,7 @@ build:
 # Optimize the WASM binary
 optimize: build
 	@echo "Optimizing contract..."
-	soroban contract optimize --wasm target/wasm32-unknown-unknown/release/swiftremit.wasm
+	soroban contract optimize --wasm target/wasm32-unknown-unknown/release/daddy-config.wasm
 	@echo "✅ Optimization complete"
 
 # Run tests
@@ -84,7 +84,7 @@ fund-deployer:
 deploy: optimize
 	@echo "Deploying contract to testnet..."
 	@CONTRACT_ID=$$(soroban contract deploy \
-		--wasm target/wasm32-unknown-unknown/release/swiftremit.optimized.wasm \
+		--wasm target/wasm32-unknown-unknown/release/daddy-config.optimized.wasm \
 		--source deployer \
 		--network testnet); \
 	echo "Contract deployed at: $$CONTRACT_ID"; \
@@ -138,11 +138,11 @@ audit:
 # Show contract size
 size: optimize
 	@echo "Contract size:"
-	@ls -lh target/wasm32-unknown-unknown/release/swiftremit.optimized.wasm | awk '{print $$5}'
+	@ls -lh target/wasm32-unknown-unknown/release/daddy-config.optimized.wasm | awk '{print $$5}'
 
 # Help
 help:
-	@echo "SwiftRemit Makefile Commands:"
+	@echo "Daddy-config Makefile Commands:"
 	@echo ""
 	@echo "Development:"
 	@echo "  make install        - Install dependencies"

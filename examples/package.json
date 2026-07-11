@@ -1,7 +1,7 @@
 {
-  "name": "swiftremit-examples",
+  "name": "daddy-config-examples",
   "version": "1.0.0",
-  "description": "Client examples for interacting with SwiftRemit smart contract",
+  "description": "Client examples for interacting with Daddy-config smart contract",
   "main": "client-example.js",
   "scripts": {
     "test": "node client-example.js",
@@ -15,7 +15,7 @@
     "usdc",
     "blockchain"
   ],
-  "author": "SwiftRemit",
+  "author": "Daddy-config",
   "license": "MIT",
   "dependencies": {
     "@stellar/stellar-sdk": "^12.0.0",

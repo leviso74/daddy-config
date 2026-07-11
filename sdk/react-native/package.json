@@ -1,7 +1,7 @@
 {
-  "name": "@swiftremit/react-native-sdk",
+  "name": "@daddy-config/react-native-sdk",
   "version": "1.0.0",
-  "description": "React Native wrapper for the SwiftRemit TypeScript SDK",
+  "description": "React Native wrapper for the Daddy-config TypeScript SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": ["dist", "src"],
@@ -9,7 +9,7 @@
     "build": "tsc",
     "test": "jest --passWithNoTests"
   },
-  "keywords": ["stellar", "soroban", "swiftremit", "react-native", "remittance"],
+  "keywords": ["stellar", "soroban", "daddy-config", "react-native", "remittance"],
   "license": "MIT",
   "peerDependencies": {
     "@stellar/stellar-sdk": ">=13.0.0",
@@ -17,7 +17,7 @@
     "react-native": ">=0.72.0"
   },
   "dependencies": {
-    "@swiftremit/sdk": "*"
+    "@daddy-config/sdk": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

@@ -15,7 +15,7 @@ use soroban_sdk::{
     Address, Env,
 };
 
-use crate::{ContractError, ProposalAction, ProposalState, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{ContractError, ProposalAction, ProposalState, Daddy-configContract, Daddy-configContractClient};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Shared setup helpers
@@ -27,9 +27,9 @@ fn make_env() -> Env {
     env
 }
 
-fn make_client(env: &Env) -> (SwiftRemitContractClient<'static>, Address) {
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(env, &contract_id);
+fn make_client(env: &Env) -> (Daddy-configContractClient<'static>, Address) {
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(env, &contract_id);
     let admin = Address::generate(env);
     let token = Address::generate(env);
     client.initialize(&admin, &token, &30u32, &0u64, &0u32, &admin);
@@ -108,8 +108,8 @@ proptest! {
     fn prop_invalid_quorum_rejected(bad_quorum in prop_oneof![Just(0u32), 3u32..=100u32]) {
         // Feature: multi-admin-dao-governance, Property 3: quorum=0 or quorum>admin_count → InvalidQuorum
         let env = make_env();
-        let contract_id = env.register_contract(None, SwiftRemitContract);
-        let client = SwiftRemitContractClient::new(&env, &contract_id);
+        let contract_id = env.register_contract(None, Daddy-configContract);
+        let client = Daddy-configContractClient::new(&env, &contract_id);
         let admin = Address::generate(&env);
         let token = Address::generate(&env);
         client.initialize(&admin, &token, &30u32, &0u64, &0u32, &admin);
@@ -330,8 +330,8 @@ proptest! {
     fn prop_expire_after_ttl(ttl in 10u64..=1000u64) {
         // Feature: multi-admin-dao-governance, Property 11: expire_proposal succeeds after TTL
         let env = make_env();
-        let contract_id = env.register_contract(None, SwiftRemitContract);
-        let client = SwiftRemitContractClient::new(&env, &contract_id);
+        let contract_id = env.register_contract(None, Daddy-configContract);
+        let client = Daddy-configContractClient::new(&env, &contract_id);
         let admin = Address::generate(&env);
         let token = Address::generate(&env);
         client.initialize(&admin, &token, &30u32, &0u64, &0u32, &admin);
@@ -595,8 +595,8 @@ proptest! {
         // Feature: multi-admin-dao-governance
         // Property 21: execute before timelock → TimelockNotElapsed; after → succeeds
         let env = make_env();
-        let contract_id = env.register_contract(None, SwiftRemitContract);
-        let client = SwiftRemitContractClient::new(&env, &contract_id);
+        let contract_id = env.register_contract(None, Daddy-configContract);
+        let client = Daddy-configContractClient::new(&env, &contract_id);
         let admin = Address::generate(&env);
         let token = Address::generate(&env);
         client.initialize(&admin, &token, &30u32, &0u64, &0u32, &admin);

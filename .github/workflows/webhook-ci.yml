@@ -27,7 +27,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: swiftremit_test
+          POSTGRES_DB: daddy-config_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -53,7 +53,7 @@ jobs:
       - name: Setup database
         working-directory: ./backend
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
         run: |
           psql $DATABASE_URL -f migrations/webhook_schema.sql
 
@@ -64,14 +64,14 @@ jobs:
       - name: Run webhook tests
         working-directory: ./backend
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
           NODE_ENV: test
         run: npm run test:webhook
 
       - name: Run all tests
         working-directory: ./backend
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
           NODE_ENV: test
         run: npm test
 
@@ -133,7 +133,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: swiftremit_test
+          POSTGRES_DB: daddy-config_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -157,7 +157,7 @@ jobs:
       - name: Setup database
         working-directory: ./backend
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
         run: |
           psql $DATABASE_URL -f migrations/webhook_schema.sql
           psql $DATABASE_URL -f migrations/seed_webhook_test_data.sql || true
@@ -165,7 +165,7 @@ jobs:
       - name: Start server
         working-directory: ./backend
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
           PORT: 3000
           NODE_ENV: test
         run: |

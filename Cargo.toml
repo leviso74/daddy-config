@@ -3,7 +3,7 @@ members = ["."]
 exclude = ["fuzz"]
 
 [package]
-name = "swiftremit"
+name = "daddy-config"
 version = "0.1.0"
 edition = "2021"
 

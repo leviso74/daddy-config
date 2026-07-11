@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SwiftRemit",
-    "slug": "swiftremit",
+    "name": "Daddy-config",
+    "slug": "daddy-config",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,15 +14,15 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.swiftremit.app",
+      "bundleIdentifier": "com.daddy-config.app",
       "infoPlist": {
-        "NSFaceIDUsageDescription": "SwiftRemit uses Face ID to confirm transactions.",
-        "NSCameraUsageDescription": "SwiftRemit needs camera access for KYC document scanning.",
-        "NSPhotoLibraryUsageDescription": "SwiftRemit needs photo library access for KYC document uploads."
+        "NSFaceIDUsageDescription": "Daddy-config uses Face ID to confirm transactions.",
+        "NSCameraUsageDescription": "Daddy-config needs camera access for KYC document scanning.",
+        "NSPhotoLibraryUsageDescription": "Daddy-config needs photo library access for KYC document uploads."
       }
     },
     "android": {
-      "package": "com.swiftremit.app",
+      "package": "com.daddy-config.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1A56DB"
@@ -48,16 +48,16 @@
       [
         "expo-local-authentication",
         {
-          "faceIDPermission": "Allow SwiftRemit to use Face ID."
+          "faceIDPermission": "Allow Daddy-config to use Face ID."
         }
       ],
       "expo-router",
       "expo-secure-store"
     ],
-    "scheme": "swiftremit",
+    "scheme": "daddy-config",
     "extra": {
       "eas": {
-        "projectId": "swiftremit-mobile"
+        "projectId": "daddy-config-mobile"
       }
     }
   }

@@ -3,7 +3,7 @@
 //! Verifies that success_rate_bps and last_active_timestamp are correctly
 //! accumulated across confirm_payout, mark_failed, and get_agent_stats.
 
-use crate::{SwiftRemitContract, SwiftRemitContractClient};
+use crate::{Daddy-configContract, Daddy-configContractClient};
 use soroban_sdk::{testutils::Address as _, token, Address, Env};
 
 fn create_token<'a>(env: &Env, admin: &Address) -> token::StellarAssetClient<'a> {
@@ -13,8 +13,8 @@ fn create_token<'a>(env: &Env, admin: &Address) -> token::StellarAssetClient<'a>
     )
 }
 
-fn create_contract<'a>(env: &Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_contract<'a>(env: &Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 /// New agent has success_rate_bps = 10000 (100%) and last_active_timestamp = 0.
@@ -98,7 +98,7 @@ fn test_success_rate_mixed_outcomes() {
     let agent = Address::generate(&env);
 
     // Directly manipulate storage to simulate accumulated stats.
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
     env.as_contract(&contract_id, || {
         let stats = crate::AgentStats {
             total_settlements: 4,

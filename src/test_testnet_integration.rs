@@ -1,4 +1,4 @@
-//! Stellar Testnet integration tests for SwiftRemit — Issue #394
+//! Stellar Testnet integration tests for Daddy-config — Issue #394
 //!
 //! These tests exercise the full remittance lifecycle against a live Testnet
 //! deployment.  They are gated behind the `testnet-integration` feature flag
@@ -6,7 +6,7 @@
 //!
 //! # Prerequisites
 //! 1. Copy `.env.testnet` to `.env.testnet.local` and fill in all values.
-//! 2. Deploy the contract to Testnet and set `SWIFTREMIT_CONTRACT_ID` /
+//! 2. Deploy the contract to Testnet and set `DADDY-CONFIG_CONTRACT_ID` /
 //!    `USDC_TOKEN_ID` in the env file.
 //! 3. Run with:
 //!    ```bash
@@ -383,13 +383,13 @@ fn testnet_03_friendbot_account_provisioning() {
     println!("✅ Friendbot funded {sender_pub} — XLM balance: {balance}");
 }
 
-/// Verify that the deployed SwiftRemit contract is reachable via the Soroban
+/// Verify that the deployed Daddy-config contract is reachable via the Soroban
 /// RPC `getLedgerEntries` call.
 #[test]
 fn testnet_04_contract_deployed_and_reachable() {
     load_env();
     let rpc_url = env_or("RPC_URL", "https://soroban-testnet.stellar.org:443");
-    let contract_id = require_env("SWIFTREMIT_CONTRACT_ID");
+    let contract_id = require_env("DADDY-CONFIG_CONTRACT_ID");
     let client = Client::new();
 
     // `getContractData` with the INSTANCE key confirms the contract exists.
@@ -438,14 +438,14 @@ fn testnet_04_contract_deployed_and_reachable() {
 ///
 /// NOTE: This test requires pre-signed XDR envelopes supplied via env vars
 /// `TESTNET_CREATE_REMITTANCE_XDR` and `TESTNET_CONFIRM_PAYOUT_XDR`.
-/// Generate them with the Stellar CLI or the SwiftRemit deploy script before
+/// Generate them with the Stellar CLI or the Daddy-config deploy script before
 /// running this test.
 #[test]
 fn testnet_05_full_remittance_lifecycle() {
     load_env();
     let rpc_url = env_or("RPC_URL", "https://soroban-testnet.stellar.org:443");
     let horizon_url = env_or("HORIZON_URL", "https://horizon-testnet.stellar.org");
-    let contract_id = require_env("SWIFTREMIT_CONTRACT_ID");
+    let contract_id = require_env("DADDY-CONFIG_CONTRACT_ID");
     let usdc_token_id = require_env("USDC_TOKEN_ID");
     let agent_secret = require_env("TESTNET_AGENT_SECRET");
     let max_retries: u32 = env_or("MAX_POLL_RETRIES", "15").parse().unwrap_or(15);
@@ -486,7 +486,7 @@ fn testnet_05_full_remittance_lifecycle() {
     // depends on the test amount configured in the XDR.
     assert!(
         escrow_balance >= 0.0,
-        "Contract account not found on Horizon — check SWIFTREMIT_CONTRACT_ID"
+        "Contract account not found on Horizon — check DADDY-CONFIG_CONTRACT_ID"
     );
 
     // ── Step 4: submit confirm_payout ────────────────────────────────────────

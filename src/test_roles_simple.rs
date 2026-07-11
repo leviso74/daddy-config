@@ -1,12 +1,12 @@
 #![cfg(test)]
 
-use crate::{SwiftRemitContract, Role};
+use crate::{Daddy-configContract, Role};
 use soroban_sdk::{testutils::Address as _, Address, Env};
 
 #[test]
 fn test_role_storage_and_retrieval() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let admin = Address::generate(&env);
     let settler = Address::generate(&env);
@@ -26,7 +26,7 @@ fn test_role_storage_and_retrieval() {
 #[test]
 fn test_role_authorization_checks() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let admin = Address::generate(&env);
     let non_admin = Address::generate(&env);
@@ -43,7 +43,7 @@ fn test_role_authorization_checks() {
 #[test]
 fn test_settler_authorization() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let settler = Address::generate(&env);
     let non_settler = Address::generate(&env);
@@ -60,7 +60,7 @@ fn test_settler_authorization() {
 #[test]
 fn test_role_persistence() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     let address = Address::generate(&env);
 

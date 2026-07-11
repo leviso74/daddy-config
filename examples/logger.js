@@ -1,7 +1,7 @@
 const pino = require('pino');
 
 /**
- * SwiftRemit Structured Logger
+ * Daddy-config Structured Logger
  * 
  * Provides consistent logging fields: level, service, request_id.
  * Supports JSON output for better observability.

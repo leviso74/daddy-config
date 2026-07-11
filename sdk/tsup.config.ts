@@ -15,7 +15,7 @@ export default defineConfig([
   {
     entry: { "browser/index": "src/index.ts" },
     format: ["iife", "esm"],
-    globalName: "SwiftRemitSDK",
+    globalName: "Daddy-configSDK",
     dts: false,
     clean: false,
     sourcemap: true,

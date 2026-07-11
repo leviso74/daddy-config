@@ -39,7 +39,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: swiftremit_test
+          POSTGRES_DB: daddy-config_test
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -60,12 +60,12 @@ jobs:
 
       - name: Run migrations
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
         run: psql $DATABASE_URL -f migrations/webhook_schema.sql
 
       - name: Run tests with coverage
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
           NODE_ENV: test
         run: npx vitest run --coverage --reporter=verbose
 

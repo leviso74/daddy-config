@@ -1,17 +1,17 @@
 #![cfg(test)]
 
-use crate::{ContractError, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{ContractError, Daddy-configContract, Daddy-configContractClient};
 use soroban_sdk::{testutils::Address as _, token, Address, Env};
 
-fn setup<'a>(env: &'a Env) -> (SwiftRemitContractClient<'a>, token::StellarAssetClient<'a>) {
+fn setup<'a>(env: &'a Env) -> (Daddy-configContractClient<'a>, token::StellarAssetClient<'a>) {
     let admin = Address::generate(env);
     let token_client = token::StellarAssetClient::new(
         env,
         &env.register_stellar_asset_contract_v2(admin.clone()).address(),
     );
-    let contract = SwiftRemitContractClient::new(
+    let contract = Daddy-configContractClient::new(
         env,
-        &env.register_contract(None, SwiftRemitContract {}),
+        &env.register_contract(None, Daddy-configContract {}),
     );
     contract.initialize(&admin, &token_client.address, &250, &0, &0, &admin);
     (contract, token_client)
@@ -62,7 +62,7 @@ fn test_get_accumulated_integrator_fees_default_zero() {
 #[test]
 fn test_set_and_get_accumulated_integrator_fees() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     env.as_contract(&contract_id, || {
         crate::storage::set_accumulated_integrator_fees(&env, 1234);

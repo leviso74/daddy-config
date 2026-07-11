@@ -1,5 +1,5 @@
 export {
-  SwiftRemitClient,
+  Daddy-configClient,
   MAX_BATCH_SIZE,
   buildUpdateFeeProposal,
   buildRegisterAgentProposal,
@@ -12,9 +12,9 @@ export {
   buildWhitelistAssetProposal,
   buildAdjustReputationThresholdProposal,
 } from "./client.js";
-export { SwiftRemitError, ErrorCode, parseContractError } from "./errors.js";
+export { Daddy-configError, ErrorCode, parseContractError } from "./errors.js";
 export type {
-  SwiftRemitClientOptions,
+  Daddy-configClientOptions,
   Remittance,
   RemittanceStatus,
   RemittanceEvent,

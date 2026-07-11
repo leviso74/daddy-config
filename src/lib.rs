@@ -1,4 +1,4 @@
-//! SwiftRemit - A Soroban smart contract for cross-border remittance services.
+//! Daddy-config - A Soroban smart contract for cross-border remittance services.
 // Initial commit: project setup and contract scaffolding
 //!
 //! This contract enables secure, fee-based remittance transactions between senders and agents,
@@ -174,7 +174,7 @@ fn enforce_daily_send_limit(
     Ok(())
 }
 
-/// The main SwiftRemit contract for managing cross-border remittances.
+/// The main Daddy-config contract for managing cross-border remittances.
 ///
 /// This contract handles the complete lifecycle of remittance transactions including:
 /// - Agent registration and management
@@ -183,7 +183,7 @@ fn enforce_daily_send_limit(
 /// - Cancellation and refund processing
 /// - Platform fee collection and withdrawal
 #[contract]
-pub struct SwiftRemitContract;
+pub struct Daddy-configContract;
 
 // ============================================================================
 // Configuration Constants
@@ -213,7 +213,7 @@ pub struct SwiftRemitContract;
 // ============================================================================
 
 #[contractimpl]
-impl SwiftRemitContract {
+impl Daddy-configContract {
     fn set_blacklist_status(
         env: &Env,
         user: Address,

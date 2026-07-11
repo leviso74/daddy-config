@@ -86,7 +86,7 @@ async function start() {
     const fxRateWss = new FxRateWebSocketServer(server);
 
     server.listen(PORT, () => {
-      console.log(`SwiftRemit Verification Service running on port ${PORT}`);
+      console.log(`Daddy-config Verification Service running on port ${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`FX rate WebSocket available at ws://...:${PORT}/ws/fx-rates`);
     });

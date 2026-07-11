@@ -18,7 +18,7 @@ try {
   openApiSpec = {
     openapi: '3.0.0',
     info: {
-      title: 'SwiftRemit API Service',
+      title: 'Daddy-config API Service',
       version: '1.0.0',
       description: 'API specification not available',
     },
@@ -29,7 +29,7 @@ try {
 // Serve Swagger UI
 router.use('/', swaggerUi.serve);
 router.get('/', swaggerUi.setup(openApiSpec, {
-  customSiteTitle: 'SwiftRemit API Documentation',
+  customSiteTitle: 'Daddy-config API Documentation',
   customCss: '.swagger-ui .topbar { display: none }',
 }));
 

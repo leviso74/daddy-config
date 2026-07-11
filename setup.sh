@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# SwiftRemit Setup Script
+# Daddy-config Setup Script
 # This script installs all prerequisites and builds the contract
 
 set -e
 
-echo "🚀 SwiftRemit Setup Script"
+echo "🚀 Daddy-config Setup Script"
 echo "=========================="
 echo ""
 
@@ -52,7 +52,7 @@ cargo build --target wasm32-unknown-unknown --release
 # Optimize the contract
 echo ""
 echo "⚡ Optimizing contract..."
-soroban contract optimize --wasm target/wasm32-unknown-unknown/release/swiftremit.wasm
+soroban contract optimize --wasm target/wasm32-unknown-unknown/release/daddy-config.wasm
 
 echo ""
 echo "✅ Setup complete!"

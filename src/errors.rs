@@ -1,4 +1,4 @@
-//! Error types for the SwiftRemit contract.
+//! Error types for the Daddy-config contract.
 //!
 //! This module defines all possible error conditions that can occur
 //! during contract execution. All errors are explicitly defined with

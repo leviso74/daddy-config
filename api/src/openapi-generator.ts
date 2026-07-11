@@ -246,11 +246,11 @@ export function generateOpenAPISpec() {
   return generator.generateDocument({
     openapi: '3.0.0',
     info: {
-      title: 'SwiftRemit API Service',
+      title: 'Daddy-config API Service',
       version: '1.0.0',
-      description: 'API service for SwiftRemit currency configuration and anchor management',
+      description: 'API service for Daddy-config currency configuration and anchor management',
       contact: {
-        name: 'SwiftRemit Team',
+        name: 'Daddy-config Team',
       },
     },
     servers: [
@@ -259,7 +259,7 @@ export function generateOpenAPISpec() {
         description: 'Development server',
       },
       {
-        url: 'https://api.swiftremit.com',
+        url: 'https://api.daddy-config.com',
         description: 'Production server',
       },
     ],

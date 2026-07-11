@@ -2,7 +2,7 @@ import { Keypair } from '@stellar/stellar-sdk';
 import crypto from 'crypto';
 
 /**
- * Example: Send a webhook to SwiftRemit
+ * Example: Send a webhook to Daddy-config
  * This demonstrates how an anchor would send webhook callbacks
  */
 

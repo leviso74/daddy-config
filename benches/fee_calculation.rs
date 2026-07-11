@@ -1,10 +1,10 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use soroban_sdk::{Env, Address, testutils::Address as _};
-use swiftremit::{SwiftRemitContract, SwiftRemitContractClient};
+use daddy-config::{Daddy-configContract, Daddy-configContractClient};
 
-fn setup_contract(env: &Env) -> (SwiftRemitContractClient, Address, Address) {
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(env, &contract_id);
+fn setup_contract(env: &Env) -> (Daddy-configContractClient, Address, Address) {
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(env, &contract_id);
     
     let admin = Address::generate(env);
     let usdc_token = Address::generate(env);
@@ -92,7 +92,7 @@ fn bench_fee_calculation_worst_case(c: &mut Criterion) {
 /// list.
 fn bench_corridor_lookup(c: &mut Criterion) {
     use soroban_sdk::String as SorobanString;
-    use swiftremit::{FeeCorridor, FeeStrategy};
+    use daddy-config::{FeeCorridor, FeeStrategy};
 
     let country_codes: &[&str] = &[
         "US", "MX", "GB", "NG", "IN", "KE", "PH", "BR", "DE", "FR",

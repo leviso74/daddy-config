@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "swiftremit.fullname" . }}-backend
+  name: {{ include "daddy-config.fullname" . }}-backend
   labels:
-    {{- include "swiftremit.labels" . | nindent 4 }}
+    {{- include "daddy-config.labels" . | nindent 4 }}
     app.kubernetes.io/component: backend
 spec:
   {{- if not $svc.autoscaling.enabled }}
@@ -12,11 +12,11 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "swiftremit.selectorLabels" (merge (dict "component" "backend") .) | nindent 6 }}
+      {{- include "daddy-config.selectorLabels" (merge (dict "component" "backend") .) | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "swiftremit.selectorLabels" (merge (dict "component" "backend") .) | nindent 8 }}
+        {{- include "daddy-config.selectorLabels" (merge (dict "component" "backend") .) | nindent 8 }}
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -24,7 +24,7 @@ spec:
       {{- end }}
       containers:
         - name: backend
-          image: {{ include "swiftremit.image" (dict "global" .Values.global "image" $svc.image) }}
+          image: {{ include "daddy-config.image" (dict "global" .Values.global "image" $svc.image) }}
           imagePullPolicy: {{ $svc.image.pullPolicy }}
           ports:
             - name: http
@@ -32,9 +32,9 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: {{ include "swiftremit.fullname" . }}-backend
+                name: {{ include "daddy-config.fullname" . }}-backend
             - secretRef:
-                name: {{ include "swiftremit.fullname" . }}-backend
+                name: {{ include "daddy-config.fullname" . }}-backend
           livenessProbe:
             {{- toYaml $svc.livenessProbe | nindent 12 }}
           readinessProbe:

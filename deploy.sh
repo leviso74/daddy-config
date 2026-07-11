@@ -5,7 +5,7 @@ set -e
 NETWORK=${NETWORK:-testnet}
 DEPLOYER=${DEPLOYER_IDENTITY:-deployer}
 INITIAL_FEE_BPS=${INITIAL_FEE_BPS:-250}
-WASM_PATH="target/wasm32-unknown-unknown/release/swiftremit.optimized.wasm"
+WASM_PATH="target/wasm32-unknown-unknown/release/daddy-config.optimized.wasm"
 
 # Allow CLI override for NETWORK (first argument)
 if [ -n "$1" ]; then
@@ -18,7 +18,7 @@ if [ "$INITIAL_FEE_BPS" -lt 0 ] || [ "$INITIAL_FEE_BPS" -gt 10000 ]; then
   exit 1
 fi
 
-echo "🚀 SwiftRemit Deployment Script"
+echo "🚀 Daddy-config Deployment Script"
 echo "Network: $NETWORK"
 echo "Deployer Identity: $DEPLOYER"
 
@@ -50,7 +50,7 @@ fi
 echo "🔨 Building and Optimizing Contract..."
 # Note: To enable debug logging for local testing, add: --features debug-log
 cargo build --target wasm32-unknown-unknown --release
-soroban contract optimize --wasm target/wasm32-unknown-unknown/release/swiftremit.wasm
+soroban contract optimize --wasm target/wasm32-unknown-unknown/release/daddy-config.wasm
 
 if [ ! -f "$WASM_PATH" ]; then
     echo "❌ Build failed. $WASM_PATH not found."

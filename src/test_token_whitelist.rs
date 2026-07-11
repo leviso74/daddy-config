@@ -1,6 +1,6 @@
 #![cfg(test)]
 
-use crate::{SwiftRemitContract, SwiftRemitContractClient, ContractError};
+use crate::{Daddy-configContract, Daddy-configContractClient, ContractError};
 use soroban_sdk::{
     testutils::{Address as _, Events},
     token, Address, Env, IntoVal, Symbol, Vec,
@@ -17,9 +17,9 @@ fn create_token_contract<'a>(
     )
 }
 
-fn create_swiftremit_contract(env: &Env) -> SwiftRemitContractClient {
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    SwiftRemitContractClient::new(env, &contract_id)
+fn create_daddy-config_contract(env: &Env) -> Daddy-configContractClient {
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    Daddy-configContractClient::new(env, &contract_id)
 }
 
 #[test]
@@ -31,7 +31,7 @@ fn test_add_whitelisted_token() {
     let (usdc_admin, usdc_token) = create_token_contract(&env, &admin);
     let (eurc_admin, eurc_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
 
     // Add EURC to whitelist
@@ -70,7 +70,7 @@ fn test_add_already_whitelisted_token_fails() {
     let admin = Address::generate(&env);
     let (_, usdc_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
 
     // Try to add USDC again (already whitelisted during init)
@@ -88,7 +88,7 @@ fn test_remove_whitelisted_token() {
     let (_, usdc_token) = create_token_contract(&env, &admin);
     let (_, eurc_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
     contract.add_whitelisted_token(&eurc_token.address);
 
@@ -116,7 +116,7 @@ fn test_remove_non_whitelisted_token_fails() {
     let (_, usdc_token) = create_token_contract(&env, &admin);
     let non_whitelisted_token = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
 
     // Try to remove a token that was never whitelisted
@@ -133,7 +133,7 @@ fn test_get_whitelisted_tokens_empty() {
     let admin = Address::generate(&env);
     let (_, usdc_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
 
     // Should have USDC from initialization
@@ -152,7 +152,7 @@ fn test_get_whitelisted_tokens_multiple() {
     let (_, eurc_token) = create_token_contract(&env, &admin);
     let (_, gbp_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
     
     contract.add_whitelisted_token(&eurc_token.address);
@@ -172,7 +172,7 @@ fn test_only_admin_can_add_token() {
     let (_, usdc_token) = create_token_contract(&env, &admin);
     let (_, eurc_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
 
     // This should fail because we're mocking all auths
@@ -194,7 +194,7 @@ fn test_only_admin_can_remove_token() {
     let (_, usdc_token) = create_token_contract(&env, &admin);
     let (_, eurc_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
     contract.add_whitelisted_token(&eurc_token.address);
 
@@ -214,7 +214,7 @@ fn test_whitelist_token_add_remove_add_again() {
     let (_, usdc_token) = create_token_contract(&env, &admin);
     let (_, eurc_token) = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &usdc_token.address, &250, &3600, &0, &admin);
 
     // Add EURC

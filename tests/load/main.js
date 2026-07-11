@@ -1,5 +1,5 @@
 /**
- * SwiftRemit k6 load test suite — combined entry point
+ * Daddy-config k6 load test suite — combined entry point
  *
  * Runs three scenarios in parallel:
  *   • remittance-create  – POST /api/remittance (backend)
@@ -10,8 +10,8 @@
  *
  * Usage:
  *   k6 run tests/load/main.js \
- *     -e API_URL=https://api.staging.swiftremit.io \
- *     -e BACKEND_URL=https://backend.staging.swiftremit.io
+ *     -e API_URL=https://api.staging.daddy-config.io \
+ *     -e BACKEND_URL=https://backend.staging.daddy-config.io
  *
  * Override VU counts via environment variables:
  *   CREATE_VUS     (default: 150)

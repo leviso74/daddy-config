@@ -1,5 +1,5 @@
 /**
- * TypeScript types mirroring the SwiftRemit Soroban contract types.
+ * TypeScript types mirroring the Daddy-config Soroban contract types.
  */
 
 export type RemittanceStatus =
@@ -10,7 +10,7 @@ export type RemittanceStatus =
   | "Failed"
   | "Disputed";
 
-/** Contract event types emitted by the SwiftRemit contract. */
+/** Contract event types emitted by the Daddy-config contract. */
 export type RemittanceEventType =
   | "created"
   | "completed"
@@ -222,11 +222,11 @@ export interface Corridor {
   country: string;
 }
 
-/** Fee estimate returned by {@link SwiftRemitClient.estimateFee}. All amounts in stroops. */
+/** Fee estimate returned by {@link Daddy-configClient.estimateFee}. All amounts in stroops. */
 export interface FeeEstimate {
   /** Requested send amount in stroops. */
   amount: bigint;
-  /** Platform fee charged by SwiftRemit in stroops. */
+  /** Platform fee charged by Daddy-config in stroops. */
   platformFee: bigint;
   /** Protocol fee charged by the Stellar network in stroops. */
   protocolFee: bigint;
@@ -240,7 +240,7 @@ export interface FeeEstimate {
   fromCache: boolean;
 }
 
-export interface SwiftRemitClientOptions {
+export interface Daddy-configClientOptions {
   /** Deployed contract address */
   contractId: string;
   /** Stellar network passphrase */
@@ -257,7 +257,7 @@ export interface SwiftRemitClientOptions {
   retryBackoffFactor?: number;
   /**
    * Default retry policy for state-changing (write) operations submitted via
-   * {@link SwiftRemitClient.submitTransaction}. Defaults to no retries because
+   * {@link Daddy-configClient.submitTransaction}. Defaults to no retries because
    * most write operations are non-idempotent and retrying the same signed
    * transaction could produce unexpected results for callers who don't explicitly
    * opt in. Override per-call via the `options.retryPolicy` argument.

@@ -60,7 +60,7 @@ export class WebhookDispatcher {
       'x-webhook-signature': signature,
       'x-webhook-timestamp': timestamp,
       'x-webhook-id': webhookId,
-      'User-Agent': 'SwiftRemit-Webhook/1.0',
+      'User-Agent': 'Daddy-config-Webhook/1.0',
     };
   }
 

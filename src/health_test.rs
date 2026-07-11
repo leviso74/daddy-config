@@ -2,12 +2,12 @@
 
 use soroban_sdk::{testutils::Address as _, Address, Env};
 
-use crate::{health::health, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{health::health, Daddy-configContract, Daddy-configContractClient};
 
 fn setup_env() -> (Env, soroban_sdk::Address) {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
     (env, contract_id)
 }
 
@@ -28,10 +28,10 @@ fn test_health_uninitialized() {
 fn test_health_after_initialize() {
     let (env, contract_id) = setup_env();
     let admin = Address::generate(&env);
-    let usdc = env.register_contract(None, SwiftRemitContract {});
+    let usdc = env.register_contract(None, Daddy-configContract {});
     let treasury = Address::generate(&env);
 
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
     client.initialize(&admin, &usdc, &250, &0, &0, &treasury);
 
     env.as_contract(&contract_id, || {
@@ -48,10 +48,10 @@ fn test_health_after_initialize() {
 fn test_health_reflects_paused_state() {
     let (env, contract_id) = setup_env();
     let admin = Address::generate(&env);
-    let usdc = env.register_contract(None, SwiftRemitContract {});
+    let usdc = env.register_contract(None, Daddy-configContract {});
     let treasury = Address::generate(&env);
 
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let client = Daddy-configContractClient::new(&env, &contract_id);
     client.initialize(&admin, &usdc, &250, &0, &0, &treasury);
     client.pause();
 

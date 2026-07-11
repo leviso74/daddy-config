@@ -1,8 +1,8 @@
 #![cfg(test)]
 
 use crate::{
-    BatchSettlementEntry, ContractError, SettlementConfig, SwiftRemitContract,
-    SwiftRemitContractClient,
+    BatchSettlementEntry, ContractError, SettlementConfig, Daddy-configContract,
+    Daddy-configContractClient,
 };
 use soroban_sdk::{
     testutils::{Address as _, Ledger},
@@ -14,14 +14,14 @@ fn create_token_contract<'a>(env: &Env, admin: &Address) -> token::StellarAssetC
     token::StellarAssetClient::new(env, &address)
 }
 
-fn create_swiftremit_contract<'a>(env: &'a Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_daddy-config_contract<'a>(env: &'a Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 fn setup(
     env: &Env,
 ) -> (
-    SwiftRemitContractClient,
+    Daddy-configContractClient,
     token::StellarAssetClient,
     Address,
     Address,
@@ -36,7 +36,7 @@ fn setup(
 
     token.mint(&sender, &500_000);
 
-    let contract = create_swiftremit_contract(env);
+    let contract = create_daddy-config_contract(env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 
@@ -203,7 +203,7 @@ fn test_rate_limit_getters_return_not_initialized_before_initialize() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     let addr = Address::generate(&env);
 
     let cfg_result = contract.try_get_rate_limit_config();

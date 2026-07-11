@@ -6,7 +6,7 @@ export default function Onboarding({ isVisible, onClose }) {
   const [hasSkipped, setHasSkipped] = useState(false)
 
   useEffect(() => {
-    const hasSeenOnboarding = localStorage.getItem('swiftremit_onboarding_seen')
+    const hasSeenOnboarding = localStorage.getItem('daddy-config_onboarding_seen')
     if (hasSeenOnboarding) {
       onClose()
     }
@@ -14,8 +14,8 @@ export default function Onboarding({ isVisible, onClose }) {
 
   const steps = [
     {
-      title: 'Welcome to SwiftRemit',
-      description: 'Send USDC remittances securely across borders with SwiftRemit built on Stellar Soroban.',
+      title: 'Welcome to Daddy-config',
+      description: 'Send USDC remittances securely across borders with Daddy-config built on Stellar Soroban.',
       action: 'Next',
       icon: '🎉'
     },
@@ -61,13 +61,13 @@ export default function Onboarding({ isVisible, onClose }) {
   }
 
   const markOnboardingComplete = () => {
-    localStorage.setItem('swiftremit_onboarding_seen', 'true')
+    localStorage.setItem('daddy-config_onboarding_seen', 'true')
     setHasSkipped(true)
     onClose()
   }
 
   const handleDocLink = () => {
-    window.open('https://swiftremit.stellar.org/docs', '_blank')
+    window.open('https://daddy-config.stellar.org/docs', '_blank')
   }
 
   if (!isVisible || hasSkipped) return null
@@ -107,7 +107,7 @@ export default function Onboarding({ isVisible, onClose }) {
             Skip
           </button>
           <div className="onboarding-buttons">
-            <a href="https://swiftremit.stellar.org/docs" target="_blank" rel="noopener noreferrer" className="btn-tertiary">
+            <a href="https://daddy-config.stellar.org/docs" target="_blank" rel="noopener noreferrer" className="btn-tertiary">
               📖 Docs
             </a>
             <button className="btn-primary" onClick={handleNext}>

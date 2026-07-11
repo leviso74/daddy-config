@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { parseProposal } from "../src/convert.js";
 import {
-  SwiftRemitClient,
+  Daddy-configClient,
   buildUpdateFeeProposal,
   buildRegisterAgentProposal,
   buildRemoveAgentProposal,
@@ -171,7 +171,7 @@ describe("proposal builder functions", () => {
 // ─── getActiveProposals pagination ────────────────────────────────────────────
 
 describe("getActiveProposals pagination", () => {
-  let client: SwiftRemitClient;
+  let client: Daddy-configClient;
 
   const makeScVal = (id: bigint, state: Proposal["state"]): xdr.ScVal => {
     const base: Record<string, unknown> = {
@@ -191,7 +191,7 @@ describe("getActiveProposals pagination", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockGetAccount.mockResolvedValue({});
-    client = new SwiftRemitClient({
+    client = new Daddy-configClient({
       contractId: "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
       networkPassphrase: "Test SDF Network ; September 2015",
       rpcUrl: "https://soroban-testnet.stellar.org",
@@ -278,12 +278,12 @@ describe("getActiveProposals pagination", () => {
 // ─── getVoteStatus ────────────────────────────────────────────────────────────
 
 describe("getVoteStatus", () => {
-  let client: SwiftRemitClient;
+  let client: Daddy-configClient;
 
   beforeEach(() => {
     vi.clearAllMocks();
     mockGetAccount.mockResolvedValue({});
-    client = new SwiftRemitClient({
+    client = new Daddy-configClient({
       contractId: "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
       networkPassphrase: "Test SDF Network ; September 2015",
       rpcUrl: "https://soroban-testnet.stellar.org",

@@ -1,4 +1,4 @@
-//! State transition validation for the SwiftRemit contract.
+//! State transition validation for the Daddy-config contract.
 //!
 //! This module enforces the canonical `RemittanceStatus` state machine:
 //!

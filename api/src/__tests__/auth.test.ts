@@ -58,7 +58,7 @@ describe('POST /api/auth/login (Issue #883)', () => {
     expect(res.body.data.expires_in).toBe(900);
     const cookie = res.headers['set-cookie'] as string[] | string;
     const cookieStr = Array.isArray(cookie) ? cookie.join('; ') : cookie;
-    expect(cookieStr).toContain('swiftremit_refresh');
+    expect(cookieStr).toContain('daddy-config_refresh');
     expect(cookieStr).toContain('HttpOnly');
   });
 
@@ -86,7 +86,7 @@ describe('POST /api/auth/refresh (Issue #883)', () => {
   it('returns 401 with invalid token', async () => {
     const res = await request(makeApp())
       .post('/api/auth/refresh')
-      .set('Cookie', 'swiftremit_refresh=bogus')
+      .set('Cookie', 'daddy-config_refresh=bogus')
       .send({});
     expect(res.status).toBe(401);
     expect(res.body.error.code).toBe('INVALID_REFRESH_TOKEN');
@@ -99,7 +99,7 @@ describe('POST /api/auth/refresh (Issue #883)', () => {
       .post('/api/auth/login')
       .send({ userId: 'carol', password: 'any' });
     const cookie = (loginRes.headers['set-cookie'] as string[]).find((c) =>
-      c.startsWith('swiftremit_refresh'),
+      c.startsWith('daddy-config_refresh'),
     )!;
 
     const refreshRes = await request(app)
@@ -119,7 +119,7 @@ describe('POST /api/auth/refresh (Issue #883)', () => {
       .post('/api/auth/login')
       .send({ userId: 'dan', password: 'any' });
     const cookie = (loginRes.headers['set-cookie'] as string[]).find((c) =>
-      c.startsWith('swiftremit_refresh'),
+      c.startsWith('daddy-config_refresh'),
     )!;
 
     // Use the token once
@@ -153,7 +153,7 @@ describe('POST /api/auth/logout (Issue #883)', () => {
       .post('/api/auth/login')
       .send({ userId: 'eve', password: 'any' });
     const cookie = (loginRes.headers['set-cookie'] as string[]).find((c) =>
-      c.startsWith('swiftremit_refresh'),
+      c.startsWith('daddy-config_refresh'),
     )!;
 
     expect(refreshTokenStore.size).toBe(1);
@@ -168,7 +168,7 @@ describe('POST /api/auth/logout (Issue #883)', () => {
       .post('/api/auth/login')
       .send({ userId: 'frank', password: 'any' });
     const cookie = (loginRes.headers['set-cookie'] as string[]).find((c) =>
-      c.startsWith('swiftremit_refresh'),
+      c.startsWith('daddy-config_refresh'),
     )!;
 
     const logoutRes = await request(app)
@@ -177,7 +177,7 @@ describe('POST /api/auth/logout (Issue #883)', () => {
       .send({});
 
     const setCookie = (logoutRes.headers['set-cookie'] as string[] | undefined) ?? [];
-    const cleared = setCookie.find((c) => c.startsWith('swiftremit_refresh'));
+    const cleared = setCookie.find((c) => c.startsWith('daddy-config_refresh'));
     expect(cleared).toContain('Expires=');
   });
 });

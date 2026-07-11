@@ -14,12 +14,12 @@ describe('Onboarding Component', () => {
 
   it('should display onboarding modal when visible', () => {
     render(<Onboarding isVisible={true} onClose={vi.fn()} />)
-    expect(screen.getByText('Welcome to SwiftRemit')).toBeInTheDocument()
+    expect(screen.getByText('Welcome to Daddy-config')).toBeInTheDocument()
   })
 
   it('should not display onboarding if already seen', () => {
     const onClose = vi.fn()
-    localStorage.setItem('swiftremit_onboarding_seen', 'true')
+    localStorage.setItem('daddy-config_onboarding_seen', 'true')
     render(<Onboarding isVisible={true} onClose={onClose} />)
     // onClose should have been called when localStorage was already set
     expect(onClose).toHaveBeenCalled()
@@ -61,14 +61,14 @@ describe('Onboarding Component', () => {
       const onClose = vi.fn()
       render(<Onboarding isVisible={true} onClose={onClose} />)
       fireEvent.click(screen.getByText('Skip'))
-      expect(localStorage.getItem('swiftremit_onboarding_seen')).toBe('true')
+      expect(localStorage.getItem('daddy-config_onboarding_seen')).toBe('true')
     })
 
     it('should close onboarding when close button is clicked', () => {
       const onClose = vi.fn()
       render(<Onboarding isVisible={true} onClose={onClose} />)
       fireEvent.click(screen.getByLabelText('Close onboarding'))
-      expect(localStorage.getItem('swiftremit_onboarding_seen')).toBe('true')
+      expect(localStorage.getItem('daddy-config_onboarding_seen')).toBe('true')
     })
   })
 
@@ -81,7 +81,7 @@ describe('Onboarding Component', () => {
     it('should display documentation link', () => {
       render(<Onboarding isVisible={true} onClose={vi.fn()} />)
       const docsLink = screen.getByRole('link', { name: /📖 Docs/i })
-      expect(docsLink).toHaveAttribute('href', 'https://swiftremit.stellar.org/docs')
+      expect(docsLink).toHaveAttribute('href', 'https://daddy-config.stellar.org/docs')
     })
 
     it('should display external link on wallet step', () => {
@@ -109,17 +109,17 @@ describe('Onboarding Component', () => {
       }
       
       fireEvent.click(screen.getByText('Get Started'))
-      expect(localStorage.getItem('swiftremit_onboarding_seen')).toBe('true')
+      expect(localStorage.getItem('daddy-config_onboarding_seen')).toBe('true')
     })
   })
 
   describe('Visibility toggling', () => {
     it('should show when isVisible is true and onboarding not seen', () => {
       const { rerender } = render(<Onboarding isVisible={false} onClose={vi.fn()} />)
-      expect(screen.queryByText('Welcome to SwiftRemit')).not.toBeInTheDocument()
+      expect(screen.queryByText('Welcome to Daddy-config')).not.toBeInTheDocument()
       
       rerender(<Onboarding isVisible={true} onClose={vi.fn()} />)
-      expect(screen.getByText('Welcome to SwiftRemit')).toBeInTheDocument()
+      expect(screen.getByText('Welcome to Daddy-config')).toBeInTheDocument()
     })
 
     it('should call onClose callback when modal closes', () => {

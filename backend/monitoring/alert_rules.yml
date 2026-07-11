@@ -34,7 +34,7 @@ groups:
     rules:
       # Alert when the dead-letter queue grows beyond threshold
       - alert: WebhookDeadLetterQueueHigh
-        expr: swiftremit_webhook_dead_letter_count > 10
+        expr: daddy-config_webhook_dead_letter_count > 10
         for: 5m
         labels:
           severity: warning
@@ -45,7 +45,7 @@ groups:
             Subscribers may be unreachable or returning non-2xx responses consistently.
 
       - alert: WebhookDeadLetterQueueCritical
-        expr: swiftremit_webhook_dead_letter_count > 50
+        expr: daddy-config_webhook_dead_letter_count > 50
         for: 2m
         labels:
           severity: critical
@@ -58,9 +58,9 @@ groups:
       # Alert when webhook failure rate exceeds threshold over a 10-minute window
       - alert: WebhookFailureRateHigh
         expr: >
-          rate(swiftremit_webhook_deliveries_total{result="failed"}[10m])
+          rate(daddy-config_webhook_deliveries_total{result="failed"}[10m])
           /
-          (rate(swiftremit_webhook_deliveries_total[10m]) + 1e-9)
+          (rate(daddy-config_webhook_deliveries_total[10m]) + 1e-9)
           > 0.2
         for: 5m
         labels:

@@ -49,7 +49,7 @@ async function start() {
     httpServer.on('request', app);
 
     httpServer.listen(PORT, () => {
-      logger.info(`SwiftRemit API server running on port ${PORT}`);
+      logger.info(`Daddy-config API server running on port ${PORT}`);
       logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
       logger.info(`Health check: http://localhost:${PORT}/health`);
       logger.info(`Currencies API: http://localhost:${PORT}/api/currencies`);

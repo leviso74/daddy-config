@@ -81,7 +81,7 @@ jobs:
       - name: Upload ABI artifact
         uses: actions/upload-artifact@v4
         with:
-          name: swiftremit-abi
+          name: daddy-config-abi
           path: abi/
           retention-days: 90
 
@@ -101,7 +101,7 @@ jobs:
       # ── Job summary ─────────────────────────────────────────────────────────
       - name: Write job summary
         run: |
-          WASM_HASH=$(cat abi/swiftremit.wasm.hash 2>/dev/null || echo "unknown")
+          WASM_HASH=$(cat abi/daddy-config.wasm.hash 2>/dev/null || echo "unknown")
           cat >> "$GITHUB_STEP_SUMMARY" <<EOF
           ## ✅ ABI & Metadata Published
 

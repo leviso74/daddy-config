@@ -1,6 +1,6 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use soroban_sdk::Env;
-use swiftremit::{
+use daddy-config::{
     bench_settlement_packed_read,
     bench_settlement_packed_write,
     bench_settlement_scattered_read,

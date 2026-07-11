@@ -8,13 +8,13 @@ export function generateOpenAPISpec() {
   return generator.generateDocument({
     openapi: '3.0.0',
     info: {
-      title: 'SwiftRemit Backend Service',
+      title: 'Daddy-config Backend Service',
       version: '1.0.0',
       description: 'Asset verification, KYC, and webhook handling service',
     },
     servers: [
       { url: 'http://localhost:3001', description: 'Development' },
-      { url: 'https://backend.swiftremit.com', description: 'Production' },
+      { url: 'https://backend.daddy-config.com', description: 'Production' },
     ],
   });
 }

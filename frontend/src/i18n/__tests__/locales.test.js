@@ -54,7 +54,7 @@ describe('Locale Validation', () => {
     })
 
     it('should have correct translations', () => {
-      expect(locales.pt.app.title).toBe('SwiftRemit')
+      expect(locales.pt.app.title).toBe('Daddy-config')
       expect(locales.pt.wallet.title).toBe('Carteira')
       expect(locales.pt.sendMoney.title).toBe('Enviar Dinheiro')
     })

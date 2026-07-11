@@ -6,7 +6,7 @@
  * 
  * Features:
  * - Create local echo server to receive webhooks
- * - Register webhook with SwiftRemit
+ * - Register webhook with Daddy-config
  * - Trigger remittance events
  * - Display received webhooks
  * - Verify signatures

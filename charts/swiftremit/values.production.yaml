@@ -1,32 +1,32 @@
 # values.production.yaml — production cluster overrides
-# Usage: helm install swiftremit ./charts/swiftremit -f charts/swiftremit/values.production.yaml
+# Usage: helm install daddy-config ./charts/daddy-config -f charts/daddy-config/values.production.yaml
 #
 # All secrets ARE injected from AWS Secrets Manager via External Secrets Operator.
 # Never commit real credentials to this file.
 #
 # Required secrets in AWS Secrets Manager:
-#   - swiftremit/DATABASE_URL
-#   - swiftremit/ADMIN_SECRET_KEY
-#   - swiftremit/CONTRACT_ID
-#   - swiftremit/JWT_SECRET
-#   - swiftremit/FX_API_KEY (optional)
-#   - swiftremit/WEBHOOK_SECRET_{ANCHOR_ID} (per anchor)
+#   - daddy-config/DATABASE_URL
+#   - daddy-config/ADMIN_SECRET_KEY
+#   - daddy-config/CONTRACT_ID
+#   - daddy-config/JWT_SECRET
+#   - daddy-config/FX_API_KEY (optional)
+#   - daddy-config/WEBHOOK_SECRET_{ANCHOR_ID} (per anchor)
 #
 # Example ExternalSecret for AWS Secrets Manager:
 #   apiVersion: external-secrets.io/v1beta1
 #   kind: ExternalSecret
 #   metadata:
-#     name: swiftremit-api-secrets
+#     name: daddy-config-api-secrets
 #   spec:
 #     secretStoreRef:
 #       name: aws-secrets-manager
 #       kind: SecretStore
 #     target:
-#       name: swiftremit-api
+#       name: daddy-config-api
 #     data:
 #       - secretKey: DATABASE_URL
 #         remoteRef:
-#           key: swiftremit/DATABASE_URL
+#           key: daddy-config/DATABASE_URL
 
 global:
   imageRegistry: "ghcr.io/your-org"
@@ -123,7 +123,7 @@ ingress:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
   hosts:
-    - host: swiftremit.example.com
+    - host: daddy-config.example.com
       paths:
         - path: /api
           pathType: Prefix
@@ -135,6 +135,6 @@ ingress:
           pathType: Prefix
           service: frontend
   tls:
-    - secretName: swiftremit-prod-tls
+    - secretName: daddy-config-prod-tls
       hosts:
-        - swiftremit.example.com
+        - daddy-config.example.com

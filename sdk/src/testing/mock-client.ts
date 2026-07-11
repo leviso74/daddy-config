@@ -1,10 +1,10 @@
 /**
- * In-memory mock implementation of SwiftRemitClient for integration testing.
+ * In-memory mock implementation of Daddy-configClient for integration testing.
  *
  * Usage:
- *   import { SwiftRemitMockClient } from "@swiftremit/sdk/testing";
+ *   import { Daddy-configMockClient } from "@daddy-config/sdk/testing";
  *
- *   const client = new SwiftRemitMockClient();
+ *   const client = new Daddy-configMockClient();
  *   client.seedAgent("GXXX");
  *   await client.createRemittance({ ... });
  */
@@ -24,7 +24,7 @@ import type {
   FeeEstimate,
   Corridor,
 } from "../types.js";
-import { SwiftRemitError, ErrorCode } from "../errors.js";
+import { Daddy-configError, ErrorCode } from "../errors.js";
 
 /** Returned by write operations on the mock client in place of a Stellar Transaction. */
 export interface MockTxResult {
@@ -47,12 +47,12 @@ export interface MockClientOptions {
 }
 
 /**
- * In-memory SwiftRemit client for integration tests.
+ * In-memory Daddy-config client for integration tests.
  *
  * Write operations directly apply state mutations and return a {@link MockTxResult}.
  * Read operations mirror the real client's signatures exactly.
  */
-export class SwiftRemitMockClient {
+export class Daddy-configMockClient {
   private readonly remittances = new Map<bigint, Remittance>();
   private readonly agents = new Set<string>();
   private readonly tokens = new Set<string>();
@@ -120,11 +120,11 @@ export class SwiftRemitMockClient {
     return Array.from(this.remittances.values());
   }
 
-  // ─── Read operations (match SwiftRemitClient signatures exactly) ──────────────
+  // ─── Read operations (match Daddy-configClient signatures exactly) ──────────────
 
   async getRemittance(_sourceAddress: string, remittanceId: bigint): Promise<Remittance> {
     const r = this.remittances.get(remittanceId);
-    if (!r) throw new SwiftRemitError(ErrorCode.RemittanceNotFound, `${remittanceId}`);
+    if (!r) throw new Daddy-configError(ErrorCode.RemittanceNotFound, `${remittanceId}`);
     return { ...r };
   }
 
@@ -184,13 +184,13 @@ export class SwiftRemitMockClient {
 
   async getAgentStats(_sourceAddress: string, agent: string): Promise<AgentStats> {
     if (!this.agents.has(agent))
-      throw new SwiftRemitError(ErrorCode.AgentNotRegistered, agent);
+      throw new Daddy-configError(ErrorCode.AgentNotRegistered, agent);
     return this.agentStats.get(agent)!;
   }
 
   async getAgentReputation(_sourceAddress: string, agent: string): Promise<number> {
     const stats = this.agentStats.get(agent);
-    if (!stats) throw new SwiftRemitError(ErrorCode.AgentNotRegistered, agent);
+    if (!stats) throw new Daddy-configError(ErrorCode.AgentNotRegistered, agent);
     return Math.round(stats.successRateBps / 100);
   }
 
@@ -238,7 +238,7 @@ export class SwiftRemitMockClient {
     remittanceId: bigint
   ): Promise<PartialPayoutRecord[]> {
     if (!this.remittances.has(remittanceId))
-      throw new SwiftRemitError(ErrorCode.RemittanceNotFound, `${remittanceId}`);
+      throw new Daddy-configError(ErrorCode.RemittanceNotFound, `${remittanceId}`);
     return [];
   }
 
@@ -247,7 +247,7 @@ export class SwiftRemitMockClient {
   }
 
   async getProposal(_sourceAddress: string, _proposalId: bigint): Promise<Proposal> {
-    throw new SwiftRemitError(ErrorCode.ProposalNotFound, `${_proposalId}`);
+    throw new Daddy-configError(ErrorCode.ProposalNotFound, `${_proposalId}`);
   }
 
   async getActiveProposals(_sourceAddress: string): Promise<Proposal[]> {
@@ -277,9 +277,9 @@ export class SwiftRemitMockClient {
 
   async createRemittance(params: CreateRemittanceParams): Promise<MockTxResult> {
     if (!this.agents.has(params.agent))
-      throw new SwiftRemitError(ErrorCode.AgentNotRegistered, params.agent);
+      throw new Daddy-configError(ErrorCode.AgentNotRegistered, params.agent);
     if (params.amount <= 0n)
-      throw new SwiftRemitError(ErrorCode.InvalidAmount, `${params.amount}`);
+      throw new Daddy-configError(ErrorCode.InvalidAmount, `${params.amount}`);
 
     const id = this.nextId++;
     const fee = (params.amount * BigInt(this._feeBps)) / 10_000n;
@@ -400,7 +400,7 @@ export class SwiftRemitMockClient {
 
   async withdrawFees(_admin: string, _to: string): Promise<MockTxResult> {
     if (this._platformFees === 0n)
-      throw new SwiftRemitError(ErrorCode.NoFeesToWithdraw, "0");
+      throw new Daddy-configError(ErrorCode.NoFeesToWithdraw, "0");
     this._platformFees = 0n;
     return { txHash: fakeTxHash() };
   }
@@ -412,14 +412,14 @@ export class SwiftRemitMockClient {
 
   async registerAgent(_admin: string, agent: string): Promise<MockTxResult> {
     if (this.agents.has(agent))
-      throw new SwiftRemitError(ErrorCode.AgentAlreadyRegistered, agent);
+      throw new Daddy-configError(ErrorCode.AgentAlreadyRegistered, agent);
     this.seedAgent(agent);
     return { txHash: fakeTxHash() };
   }
 
   async removeAgent(_admin: string, agent: string): Promise<MockTxResult> {
     if (!this.agents.has(agent))
-      throw new SwiftRemitError(ErrorCode.AgentNotRegistered, agent);
+      throw new Daddy-configError(ErrorCode.AgentNotRegistered, agent);
     this.agents.delete(agent);
     return { txHash: fakeTxHash() };
   }
@@ -473,13 +473,13 @@ export class SwiftRemitMockClient {
 
   private _requireRemittance(id: bigint): Remittance {
     const r = this.remittances.get(id);
-    if (!r) throw new SwiftRemitError(ErrorCode.RemittanceNotFound, `${id}`);
+    if (!r) throw new Daddy-configError(ErrorCode.RemittanceNotFound, `${id}`);
     return r;
   }
 
   private _requireStatus(r: Remittance, expected: RemittanceStatus): void {
     if (r.status !== expected)
-      throw new SwiftRemitError(
+      throw new Daddy-configError(
         ErrorCode.InvalidStatus,
         `Expected ${expected}, got ${r.status}`
       );

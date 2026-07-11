@@ -1,4 +1,4 @@
-//! Recipient address verification for SwiftRemit.
+//! Recipient address verification for Daddy-config.
 //!
 //! This module implements on-chain recipient hash storage, retrieval, and comparison.
 //! It prevents misdirected payouts by verifying that the recipient's payout details

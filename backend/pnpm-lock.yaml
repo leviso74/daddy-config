@@ -35,7 +35,7 @@ importers:
       '@stellar/stellar-sdk':
         specifier: ^12.0.0
         version: 12.3.0
-      '@swiftremit/sdk':
+      '@daddy-config/sdk':
         specifier: file:../sdk
         version: file:../sdk(@stellar/stellar-sdk@12.3.0)
       axios:
@@ -934,7 +934,7 @@ packages:
   '@stellar/stellar-sdk@12.3.0':
     resolution: {integrity: sha512-F2DYFop/M5ffXF0lvV5Ezjk+VWNKg0QDX8gNhwehVU3y5LYA3WAY6VcCarMGPaG9Wdgoeh1IXXzOautpqpsltw==}
 
-  '@swiftremit/sdk@file:../sdk':
+  '@daddy-config/sdk@file:../sdk':
     resolution: {directory: ../sdk, type: directory}
     peerDependencies:
       '@stellar/stellar-sdk': '>=13.0.0'
@@ -3172,7 +3172,7 @@ snapshots:
       - bare-url
       - debug
 
-  '@swiftremit/sdk@file:../sdk(@stellar/stellar-sdk@12.3.0)':
+  '@daddy-config/sdk@file:../sdk(@stellar/stellar-sdk@12.3.0)':
     dependencies:
       '@stellar/stellar-sdk': 12.3.0
 

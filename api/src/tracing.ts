@@ -1,12 +1,12 @@
 /**
- * OpenTelemetry instrumentation for SwiftRemit API service.
+ * OpenTelemetry instrumentation for Daddy-config API service.
  *
  * Import this module FIRST (before any other imports) in index.ts so that
  * auto-instrumentation patches are applied before the libraries are loaded.
  *
  * Environment variables:
  *   OTEL_EXPORTER_OTLP_ENDPOINT  – OTLP HTTP endpoint (default: http://localhost:4318)
- *   OTEL_SERVICE_NAME            – Service name reported in traces (default: swiftremit-api)
+ *   OTEL_SERVICE_NAME            – Service name reported in traces (default: daddy-config-api)
  *   OTEL_ENABLED                 – Set to "false" to disable tracing (default: true)
  */
 
@@ -27,7 +27,7 @@ if (enabled) {
 
   const sdk = new NodeSDK({
     resource: resourceFromAttributes({
-      [ATTR_SERVICE_NAME]: process.env.OTEL_SERVICE_NAME ?? 'swiftremit-api',
+      [ATTR_SERVICE_NAME]: process.env.OTEL_SERVICE_NAME ?? 'daddy-config-api',
       [ATTR_SERVICE_VERSION]: process.env.npm_package_version ?? '1.0.0',
     }),
     traceExporter: exporter,

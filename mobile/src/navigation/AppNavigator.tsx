@@ -34,7 +34,7 @@ function MainTabs() {
         headerTitleStyle: { fontWeight: '700' },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'SwiftRemit' }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Daddy-config' }} />
       <Tab.Screen name="History" component={TransactionHistoryScreen} options={{ title: 'Transactions' }} />
       <Tab.Screen name="KYC" component={KycStatusScreen} options={{ title: 'Verification' }} />
     </Tab.Navigator>

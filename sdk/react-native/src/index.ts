@@ -1,5 +1,5 @@
-export { SwiftRemitRNClient } from './client.js';
-export type { SwiftRemitRNClientOptions, SwiftRemitSigner } from './client.js';
+export { Daddy-configRNClient } from './client.js';
+export type { Daddy-configRNClientOptions, Daddy-configSigner } from './client.js';
 export { useCreateRemittance, useNetworkToggle } from './hooks.js';
 export type { StellarNetwork } from './hooks.js';
 
@@ -11,6 +11,6 @@ export {
   Networks,
   RpcUrls,
   ErrorCode,
-  SwiftRemitError,
+  Daddy-configError,
   parseContractError,
-} from '@swiftremit/sdk';
+} from '@daddy-config/sdk';

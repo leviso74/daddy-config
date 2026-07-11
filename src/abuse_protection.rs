@@ -256,13 +256,13 @@ fn emit_action_recorded(env: &Env, address: &Address, action_type: &ActionType, 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::SwiftRemitContract;
+    use crate::Daddy-configContract;
     use soroban_sdk::{testutils::{Address as _, Ledger as _, LedgerInfo}, Env};
 
     #[test]
     fn test_rate_limit_allows_within_limit() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             for _ in 0..MAX_TRANSFERS_PER_WINDOW {
@@ -274,7 +274,7 @@ mod tests {
     #[test]
     fn test_rate_limit_blocks_excess_requests() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             for _ in 0..MAX_TRANSFERS_PER_WINDOW {
@@ -289,7 +289,7 @@ mod tests {
     #[test]
     fn test_cooldown_enforced() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             assert!(check_cooldown(&env, &address, ActionType::Transfer).is_ok());
@@ -303,7 +303,7 @@ mod tests {
     #[test]
     fn test_different_addresses_independent_limits() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address1 = Address::generate(&env);
         let address2 = Address::generate(&env);
         env.as_contract(&contract_id, || {
@@ -318,7 +318,7 @@ mod tests {
     #[test]
     fn test_different_action_types_independent_limits() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             for _ in 0..MAX_TRANSFERS_PER_WINDOW {
@@ -332,7 +332,7 @@ mod tests {
     #[test]
     fn test_rapid_retry_detection() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             for _ in 0..5 {
@@ -345,7 +345,7 @@ mod tests {
     #[test]
     fn test_cooldown_expires_at_ledger_boundary() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             // Record action at t=0 (default ledger timestamp)
@@ -380,7 +380,7 @@ mod tests {
     #[test]
     fn test_admin_actions_no_rate_limit() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             for _ in 0..1000 {
@@ -392,7 +392,7 @@ mod tests {
     #[test]
     fn test_query_actions_higher_limit() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             for _ in 0..MAX_QUERIES_PER_WINDOW {
@@ -405,7 +405,7 @@ mod tests {
     #[test]
     fn test_timestamps_vec_stays_bounded_after_many_calls() {
         let env = Env::default();
-        let contract_id = env.register_contract(None, SwiftRemitContract {});
+        let contract_id = env.register_contract(None, Daddy-configContract {});
         let address = Address::generate(&env);
         env.as_contract(&contract_id, || {
             // Drive the rate limiter well past the limit; the Vec must never exceed MAX_VEC_SIZE.

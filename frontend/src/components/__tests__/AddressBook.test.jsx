@@ -71,7 +71,7 @@ describe('AddressBook Component', () => {
           memo: ''
         }
       ]
-      localStorage.setItem('swiftremit_recipients', JSON.stringify(savedRecipients))
+      localStorage.setItem('daddy-config_recipients', JSON.stringify(savedRecipients))
       
       render(<AddressBook onSelectRecipient={vi.fn()} />)
       
@@ -91,7 +91,7 @@ describe('AddressBook Component', () => {
           memo: 'Monthly support'
         }
       ]
-      localStorage.setItem('swiftremit_recipients', JSON.stringify(savedRecipients))
+      localStorage.setItem('daddy-config_recipients', JSON.stringify(savedRecipients))
     })
 
     it('should load recipients from localStorage', () => {
@@ -122,7 +122,7 @@ describe('AddressBook Component', () => {
           memo: 'Monthly support'
         }
       ]
-      localStorage.setItem('swiftremit_recipients', JSON.stringify(savedRecipients))
+      localStorage.setItem('daddy-config_recipients', JSON.stringify(savedRecipients))
     })
 
     it('should call onSelectRecipient with recipient data', () => {
@@ -171,7 +171,7 @@ describe('AddressBook Component', () => {
           memo: ''
         }
       ]
-      localStorage.setItem('swiftremit_recipients', JSON.stringify(savedRecipients))
+      localStorage.setItem('daddy-config_recipients', JSON.stringify(savedRecipients))
       
       render(<AddressBook onSelectRecipient={vi.fn()} />)
       

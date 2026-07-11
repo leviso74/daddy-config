@@ -1,6 +1,6 @@
 #![cfg(test)]
 
-use crate::{SwiftRemitContract, SwiftRemitContractClient, Role};
+use crate::{Daddy-configContract, Daddy-configContractClient, Role};
 use soroban_sdk::{testutils::Address as _, token, Address, Env};
 
 fn create_token_contract<'a>(env: &Env, admin: &Address) -> token::StellarAssetClient<'a> {
@@ -13,8 +13,8 @@ fn test_role_assignment_by_admin() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let settler = Address::generate(&env);
@@ -42,8 +42,8 @@ fn test_non_admin_cannot_assign_roles() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let non_admin = Address::generate(&env);
@@ -64,8 +64,8 @@ fn test_confirm_payout_requires_settler_role() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let agent = Address::generate(&env);
@@ -94,8 +94,8 @@ fn test_unregistered_agent_cannot_confirm_partial_payout() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let agent = Address::generate(&env);
@@ -120,8 +120,8 @@ fn test_settler_can_finalize_transfers() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let agent = Address::generate(&env);
@@ -152,8 +152,8 @@ fn test_role_persistence() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let settler = Address::generate(&env);

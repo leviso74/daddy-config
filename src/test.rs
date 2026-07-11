@@ -38,7 +38,7 @@ extern crate alloc;
 //
 // ============================================================================
 
-use crate::{SwiftRemitContract, SwiftRemitContractClient};
+use crate::{Daddy-configContract, Daddy-configContractClient};
 use soroban_sdk::token::Client as TokenClient;
 use soroban_sdk::token::StellarAssetClient;
 use soroban_sdk::{
@@ -55,8 +55,8 @@ fn get_token_balance(token: &token::StellarAssetClient, address: &Address) -> i1
     token::Client::new(&token.env, &token.address).balance(address)
 }
 
-fn create_swiftremit_contract<'a>(env: &Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_daddy-config_contract<'a>(env: &Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 fn default_currency(env: &Env) -> String {
@@ -76,7 +76,7 @@ fn test_initialize() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -93,7 +93,7 @@ fn test_initialize_twice() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
@@ -109,7 +109,7 @@ fn test_initialize_invalid_fee() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     contract.initialize(&admin, &token.address, &10001, &0, &0, &admin);
 }
@@ -124,7 +124,7 @@ fn test_register_agent() {
     let token = create_token_contract(&env, &token_admin);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
 contract.register_agent(&agent, &None);
@@ -157,7 +157,7 @@ fn test_remove_agent() {
     let token = create_token_contract(&env, &token_admin);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
 contract.register_agent(&agent, &None);
@@ -176,7 +176,7 @@ fn test_update_fee() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     contract.update_fee(&500);
@@ -193,7 +193,7 @@ fn test_update_fee_invalid() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     contract.update_fee(&10001);
@@ -213,7 +213,7 @@ fn test_create_remittance() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address);
 contract.register_agent(&agent, &None);
 
@@ -243,7 +243,7 @@ fn test_create_remittance_invalid_amount() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -265,7 +265,7 @@ fn test_create_remittance_unregistered_agent() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin);
 
     contract.create_remittance(&sender, &agent, &1000, &None, &None, &None, &None, &None);
@@ -285,7 +285,7 @@ fn test_confirm_payout() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -312,7 +312,7 @@ fn test_confirm_payout_twice() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -343,7 +343,7 @@ fn test_cancel_remittance_already_completed() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -390,7 +390,7 @@ fn test_cancel_remittance_sender_authorization() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -429,7 +429,7 @@ fn test_cancel_remittance_event_emission() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -470,7 +470,7 @@ fn test_cancel_remittance_not_found() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to cancel non-existent remittance
@@ -492,7 +492,7 @@ fn test_cancel_remittance_already_cancelled() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -518,7 +518,7 @@ fn test_cancel_remittance_multiple_remittances() {
 
     token.mint(&sender, &20000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -564,7 +564,7 @@ fn test_cancel_remittance_no_fee_accumulation() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -590,7 +590,7 @@ fn test_cancel_remittance_preserves_remittance_data() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -632,7 +632,7 @@ fn test_withdraw_fees() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -663,7 +663,7 @@ fn test_accumulated_fees_reset_after_withdrawal_regression() {
 
     token.mint(&sender, &20000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 
@@ -693,7 +693,7 @@ fn test_withdraw_fees_no_fees() {
     let token = create_token_contract(&env, &token_admin);
     let fee_recipient = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     contract.withdraw_fees(&fee_recipient);
@@ -712,7 +712,7 @@ fn test_fee_calculation() {
 
     token.mint(&sender, &100000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &500, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -742,7 +742,7 @@ fn test_multiple_remittances() {
     token.mint(&sender1, &10000);
     token.mint(&sender2, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -776,7 +776,7 @@ fn test_events_emitted() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     let initial_events = env.events().all().len();
@@ -805,7 +805,7 @@ fn test_authorization_enforcement() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     env.mock_all_auths();
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
@@ -851,7 +851,7 @@ fn test_withdraw_fees_valid_address() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -880,7 +880,7 @@ fn test_confirm_payout_valid_address() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -909,7 +909,7 @@ fn test_address_validation_in_settlement_flow() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -943,7 +943,7 @@ fn test_multiple_settlements_with_address_validation() {
     token.mint(&sender1, &10000);
     token.mint(&sender2, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent1, &None);
 contract.register_agent(&agent2, &None);
@@ -978,7 +978,7 @@ fn test_settlement_with_future_expiry() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1013,7 +1013,7 @@ fn test_settlement_with_past_expiry() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1043,7 +1043,7 @@ fn test_settlement_without_expiry() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1074,7 +1074,7 @@ fn test_duplicate_settlement_prevention() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1118,7 +1118,7 @@ fn test_different_settlements_allowed() {
 
     token.mint(&sender, &20000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1156,7 +1156,7 @@ fn test_settlement_hash_storage_efficiency() {
 
     token.mint(&sender, &50000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1189,7 +1189,7 @@ fn test_get_settlement_hash_for_settled_remittance() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 
@@ -1221,7 +1221,7 @@ fn test_get_settlement_hash_for_unsettled_remittance() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 
@@ -1242,7 +1242,7 @@ fn test_get_settlement_hash_for_nonexistent_remittance() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Attempting to get settlement hash for non-existent remittance should fail
@@ -1263,7 +1263,7 @@ fn test_settlement_completed_event() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
     env.ledger().with_mut(|li| li.timestamp = 10000);
@@ -1293,7 +1293,7 @@ fn test_pause_unpause() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     assert!(!contract.is_paused());
@@ -1319,7 +1319,7 @@ fn test_duplicate_prevention_with_expiry() {
     env.mock_all_auths();
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1344,7 +1344,7 @@ fn test_settlement_works_after_unpause() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1378,7 +1378,7 @@ fn test_get_settlement_valid() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -1404,7 +1404,7 @@ fn test_get_settlement_invalid_id() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     contract.get_settlement(&999);
@@ -1418,7 +1418,7 @@ fn test_settlement_completed_event_emission() {    let env = Env::default();
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
     let asset_code = String::from_str(&env, "USDC");
@@ -1454,7 +1454,7 @@ fn test_has_asset_verification() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &500, &0, &0, &admin); // 5% fee
 contract.register_agent(&agent, &None);
     let asset_code = String::from_str(&env, "USDC");
@@ -1486,7 +1486,7 @@ fn test_rate_limit_disabled_by_default() {
 
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin); // 0 = disabled
 contract.register_agent(&agent, &None);
 
@@ -1517,7 +1517,7 @@ fn test_rate_limit_enforced() {
 
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin); // 1 hour cooldown
 contract.register_agent(&agent, &None);
 
@@ -1543,7 +1543,7 @@ fn test_rate_limit_blocks_rapid_settlements() {
 
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin); // 1 hour cooldown
 contract.register_agent(&agent, &None);
 
@@ -1569,7 +1569,7 @@ fn test_rate_limit_allows_after_cooldown() {
 
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &60, &0, &admin); // 60 second cooldown
 contract.register_agent(&agent, &None);
 
@@ -1604,7 +1604,7 @@ fn test_rate_limit_per_sender() {
     token.mint(&sender1, &10000);
     token.mint(&sender2, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin); // 1 hour cooldown
 contract.register_agent(&agent, &None);
 
@@ -1628,7 +1628,7 @@ fn test_update_rate_limit() {    let env = Env::default();
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
     let asset_code = String::from_str(&env, "USDC");
     let issuer = Address::generate(&env);
@@ -1657,7 +1657,7 @@ fn test_admin_can_disable_rate_limit() {
 
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin); // Start with cooldown
 contract.register_agent(&agent, &None);
 
@@ -1683,7 +1683,7 @@ fn test_rate_limit_event_emission() {    let env = Env::default();
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     contract.update_rate_limit(&7200, &0, &admin);
@@ -1700,7 +1700,7 @@ fn test_validate_asset_safety_verified() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
     let asset_code = String::from_str(&env, "USDC");
@@ -1730,7 +1730,7 @@ fn test_add_admin() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin1, &token.address, &250, &0, &0, &admin1);
 
     // Initial admin should be registered
@@ -1753,7 +1753,7 @@ fn test_validate_asset_safety_unverified() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     let asset_code = String::from_str(&env, "UNKNOWN");
@@ -1783,7 +1783,7 @@ fn test_validate_asset_safety_suspicious() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to add the same admin again
@@ -1800,7 +1800,7 @@ fn test_remove_admin() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin1, &token.address, &250, &0, &0, &admin1);
 
     // Add second admin
@@ -1823,7 +1823,7 @@ fn test_cannot_remove_last_admin() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to remove the only admin
@@ -1842,7 +1842,7 @@ fn test_remove_admin_unauthorized() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin1, &token.address, &250, &0, &0, &admin1);
     contract.add_admin(&admin1, &admin2, &0, &admin1);
 
@@ -1861,7 +1861,7 @@ fn test_remove_admin_not_found() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to remove an address that is not an admin
@@ -1879,7 +1879,7 @@ fn test_multiple_admins_can_perform_admin_actions() {
     let token = create_token_contract(&env, &token_admin);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin1, &token.address, &250, &0, &0, &admin1);
     contract.add_admin(&admin1, &admin2);
 
@@ -1909,7 +1909,7 @@ fn test_add_admin_emits_event() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin1, &token.address, &250, &0, &0, &admin1);
 
     let initial_event_count = env.events().all().len();
@@ -1936,7 +1936,7 @@ fn test_remove_admin_emits_event() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin1, &token.address, &250, &0, &0, &admin1);
     contract.add_admin(&admin1, &admin2);
 
@@ -1964,7 +1964,7 @@ fn test_add_admin_already_exists() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to add the same admin again - should panic with AdminAlreadyExists
@@ -1982,7 +1982,7 @@ fn test_admin_count_updates_correctly() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin1, &token.address, &250, &0, &0, &admin1);
 
     // Initial count should be 1
@@ -2030,8 +2030,8 @@ fn test_multiple_tokens_different_contracts() {
     token2.mint(&sender, &20000);
 
     // Create two separate contract instances for different tokens
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &250);
     contract2.initialize(&admin, &token2.address, &300);
@@ -2082,9 +2082,9 @@ fn test_multi_token_balance_isolation() {
     token3.mint(&sender2, &60000);
 
     // Create contracts for each token
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
-    let contract3 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
+    let contract3 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &200);
     contract2.initialize(&admin, &token2.address, &300);
@@ -2149,8 +2149,8 @@ fn test_multi_token_fee_withdrawal() {
     token1.mint(&sender, &20000);
     token2.mint(&sender, &30000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &500);
     contract2.initialize(&admin, &token2.address, &250);
@@ -2205,8 +2205,8 @@ fn test_multi_token_cancellation_refunds() {
     token1.mint(&sender, &10000);
     token2.mint(&sender, &15000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &250);
     contract2.initialize(&admin, &token2.address, &300);
@@ -2256,8 +2256,8 @@ fn test_multi_token_state_transitions() {
     token1.mint(&sender, &10000);
     token2.mint(&sender, &10000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &250);
     contract2.initialize(&admin, &token2.address, &250);
@@ -2313,8 +2313,8 @@ fn test_multi_token_concurrent_operations() {
     token2.mint(&sender1, &50000);
     token2.mint(&sender2, &50000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &250);
     contract2.initialize(&admin, &token2.address, &250);
@@ -2363,8 +2363,8 @@ fn test_multi_token_edge_case_zero_fee() {
     token1.mint(&sender, &10000);
     token2.mint(&sender, &10000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     // One with 0% fee, one with normal fee
     contract1.initialize(&admin, &token1.address, &0);
@@ -2406,8 +2406,8 @@ fn test_multi_token_large_amounts() {
     token1.mint(&sender, &1_000_000_000);
     token2.mint(&sender, &5_000_000_000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &100);
     contract2.initialize(&admin, &token2.address, &50);
@@ -2448,8 +2448,8 @@ fn test_multi_token_expiry_handling() {
     token1.mint(&sender, &10000);
     token2.mint(&sender, &10000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &250);
     contract2.initialize(&admin, &token2.address, &250);
@@ -2494,8 +2494,8 @@ fn test_multi_token_pause_independence() {
     token1.mint(&sender, &10000);
     token2.mint(&sender, &10000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &250);
     contract2.initialize(&admin, &token2.address, &250);
@@ -2547,8 +2547,8 @@ fn test_multi_token_different_agents() {
     token1.mint(&sender, &30000);
     token2.mint(&sender, &30000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &200);
     contract2.initialize(&admin, &token2.address, &300);
@@ -2601,8 +2601,8 @@ fn test_multi_token_mixed_success_failure() {
     token1.mint(&sender, &10000);
     token2.mint(&sender, &10000);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     contract1.initialize(&admin, &token1.address, &250);
     contract2.initialize(&admin, &token2.address, &250);
@@ -2646,7 +2646,7 @@ fn test_whitelist_token() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Initially token should not be whitelisted
     assert!(!contract.is_token_whitelisted(&token.address));
@@ -2667,7 +2667,7 @@ fn test_remove_whitelisted_token() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist the token
     contract.whitelist_token(&admin, &token.address);
@@ -2688,7 +2688,7 @@ fn test_whitelist_token_already_whitelisted() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist the token
     contract.whitelist_token(&admin, &token.address);
@@ -2707,7 +2707,7 @@ fn test_remove_token_not_whitelisted() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Try to remove a token that was never whitelisted - should fail
     contract.remove_whitelisted_token(&admin, &token.address);
@@ -2723,7 +2723,7 @@ fn test_initialize_with_non_whitelisted_token() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Try to initialize with non-whitelisted token - should fail
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
@@ -2738,7 +2738,7 @@ fn test_initialize_with_whitelisted_token() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env, &0, &admin);
+    let contract = create_daddy-config_contract(&env, &0, &admin);
 
     // Whitelist the token first
     contract.whitelist_token(&admin, &token.address);
@@ -2771,7 +2771,7 @@ fn test_update_asset_verification() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     let asset_code = String::from_str(&env, "USDC");
@@ -2800,7 +2800,7 @@ fn test_multi_admin_whitelist_management() {
     let token1 = create_token_contract(&env, &token_admin);
     let token2 = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist first token
     contract.whitelist_token(&admin1, &token1.address);
@@ -2832,8 +2832,8 @@ fn test_whitelist_different_contract_instances() {
     let token2 = create_token_contract(&env, &token_admin);
 
     // Create two separate contract instances
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     // Whitelist token1 in contract1
     contract1.whitelist_token(&admin, &token1.address);
@@ -2862,7 +2862,7 @@ fn test_whitelist_and_full_workflow() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist token
     contract.whitelist_token(&admin, &token.address);
@@ -2895,8 +2895,8 @@ fn test_whitelist_token_isolation_across_contracts() {
     let token2 = create_token_contract(&env, &token_admin);
     let token3 = create_token_contract(&env, &token_admin);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     // Contract1: whitelist token1 and token2
     contract1.whitelist_token(&admin1, &token1.address);
@@ -2933,8 +2933,8 @@ fn test_cannot_use_removed_token() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract1 = create_swiftremit_contract(&env);
-    let contract2 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
 
     // Whitelist token
     contract1.whitelist_token(&admin, &token.address);
@@ -2961,7 +2961,7 @@ fn test_whitelist_edge_case_many_tokens() {
     let admin = Address::generate(&env);
     let token_admin = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist many tokens
     let mut tokens = std::vec![];
@@ -3026,7 +3026,7 @@ fn test_simulate_settlement_success() {
     let sender_a = Address::generate(&env);
     let sender_b = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin); // 2.5% fee
 
@@ -3080,7 +3080,7 @@ fn test_net_settlement_complete_offset() {
     let sender_a = Address::generate(&env);
     let sender_b = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -3124,7 +3124,7 @@ fn test_net_settlement_multiple_parties() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist token
     contract.whitelist_token(&admin, &token.address);
@@ -3159,7 +3159,7 @@ fn test_simulate_settlement_invalid_status() {
     let party_b = Address::generate(&env);
     let party_c = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &100, &0, &0, &admin); // 1% fee
 
@@ -3208,7 +3208,7 @@ fn test_net_settlement_order_independence() {
     let sender_a = Address::generate(&env);
     let sender_b = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -3258,7 +3258,7 @@ fn test_net_settlement_empty_batch() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist token
     contract.whitelist_token(&admin, &token.address);
@@ -3289,7 +3289,7 @@ fn test_simulate_settlement_nonexistent() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
@@ -3311,7 +3311,7 @@ fn test_net_settlement_exceeds_max_batch_size() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -3358,7 +3358,7 @@ fn test_simulate_settlement_when_paused() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -3387,14 +3387,14 @@ fn test_net_settlement_already_completed() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Whitelist token
 
@@ -3449,14 +3449,14 @@ fn test_settlement_id_returned() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
 
     contract.whitelist_token(&admin, &token.address);
@@ -3508,7 +3508,7 @@ fn test_settlement_ids_sequential() {
     let sender_a = Address::generate(&env);
     let sender_b = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &500, &0, &0, &admin); // 5% fee
 
@@ -3553,7 +3553,7 @@ fn test_net_settlement_large_batch() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
@@ -3605,7 +3605,7 @@ fn test_settlement_id_uniqueness() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -3653,7 +3653,7 @@ fn test_net_settlement_reduces_transfer_count() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Test fee > 10000 in initialize
     let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
@@ -3676,7 +3676,7 @@ fn test_validation_prevents_unregistered_agent() {
     let party_a = Address::generate(&env);
     let party_b = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address, &0, &admin);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -3720,7 +3720,7 @@ fn test_net_settlement_mathematical_correctness() {
     let party_a = Address::generate(&env);
     let party_b = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &200, &0, &0, &admin); // 2% fee
 
@@ -3769,7 +3769,7 @@ contract.register_agent(&party_b, &None);
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
@@ -3813,7 +3813,7 @@ fn test_export_migration_state() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -3841,7 +3841,7 @@ fn test_export_import_migration_state() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to create remittance with unregistered agent
@@ -3855,7 +3855,7 @@ fn test_export_import_migration_state() {
 fn test_validation_prevents_operations_on_nonexistent_remittance() {
 
     // Create and populate first contract
-    let contract1 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
     contract1.whitelist_token(&admin);
     contract1.initialize(&admin, &token.address, &250);
 
@@ -3870,7 +3870,7 @@ fn test_validation_prevents_operations_on_nonexistent_remittance() {
     let snapshot = contract1.export_migration_state(&admin).unwrap();
 
     // Create new contract and import state
-    let contract2 = create_swiftremit_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
     let result = contract2.import_migration_state(&admin, snapshot);
     assert!(result.is_ok());
 
@@ -3892,7 +3892,7 @@ fn test_verify_migration_snapshot() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -3913,7 +3913,7 @@ fn test_migration_hash_detects_tampering() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to confirm payout for non-existent remittance
@@ -3940,7 +3940,7 @@ fn test_migration_hash_detects_tampering() {
     assert!(!verification.valid);
 
     // Import should fail
-    let contract2 = create_swiftremit_contract(&env, &0, &0, &admin);
+    let contract2 = create_daddy-config_contract(&env, &0, &0, &admin);
     let result = contract2.import_migration_state(&admin, snapshot);
     assert!(result.is_err());
 }
@@ -3962,13 +3962,13 @@ fn test_import_fails_if_already_initialized() {
     let token = create_token_contract(&env, &token_admin);
 
     // Create and export from first contract
-    let contract1 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
     contract1.whitelist_token(&admin, &token.address);
     contract1.initialize(&admin, &token.address, &250);
     let snapshot = contract1.export_migration_state(&admin).unwrap();
 
     // Create and initialize second contract
-    let contract2 = create_swiftremit_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
     contract2.whitelist_token(&admin, &token.address);
     contract2.initialize(&admin, &token.address, &300);
 
@@ -3985,7 +3985,7 @@ fn test_export_migration_batch() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -4027,7 +4027,7 @@ fn test_import_migration_batch() {
     let token = create_token_contract(&env, &token_admin);
 
     // Create and populate first contract
-    let contract1 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
     contract1.whitelist_token(&admin, &token.address);
     contract1.initialize(&admin, &token.address, &250);
 
@@ -4046,7 +4046,7 @@ fn test_import_migration_batch() {
     let batch = contract1.export_migration_batch(&admin, 0, 5).unwrap();
 
     // Create new contract and import batch
-    let contract2 = create_swiftremit_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
     contract2.whitelist_token(&admin, &token.address);
     contract2.initialize(&admin, &token.address, &250);
 
@@ -4073,7 +4073,7 @@ fn test_migration_batch_hash_verification() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4090,7 +4090,7 @@ contract.register_agent(&agent, &None);
 #[test]
 fn test_validation_prevents_withdraw_with_no_fees() {
 
-    let contract1 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
     contract1.whitelist_token(&admin);
     contract1.initialize(&admin, &token.address, &250);
 
@@ -4116,7 +4116,7 @@ fn test_validation_prevents_withdraw_with_no_fees() {
     batch.remittances = remittances;
 
     // Import should fail due to hash mismatch
-    let contract2 = create_swiftremit_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
     contract2.whitelist_token(&admin, &token.address);
     contract2.initialize(&admin, &token.address, &250);
 
@@ -4134,7 +4134,7 @@ fn test_migration_preserves_all_data() {
     let token = create_token_contract(&env, &token_admin);
 
     // Create and populate first contract
-    let contract1 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
     contract1.whitelist_token(&admin, &token.address);
     contract1.initialize(&admin, &token.address, &250);
 
@@ -4158,7 +4158,7 @@ fn test_migration_preserves_all_data() {
     assert_eq!(snapshot.persistent_data.remittances.len(), 1);
 
     // Import to new contract
-    let contract2 = create_swiftremit_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
     contract2.import_migration_state(&admin, snapshot).unwrap();
 
     // Verify all data was imported
@@ -4178,7 +4178,7 @@ fn test_migration_deterministic_hash() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -4203,7 +4203,7 @@ fn test_export_batch_invalid_size() {
     let token = create_token_contract(&env, &token_admin);
     let recipient = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Try to withdraw when no fees accumulated
@@ -4216,7 +4216,7 @@ fn test_export_batch_invalid_size() {
 #[test]
 fn test_validation_prevents_paused_operations(, &0, &0, &admin) {
 
-    let contract = create_swiftremit_contract(&env, &0, &0, &admin);
+    let contract = create_daddy-config_contract(&env, &0, &0, &admin);
     contract.whitelist_token(&admin, &token.address, &0, &admin);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -4234,7 +4234,7 @@ fn test_export_batch_zero_size() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
@@ -4255,7 +4255,7 @@ fn test_migration_with_multiple_remittance_statuses() {
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4274,7 +4274,7 @@ contract.register_agent(&agent, &None);
 #[test]
 fn test_validation_allows_valid_operations() {
 
-    let contract1 = create_swiftremit_contract(&env);
+    let contract1 = create_daddy-config_contract(&env);
     contract1.whitelist_token(&admin);
     contract1.initialize(&admin, &token.address, &250);
 
@@ -4293,7 +4293,7 @@ fn test_validation_allows_valid_operations() {
 
     // Export and import
     let snapshot = contract1.export_migration_state(&admin).unwrap();
-    let contract2 = create_swiftremit_contract(&env);
+    let contract2 = create_daddy-config_contract(&env);
     contract2.import_migration_state(&admin, snapshot).unwrap();
 
     // Verify all statuses preserved
@@ -4314,11 +4314,11 @@ fn test_rate_limit_initialization() {
     let admin = Address::generate(&env);
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     token.mint(&sender, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Valid initialization
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
@@ -4341,7 +4341,7 @@ contract.register_agent(&agent, &None);
 fn test_validation_structured_error_for_expired_settlement() {
     token.mint(&sender, &20000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Check default rate limit config
@@ -4365,7 +4365,7 @@ fn test_update_rate_limit_duplicate() {
     token.mint(&sender, &10000);
     token.mint(&sender, &20000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4411,7 +4411,7 @@ fn test_daily_limit_rolling_window() {
     token.mint(&sender, &10000);
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4462,7 +4462,7 @@ fn test_rate_limit_status() {
     token.mint(&sender, &10000);
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4510,7 +4510,7 @@ fn test_daily_limit_different_countries() {
     token.mint(&sender, &10000);
     token.mint(&sender, &30000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4557,7 +4557,7 @@ fn test_daily_limit_no_limit_configured() {
     token.mint(&sender, &10000);
     token.mint(&sender, &100000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4602,7 +4602,7 @@ fn test_daily_limit_multiple_users() {
     token.mint(&sender1, &20000);
     token.mint(&sender2, &20000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -4643,7 +4643,7 @@ fn test_rate_limit_disable() {
     let admin = Address::generate(&env);
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
 
     // Test boundary: 10000 should be valid (100%)
     contract.initialize(&admin, &token.address, &10000, &0, &0, &admin);
@@ -4679,7 +4679,7 @@ fn test_daily_limit_exact_limit() {
     token.mint(&sender, &10000);
     token.mint(&sender, &20000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     // Minimum valid amount is 1
@@ -4907,7 +4907,7 @@ fn test_error_handler_integration_with_contract() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5046,7 +5046,7 @@ fn test_settlement_completion_event_emitted_once() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5084,7 +5084,7 @@ fn test_settlement_completion_event_not_emitted_before_finalization() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5121,7 +5121,7 @@ fn test_settlement_completion_event_includes_remittance_id() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5161,7 +5161,7 @@ fn test_settlement_completion_event_not_emitted_on_cancellation() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5199,7 +5199,7 @@ fn test_settlement_completion_event_multiple_settlements() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5257,7 +5257,7 @@ fn test_settlement_completion_event_batch_settlement() {
     let sender_a = Address::generate(&env);
     let sender_b = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
@@ -5304,7 +5304,7 @@ fn test_settlement_completion_event_deterministic() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5344,7 +5344,7 @@ fn test_settlement_completion_event_after_state_commit() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5387,7 +5387,7 @@ fn test_settlement_completion_event_unique_per_settlement() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5438,7 +5438,7 @@ fn test_settlement_completion_event_not_emitted_on_failed_settlement() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.whitelist_token(&admin, &token.address);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
@@ -5483,7 +5483,7 @@ fn test_settlement_counter_initial_value() {
     let admin = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     // Counter should be 0 initially
@@ -5501,7 +5501,7 @@ fn test_settlement_counter_increments_after_successful_settlement() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5530,7 +5530,7 @@ fn test_settlement_counter_not_incremented_on_cancellation() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5554,7 +5554,7 @@ fn test_settlement_counter_not_incremented_on_failed_settlement() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5582,7 +5582,7 @@ fn test_settlement_counter_batch_settlement() {
     let agent2 = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent1, &None);
     token.mint(&sender2, &1000);
@@ -5617,7 +5617,7 @@ fn test_settlement_counter_constant_time_retrieval() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5646,7 +5646,7 @@ fn test_settlement_counter_mixed_operations() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5681,7 +5681,7 @@ fn test_settlement_counter_deterministic() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5709,7 +5709,7 @@ fn test_settlement_counter_read_only() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5740,7 +5740,7 @@ fn test_settlement_counter_no_external_modification() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5765,7 +5765,7 @@ fn test_settlement_counter_preserves_storage_integrity() {
     let agent = Address::generate(&env);
     let token = create_token_contract(&env, &admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5798,7 +5798,7 @@ fn test_create_remittance_minimum_amount() {
     let agent = Address::generate(&env);
 
     token.mint(&sender, &10);
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5823,7 +5823,7 @@ fn test_create_remittance_zero_amount() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5842,7 +5842,7 @@ fn test_create_remittance_negative_amount() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address);
 contract.register_agent(&agent, &None);
 
@@ -5861,7 +5861,7 @@ contract.register_agent(&agent, &None);
     let large_amount = i128::MAX / 10001;
     token.mint(&sender, &large_amount);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5879,7 +5879,7 @@ fn test_initialize_exceed_max_fee() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     // 10001 bps is invalid (> 100%)
     contract.initialize(&admin, &token.address);
 }
@@ -5896,7 +5896,7 @@ fn test_withdraw_fees_zero() {
     let token = create_token_contract(&env, &token_admin);
     let recipient = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     assert_eq!(contract.get_accumulated_fees(), 0);
@@ -5914,7 +5914,7 @@ fn test_batch_settle_max_size() {
     let sender = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 contract.register_agent(&agent, &None);
 
@@ -5947,7 +5947,7 @@ fn test_batch_settle_exceed_max_size() {
     let token_admin = Address::generate(&env);
     let token = create_token_contract(&env, &token_admin);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
 
     let mut entries = soroban_sdk::Vec::new(&env);
@@ -5976,7 +5976,7 @@ fn test_execute_transaction_success() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6009,7 +6009,7 @@ fn test_execute_transaction_user_blacklisted() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6038,7 +6038,7 @@ fn test_execute_transaction_kyc_not_approved() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6062,7 +6062,7 @@ fn test_execute_transaction_kyc_expired() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6084,7 +6084,7 @@ fn test_set_user_blacklisted() {
     let token = create_token_contract(&env, &token_admin);
     let user = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     // Initially not blacklisted
@@ -6109,7 +6109,7 @@ fn test_set_kyc_approved() {
     let token = create_token_contract(&env, &token_admin);
     let user = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     // Initially not approved
@@ -6135,7 +6135,7 @@ fn test_kyc_expiry() {
     let token = create_token_contract(&env, &token_admin);
     let user = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     // Set KYC with future expiry
@@ -6162,7 +6162,7 @@ fn test_transaction_with_agent_not_registered() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     // Don't register agent
 
@@ -6186,7 +6186,7 @@ fn test_transaction_with_invalid_amount() {
     let user = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6215,7 +6215,7 @@ fn test_execute_transaction_success() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6248,7 +6248,7 @@ fn test_execute_transaction_kyc_not_approved() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6270,7 +6270,7 @@ fn test_execute_transaction_user_blacklisted() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6298,7 +6298,7 @@ fn test_get_transaction_status() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6328,7 +6328,7 @@ fn test_user_blacklist_management() {
     let token = create_token_contract(&env, &token_admin);
     let user = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     // Initially not blacklisted
@@ -6353,7 +6353,7 @@ fn test_kyc_approval_management() {
     let token = create_token_contract(&env, &token_admin);
     let user = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     // Initially not approved
@@ -6379,7 +6379,7 @@ fn test_kyc_expiry() {
     let token = create_token_contract(&env, &token_admin);
     let user = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
 
     // Set KYC with past expiry
@@ -6403,7 +6403,7 @@ fn test_transaction_with_multiple_validations() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6437,7 +6437,7 @@ fn test_transaction_invalid_amount() {
     let user = Address::generate(&env);
     let agent = Address::generate(&env);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     contract.register_agent(&agent, &None);
 
@@ -6462,7 +6462,7 @@ fn test_transaction_unregistered_agent() {
 
     token.mint(&user, &10000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250);
     // Don't register agent
 
@@ -6481,7 +6481,7 @@ fn test_transaction_unregistered_agent() {
 /// Returns (env, contract, token_client, sender, agent).
 fn setup_idempotency_env() -> (
     Env,
-    SwiftRemitContractClient<'static>,
+    Daddy-configContractClient<'static>,
     soroban_sdk::token::StellarAssetClient<'static>,
     Address,
     Address,
@@ -6497,14 +6497,14 @@ fn setup_idempotency_env() -> (
 
     token.mint(&sender, &100_000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 
     // Leak to satisfy 'static lifetime required by the return type.
     // Safe in tests: env outlives all derived values.
     let env: Env = unsafe { core::mem::transmute(env) };
-    let contract: SwiftRemitContractClient<'static> = unsafe { core::mem::transmute(contract) };
+    let contract: Daddy-configContractClient<'static> = unsafe { core::mem::transmute(contract) };
     let token: soroban_sdk::token::StellarAssetClient<'static> =
         unsafe { core::mem::transmute(token) };
 
@@ -6526,7 +6526,7 @@ fn test_idempotency_same_key_returns_same_id_no_double_debit() {
 
     token.mint(&sender, &100_000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 
@@ -6575,7 +6575,7 @@ fn test_idempotency_different_keys_create_distinct_remittances() {
 
     token.mint(&sender, &100_000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 
@@ -6619,7 +6619,7 @@ fn test_idempotency_key_cleared_after_terminal_state() {
 
     token.mint(&sender, &100_000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
     contract.register_agent(&agent, &None);
 

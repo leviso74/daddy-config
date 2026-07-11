@@ -1,28 +1,28 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { SwiftRemitMockClient } from "./mock-client.js";
-import { SwiftRemitError, ErrorCode } from "../errors.js";
+import { Daddy-configMockClient } from "./mock-client.js";
+import { Daddy-configError, ErrorCode } from "../errors.js";
 
 const AGENT = "GAGENT000000000000000000000000000000000000000000000000000";
 const SENDER = "GSENDER00000000000000000000000000000000000000000000000000";
 const SOURCE = "GSOURCE00000000000000000000000000000000000000000000000000";
 const AMOUNT = 100_000_000n; // 10 USDC at 1 USDC = 10_000_000 stroops
 
-describe("SwiftRemitMockClient – seed helpers", () => {
+describe("Daddy-configMockClient – seed helpers", () => {
   it("seedAgent makes isAgentRegistered return true", async () => {
-    const client = new SwiftRemitMockClient();
+    const client = new Daddy-configMockClient();
     expect(await client.isAgentRegistered(SOURCE, AGENT)).toBe(false);
     client.seedAgent(AGENT);
     expect(await client.isAgentRegistered(SOURCE, AGENT)).toBe(true);
   });
 
   it("seedToken makes isTokenWhitelisted return true", async () => {
-    const client = new SwiftRemitMockClient();
+    const client = new Daddy-configMockClient();
     client.seedToken("USDC_CONTRACT");
     expect(await client.isTokenWhitelisted(SOURCE, "USDC_CONTRACT")).toBe(true);
   });
 
   it("seedRemittance injects a remittance queryable by id", async () => {
-    const client = new SwiftRemitMockClient();
+    const client = new Daddy-configMockClient();
     const remittance = {
       id: 42n,
       sender: SENDER,
@@ -43,7 +43,7 @@ describe("SwiftRemitMockClient – seed helpers", () => {
   });
 
   it("setFeeBps changes the fee used in createRemittance", async () => {
-    const client = new SwiftRemitMockClient();
+    const client = new Daddy-configMockClient();
     client.seedAgent(AGENT).setFeeBps(200); // 2%
     const result = await client.createRemittance({ sender: SENDER, agent: AGENT, amount: AMOUNT });
     const r = await client.getRemittance(SOURCE, result.id!);
@@ -51,11 +51,11 @@ describe("SwiftRemitMockClient – seed helpers", () => {
   });
 });
 
-describe("SwiftRemitMockClient – createRemittance", () => {
-  let client: SwiftRemitMockClient;
+describe("Daddy-configMockClient – createRemittance", () => {
+  let client: Daddy-configMockClient;
 
   beforeEach(() => {
-    client = new SwiftRemitMockClient();
+    client = new Daddy-configMockClient();
     client.seedAgent(AGENT);
   });
 
@@ -75,7 +75,7 @@ describe("SwiftRemitMockClient – createRemittance", () => {
   it("rejects unregistered agents", async () => {
     await expect(
       client.createRemittance({ sender: SENDER, agent: "GUNKNOWN", amount: AMOUNT })
-    ).rejects.toThrow(SwiftRemitError);
+    ).rejects.toThrow(Daddy-configError);
     await expect(
       client.createRemittance({ sender: SENDER, agent: "GUNKNOWN", amount: AMOUNT })
     ).rejects.toMatchObject({ code: ErrorCode.AgentNotRegistered });
@@ -94,11 +94,11 @@ describe("SwiftRemitMockClient – createRemittance", () => {
   });
 });
 
-describe("SwiftRemitMockClient – state machine transitions", () => {
-  let client: SwiftRemitMockClient;
+describe("Daddy-configMockClient – state machine transitions", () => {
+  let client: Daddy-configMockClient;
 
   beforeEach(() => {
-    client = new SwiftRemitMockClient({ feeBps: 100 });
+    client = new Daddy-configMockClient({ feeBps: 100 });
     client.seedAgent(AGENT);
   });
 
@@ -156,9 +156,9 @@ describe("SwiftRemitMockClient – state machine transitions", () => {
   });
 });
 
-describe("SwiftRemitMockClient – fees and totals", () => {
+describe("Daddy-configMockClient – fees and totals", () => {
   it("accumulatedFees increases after confirmPayout", async () => {
-    const client = new SwiftRemitMockClient({ feeBps: 100 });
+    const client = new Daddy-configMockClient({ feeBps: 100 });
     client.seedAgent(AGENT);
     const { id } = await client.createRemittance({ sender: SENDER, agent: AGENT, amount: AMOUNT });
     expect(await client.getAccumulatedFees(SOURCE)).toBe(0n);
@@ -168,7 +168,7 @@ describe("SwiftRemitMockClient – fees and totals", () => {
   });
 
   it("withdrawFees resets accumulated fees", async () => {
-    const client = new SwiftRemitMockClient({ feeBps: 100 });
+    const client = new Daddy-configMockClient({ feeBps: 100 });
     client.seedAgent(AGENT);
     const { id } = await client.createRemittance({ sender: SENDER, agent: AGENT, amount: AMOUNT });
     await client.confirmPayout(AGENT, id!);
@@ -177,16 +177,16 @@ describe("SwiftRemitMockClient – fees and totals", () => {
   });
 
   it("withdrawFees throws when no fees have accumulated", async () => {
-    const client = new SwiftRemitMockClient();
+    const client = new Daddy-configMockClient();
     await expect(client.withdrawFees("GADMIN", "GTREASURY")).rejects.toMatchObject({
       code: ErrorCode.NoFeesToWithdraw,
     });
   });
 });
 
-describe("SwiftRemitMockClient – estimateFee", () => {
+describe("Daddy-configMockClient – estimateFee", () => {
   it("returns correct breakdown using configured feeBps", async () => {
-    const client = new SwiftRemitMockClient({ feeBps: 200, protocolFeeBps: 50 });
+    const client = new Daddy-configMockClient({ feeBps: 200, protocolFeeBps: 50 });
     const estimate = await client.estimateFee(
       AMOUNT,
       { currency: "USDC", country: "NG" },
@@ -202,9 +202,9 @@ describe("SwiftRemitMockClient – estimateFee", () => {
   });
 });
 
-describe("SwiftRemitMockClient – getRemittancesBySender", () => {
+describe("Daddy-configMockClient – getRemittancesBySender", () => {
   it("returns ids for a specific sender with pagination", async () => {
-    const client = new SwiftRemitMockClient();
+    const client = new Daddy-configMockClient();
     client.seedAgent(AGENT);
     for (let i = 0; i < 5; i++) {
       await client.createRemittance({ sender: SENDER, agent: AGENT, amount: AMOUNT });

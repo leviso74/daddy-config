@@ -10,7 +10,7 @@ import {
   scValToNative,
 } from "@stellar/stellar-sdk";
 import type {
-  SwiftRemitClientOptions,
+  Daddy-configClientOptions,
   Remittance,
   AgentStats,
   CircuitBreakerStatus,
@@ -33,7 +33,7 @@ import type {
   FeeEstimate,
   EventHandler,
 } from "./types.js";
-import { parseContractError, SwiftRemitError, ErrorCode } from "./errors.js";
+import { parseContractError, Daddy-configError, ErrorCode } from "./errors.js";
 import { withRetry, withRetryPolicy } from "./retry.js";
 import {
   parseRemittance,
@@ -125,7 +125,7 @@ function proposalActionToScVal(action: ProposalAction): xdr.ScVal {
       val: xdr.ScVal.scvU32(action.AdjustReputationThreshold),
     });
   } else {
-    throw new SwiftRemitError(
+    throw new Daddy-configError(
       ErrorCode.DataCorruption,
       "Unknown proposal action type"
     );
@@ -189,7 +189,7 @@ export function buildAdjustReputationThresholdProposal(
   return { AdjustReputationThreshold: threshold };
 }
 
-export class SwiftRemitClient {
+export class Daddy-configClient {
   private readonly contract: Contract;
   private readonly server: SorobanRpc.Server;
   private readonly networkPassphrase: string;
@@ -202,10 +202,10 @@ export class SwiftRemitClient {
   private static readonly FEE_CACHE_TTL_MS = 30_000;
 
   /**
-   * Initialize a SwiftRemit SDK client.
+   * Initialize a Daddy-config SDK client.
    * 
    * @param options - Client configuration
-   * @param options.contractId - The deployed SwiftRemit contract address
+   * @param options.contractId - The deployed Daddy-config contract address
    * @param options.networkPassphrase - Stellar network passphrase (e.g., Networks.TESTNET)
    * @param options.rpcUrl - Soroban RPC endpoint URL
    * @param options.fee - Optional: Transaction fee in stroops (default: 100)
@@ -214,21 +214,21 @@ export class SwiftRemitClient {
    * @param options.retryBackoffFactor - Optional: Backoff multiplier for retries (default: 2)
    * 
    * @example
-   * import { SwiftRemitClient, Networks, RpcUrls } from '@swiftremit/sdk';
+   * import { Daddy-configClient, Networks, RpcUrls } from '@daddy-config/sdk';
    * 
-   * const client = new SwiftRemitClient({
+   * const client = new Daddy-configClient({
    *   contractId: 'CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSC4',
    *   networkPassphrase: Networks.TESTNET,
    *   rpcUrl: RpcUrls.TESTNET,
    * });
    */
-  constructor(options: SwiftRemitClientOptions) {
+  constructor(options: Daddy-configClientOptions) {
     this.contract = new Contract(options.contractId);
     const allowHttp = shouldAllowHttp(options.rpcUrl);
     this.server = new SorobanRpc.Server(options.rpcUrl, { allowHttp });
     if (allowHttp) {
       console.warn(
-        `[SwiftRemitClient] Using insecure HTTP RPC connection for ${options.rpcUrl}. Restrict this to local or test environments.`
+        `[Daddy-configClient] Using insecure HTTP RPC connection for ${options.rpcUrl}. Restrict this to local or test environments.`
       );
     }
     this.networkPassphrase = options.networkPassphrase;
@@ -711,10 +711,10 @@ export class SwiftRemitClient {
     entries: BatchCreateEntry[]
   ): Promise<BatchCreateResponse> {
     if (entries.length === 0) {
-      throw new SwiftRemitError(ErrorCode.InvalidBatchSize, "Batch must contain at least one entry");
+      throw new Daddy-configError(ErrorCode.InvalidBatchSize, "Batch must contain at least one entry");
     }
     if (entries.length > MAX_BATCH_SIZE) {
-      throw new SwiftRemitError(
+      throw new Daddy-configError(
         ErrorCode.InvalidBatchSize,
         `Batch size ${entries.length} exceeds MAX_BATCH_SIZE (${MAX_BATCH_SIZE})`
       );
@@ -769,10 +769,10 @@ export class SwiftRemitClient {
     entries: BatchCreateEntry[]
   ): Promise<Transaction> {
     if (entries.length === 0) {
-      throw new SwiftRemitError(ErrorCode.InvalidBatchSize, "Batch must contain at least one entry");
+      throw new Daddy-configError(ErrorCode.InvalidBatchSize, "Batch must contain at least one entry");
     }
     if (entries.length > MAX_BATCH_SIZE) {
-      throw new SwiftRemitError(
+      throw new Daddy-configError(
         ErrorCode.InvalidBatchSize,
         `Batch size ${entries.length} exceeds MAX_BATCH_SIZE (${MAX_BATCH_SIZE})`
       );
@@ -1083,7 +1083,7 @@ export class SwiftRemitClient {
   ): Promise<FeeEstimate> {
     const cacheKey = `${senderAddress}:${amount}:${corridor.currency}:${corridor.country}`;
     const cached = this.feeCache.get(cacheKey);
-    if (cached && Date.now() - cached.cachedAt < SwiftRemitClient.FEE_CACHE_TTL_MS) {
+    if (cached && Date.now() - cached.cachedAt < Daddy-configClient.FEE_CACHE_TTL_MS) {
       return { ...cached.estimate, fromCache: true };
     }
 

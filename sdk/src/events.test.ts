@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { SwiftRemitClient } from "./client.js";
+import { Daddy-configClient } from "./client.js";
 import { xdr, scValToNative } from "@stellar/stellar-sdk";
 
 // Minimal mock of SorobanRpc.Server
@@ -43,11 +43,11 @@ function makeEvent(type: string, remittanceId: bigint, pagingToken: string) {
 }
 
 describe("subscribeToRemittanceEvents", () => {
-  let client: SwiftRemitClient;
+  let client: Daddy-configClient;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    client = new SwiftRemitClient({
+    client = new Daddy-configClient({
       contractId: "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
       networkPassphrase: "Test SDF Network ; September 2015",
       rpcUrl: "https://soroban-testnet.stellar.org",
@@ -64,7 +64,7 @@ describe("subscribeToRemittanceEvents", () => {
   it("allows localhost HTTP endpoints and warns once", () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-    new SwiftRemitClient({
+    new Daddy-configClient({
       contractId: "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
       networkPassphrase: "Test SDF Network ; September 2015",
       rpcUrl: "http://localhost:8000",

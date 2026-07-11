@@ -14,7 +14,7 @@ vi.mock('@stellar/freighter-api', () => ({
 }));
 
 const MOCK_PUBLIC_KEY = 'GBZXN7PIRZGNMHGAU2LYGAZGQG4RYSQ3TB2T6O3COVGW6OLBDEQ2COFQ';
-const STORAGE_KEY = 'swiftremit_wallet_address';
+const STORAGE_KEY = 'daddy-config_wallet_address';
 
 describe('WalletConnection', () => {
   beforeEach(() => {

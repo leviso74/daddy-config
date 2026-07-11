@@ -1,5 +1,5 @@
 /**
- * Pact consumer tests for the SwiftRemit API.
+ * Pact consumer tests for the Daddy-config API.
  *
  * These tests define the contract that the frontend expects from the API.
  * Running them generates pact JSON files under /pacts/ that the API provider
@@ -18,8 +18,8 @@ const { like, eachLike, string, integer, boolean: booleanMatcher } = MatchersV3;
 const PACT_OUTPUT_DIR = path.resolve(__dirname, '../../../../pacts');
 
 const provider = new PactV3({
-  consumer: 'SwiftRemitFrontend',
-  provider: 'SwiftRemitAPI',
+  consumer: 'Daddy-configFrontend',
+  provider: 'Daddy-configAPI',
   dir: PACT_OUTPUT_DIR,
   logLevel: 'warn',
 });
@@ -45,7 +45,7 @@ async function post(baseUrl: string, path: string, body: unknown, headers: Recor
 
 // ── Consumer tests ───────────────────────────────────────────────────────────
 
-describe('SwiftRemit API — Pact consumer contract', () => {
+describe('Daddy-config API — Pact consumer contract', () => {
   describe('GET /api/currencies', () => {
     it('returns a paginated list of supported currencies', async () => {
       await provider.addInteraction({

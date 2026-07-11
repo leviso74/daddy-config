@@ -102,7 +102,7 @@ export default function KycStatusScreen() {
       {['not_started', 'denied', 'expired'].includes(status.kyc_status) && (
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => Linking.openURL('https://swiftremit.app/kyc')}
+          onPress={() => Linking.openURL('https://daddy-config.app/kyc')}
         >
           <Text style={styles.btnText}>Start / Re-submit Verification</Text>
         </TouchableOpacity>

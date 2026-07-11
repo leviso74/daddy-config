@@ -1,11 +1,11 @@
 /**
- * Pact provider verification for the SwiftRemit API.
+ * Pact provider verification for the Daddy-config API.
  *
  * Verifies that the real API implementation satisfies the contracts generated
- * by the SwiftRemitFrontend consumer test suite.
+ * by the Daddy-configFrontend consumer test suite.
  *
- * Consumer tests live at:  frontend/src/pact/swiftremit-api.consumer.pact.test.ts
- * Generated pact files at: pacts/SwiftRemitFrontend-SwiftRemitAPI.json
+ * Consumer tests live at:  frontend/src/pact/daddy-config-api.consumer.pact.test.ts
+ * Generated pact files at: pacts/Daddy-configFrontend-Daddy-configAPI.json
  *
  * Issue #934: Add API endpoint contract tests with Pact.
  */
@@ -69,7 +69,7 @@ const stateHandlers: Record<string, () => Promise<void>> = {
 
 // ── Provider verification ─────────────────────────────────────────────────────
 
-describe('SwiftRemit API — Pact provider verification', () => {
+describe('Daddy-config API — Pact provider verification', () => {
   beforeAll(async () => {
     serverPort = await startProvider();
   });
@@ -78,14 +78,14 @@ describe('SwiftRemit API — Pact provider verification', () => {
     if (server) server.close();
   });
 
-  it('satisfies all contracts from SwiftRemitFrontend', async () => {
+  it('satisfies all contracts from Daddy-configFrontend', async () => {
     const pactDir = path.resolve(__dirname, '../../../../../pacts');
 
     const verifier = new Verifier({
-      provider: 'SwiftRemitAPI',
+      provider: 'Daddy-configAPI',
       providerBaseUrl: `http://localhost:${serverPort}`,
       pactUrls: [
-        path.join(pactDir, 'SwiftRemitFrontend-SwiftRemitAPI.json'),
+        path.join(pactDir, 'Daddy-configFrontend-Daddy-configAPI.json'),
       ],
       stateHandlers,
       // Fail the CI job if the pact file is missing, which means the consumer

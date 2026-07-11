@@ -1,5 +1,5 @@
 /**
- * SwiftRemit Configuration Module
+ * Daddy-config Configuration Module
  * 
  * Centralized configuration management with validation and type safety.
  * Loads environment variables from .env files and validates them at startup.
@@ -155,7 +155,7 @@ const networkPassphrase = network === 'testnet'
 
 // Contract Addresses
 // These are optional at module load time but required for actual operations
-const contractId = getEnv('SWIFTREMIT_CONTRACT_ID', '');
+const contractId = getEnv('DADDY-CONFIG_CONTRACT_ID', '');
 const usdcTokenId = getEnv('USDC_TOKEN_ID', '');
 
 // Fee Configuration
@@ -208,16 +208,16 @@ const schemaVersion = 1;
 // ============================================
 
 /**
- * SwiftRemit Configuration Object
+ * Daddy-config Configuration Object
  * 
  * Contains all configuration values loaded from environment variables,
  * with sensible defaults and validation applied.
  * 
- * @typedef {Object} SwiftRemitConfig
+ * @typedef {Object} Daddy-configConfig
  * @property {string} network - Blockchain network ('testnet' or 'mainnet')
  * @property {string} networkPassphrase - Stellar network passphrase for signing
  * @property {string} rpcUrl - RPC endpoint URL (must be HTTPS)
- * @property {string} contractId - SwiftRemit contract ID on the blockchain
+ * @property {string} contractId - Daddy-config contract ID on the blockchain
  * @property {string} usdcTokenId - USDC token contract ID
  * @property {number} defaultFeeBps - Default fee in basis points (0-10000)
  * @property {number} maxFeeBps - Maximum allowed fee in basis points (constant: 10000)

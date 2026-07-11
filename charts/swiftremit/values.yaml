@@ -1,4 +1,4 @@
-# Default values for swiftremit.
+# Default values for daddy-config.
 # Override per environment with values.dev.yaml / values.staging.yaml / values.production.yaml
 
 global:
@@ -11,16 +11,16 @@ postgresql:
   # Set to true to spin up an in-cluster postgres (dev only)
   enabled: false
   auth:
-    username: swiftremit
-    password: swiftremit
-    database: swiftremit
+    username: daddy-config
+    password: daddy-config
+    database: daddy-config
 
 # ─── API service ───────────────────────────────────────────────────────────────
 api:
   replicaCount: 2
 
   image:
-    repository: swiftremit-api
+    repository: daddy-config-api
     tag: latest
     pullPolicy: IfNotPresent
 
@@ -57,7 +57,7 @@ api:
   # See CONFIGURATION.md for AWS Secrets Manager setup.
   # Example with External Secrets:
   #   The secret values are populated by ExternalSecret resources referencing
-  #   AWS Secrets Manager paths like swiftremit/DATABASE_URL
+  #   AWS Secrets Manager paths like daddy-config/DATABASE_URL
   secret:
     DATABASE_URL: ""
     CONTRACT_RPC_URL: ""
@@ -83,7 +83,7 @@ backend:
   replicaCount: 2
 
   image:
-    repository: swiftremit-backend
+    repository: daddy-config-backend
     tag: latest
     pullPolicy: IfNotPresent
 
@@ -152,7 +152,7 @@ frontend:
   replicaCount: 2
 
   image:
-    repository: swiftremit-frontend
+    repository: daddy-config-frontend
     tag: latest
     pullPolicy: IfNotPresent
 
@@ -207,7 +207,7 @@ ingress:
   className: nginx
   annotations: {}
   hosts:
-    - host: swiftremit.example.com
+    - host: daddy-config.example.com
       paths:
         - path: /api
           pathType: Prefix

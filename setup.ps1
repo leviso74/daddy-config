@@ -1,7 +1,7 @@
-# SwiftRemit Setup Script for Windows
+# Daddy-config Setup Script for Windows
 # This script installs all prerequisites and builds the contract
 
-Write-Host "🚀 SwiftRemit Setup Script" -ForegroundColor Cyan
+Write-Host "🚀 Daddy-config Setup Script" -ForegroundColor Cyan
 Write-Host "==========================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -55,7 +55,7 @@ cargo build --target wasm32-unknown-unknown --release
 # Optimize the contract
 Write-Host ""
 Write-Host "⚡ Optimizing contract..." -ForegroundColor Yellow
-soroban contract optimize --wasm target/wasm32-unknown-unknown/release/swiftremit.wasm
+soroban contract optimize --wasm target/wasm32-unknown-unknown/release/daddy-config.wasm
 
 Write-Host ""
 Write-Host "✅ Setup complete!" -ForegroundColor Green

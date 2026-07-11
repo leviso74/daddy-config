@@ -3,7 +3,7 @@
 use soroban_sdk::{Env, String as SorobanString};
 use crate::ContractError;
 
-/// Centralized error handling module for the SwiftRemit contract.
+/// Centralized error handling module for the Daddy-config contract.
 ///
 /// This module provides a single global error handler that:
 /// - Maps contract errors to structured error responses

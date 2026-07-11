@@ -4,7 +4,7 @@
 set -e
 
 echo "========================================="
-echo "SwiftRemit Property-Based Testing Demo"
+echo "Daddy-config Property-Based Testing Demo"
 echo "========================================="
 echo ""
 

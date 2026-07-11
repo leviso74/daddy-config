@@ -37,15 +37,15 @@ jobs:
           - service: backend
             context: ./backend
             dockerfile: ./backend/Dockerfile
-            image: swiftremit-backend
+            image: daddy-config-backend
           - service: api
             context: ./api
             dockerfile: ./api/Dockerfile
-            image: swiftremit-api
+            image: daddy-config-api
           - service: frontend
             context: ./frontend
             dockerfile: ./frontend/Dockerfile
-            image: swiftremit-frontend
+            image: daddy-config-frontend
 
     steps:
       - uses: actions/checkout@v4

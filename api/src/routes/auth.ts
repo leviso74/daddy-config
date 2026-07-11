@@ -27,7 +27,7 @@ function sendError(res: Response, status: number, message: string, code: string)
 
 const ACCESS_TOKEN_TTL = '15m';
 const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days in ms
-const REFRESH_COOKIE = 'swiftremit_refresh';
+const REFRESH_COOKIE = 'daddy-config_refresh';
 
 /** In-memory refresh-token store: token → { userId, expiresAt } */
 const refreshTokenStore = new Map<string, { userId: string; expiresAt: number }>();

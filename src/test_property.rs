@@ -1,4 +1,4 @@
-//! Property-based tests for SwiftRemit contract invariants.
+//! Property-based tests for Daddy-config contract invariants.
 //!
 //! These tests validate critical invariants across randomized inputs:
 //! - No balance creation (conservation of funds)
@@ -9,7 +9,7 @@
 #![cfg(test)]
 extern crate std;
 
-use crate::{SwiftRemitContract, SwiftRemitContractClient};
+use crate::{Daddy-configContract, Daddy-configContractClient};
 use proptest::prelude::*;
 use soroban_sdk::token::StellarAssetClient;
 use soroban_sdk::testutils::Address as _;
@@ -24,8 +24,8 @@ fn create_token_contract<'a>(env: &'a Env, admin: &Address) -> token::StellarAss
     token::StellarAssetClient::new(env, &address)
 }
 
-fn create_swiftremit_contract<'a>(env: &'a Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_daddy-config_contract<'a>(env: &'a Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 // ============================================================================
@@ -79,7 +79,7 @@ proptest! {
         let initial_mint = 10_000_000i128;
         token.mint(&sender, &initial_mint);
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
         contract.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -125,7 +125,7 @@ proptest! {
         let initial_mint = 10_000_000i128;
         token.mint(&sender, &initial_mint);
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
         contract.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -176,7 +176,7 @@ proptest! {
         let initial_mint = 10_000_000i128;
         token.mint(&sender, &initial_mint);
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
 
@@ -233,7 +233,7 @@ proptest! {
         let initial_mint = amount * 2;
         token.mint(&sender, &initial_mint);
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
         contract.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -274,7 +274,7 @@ proptest! {
 
         token.mint(&sender, &(amount * 2));
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
         contract.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -323,7 +323,7 @@ proptest! {
         token.mint(&party_a, &total_needed);
         token.mint(&party_b, &total_needed);
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
         contract.register_agent(&party_a, &None);
         contract.register_agent(&party_b, &None);
@@ -408,7 +408,7 @@ proptest! {
 
         token.mint(&sender, &(amount * 2));
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
 
@@ -453,7 +453,7 @@ proptest! {
         let total_amount: i128 = amounts.iter().sum::<i128>() * 2;
         token.mint(&sender, &total_amount);
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
         contract.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -505,7 +505,7 @@ proptest! {
 
         token.mint(&sender, &(amount * 2));
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
         contract.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -545,7 +545,7 @@ proptest! {
 
         token.mint(&sender, &(amount * 2));
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
 
@@ -589,7 +589,7 @@ proptest! {
 
         token.mint(&sender, &(amount * 2));
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &fee_bps, &0, &0, &admin);
         contract.register_agent(&agent, &None);
         contract.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -647,7 +647,7 @@ proptest! {
         token.mint(&party_a, &total_needed);
         token.mint(&party_b, &total_needed);
 
-        let contract = create_swiftremit_contract(&env);
+        let contract = create_daddy-config_contract(&env);
         contract.initialize(&admin, &token.address, &250, &0, &0, &admin);
         contract.register_agent(&party_a, &None);
         contract.register_agent(&party_b, &None);

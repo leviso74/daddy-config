@@ -3,8 +3,8 @@
 # Exits non-zero on any failure so the CI workflow marks the deploy as failed.
 #
 # Required environment variables:
-#   STAGING_API_URL     – Base URL for the API service  (e.g. https://api.staging.swiftremit.io)
-#   STAGING_BACKEND_URL – Base URL for the backend service (e.g. https://backend.staging.swiftremit.io)
+#   STAGING_API_URL     – Base URL for the API service  (e.g. https://api.staging.daddy-config.io)
+#   STAGING_BACKEND_URL – Base URL for the backend service (e.g. https://backend.staging.daddy-config.io)
 set -euo pipefail
 
 API="${STAGING_API_URL:-http://localhost:3000}"
@@ -29,7 +29,7 @@ check() {
   fi
 }
 
-echo "=== SwiftRemit staging smoke tests ==="
+echo "=== Daddy-config staging smoke tests ==="
 echo "API:     $API"
 echo "BACKEND: $BACKEND"
 echo ""

@@ -9,17 +9,17 @@ export class MetricsService {
 
   // Metrics storage
   private metrics = {
-    swiftremit_settlements_total: {} as Record<string, number>,
-    swiftremit_webhook_deliveries_total: {} as Record<string, number>,
-    swiftremit_active_remittances: 0,
-    swiftremit_accumulated_fees: 0,
-    swiftremit_webhook_dead_letter_count: 0,
-    swiftremit_kyc_poll_runs_total: 0,
-    swiftremit_kyc_poll_failures_total: 0,
+    daddy-config_settlements_total: {} as Record<string, number>,
+    daddy-config_webhook_deliveries_total: {} as Record<string, number>,
+    daddy-config_active_remittances: 0,
+    daddy-config_accumulated_fees: 0,
+    daddy-config_webhook_dead_letter_count: 0,
+    daddy-config_kyc_poll_runs_total: 0,
+    daddy-config_kyc_poll_failures_total: 0,
     kyc_poller_last_run_timestamp_seconds: 0,
     contract_event_indexer_lag_ledgers: 0,
-    swiftremit_rate_limit_exceeded_total: {} as Record<string, number>,
-    swiftremit_fx_rate_staleness_seconds: {} as Record<string, number>,
+    daddy-config_rate_limit_exceeded_total: {} as Record<string, number>,
+    daddy-config_fx_rate_staleness_seconds: {} as Record<string, number>,
     db_pool_active_connections: 0,
     db_pool_idle_connections: 0,
     db_pool_waiting_connections: 0,
@@ -82,13 +82,13 @@ export class MetricsService {
          GROUP BY status`
       );
 
-      this.metrics.swiftremit_settlements_total = {};
+      this.metrics.daddy-config_settlements_total = {};
       result.rows.forEach(row => {
-        this.metrics.swiftremit_settlements_total[row.status] = parseInt(row.count);
+        this.metrics.daddy-config_settlements_total[row.status] = parseInt(row.count);
       });
 
       this.logger.debug('Settlement metrics updated', {
-        metrics: this.metrics.swiftremit_settlements_total,
+        metrics: this.metrics.daddy-config_settlements_total,
       });
     } catch (error) {
       this.logger.error('Failed to update settlement metrics', error);
@@ -106,13 +106,13 @@ export class MetricsService {
          GROUP BY status`
       );
 
-      this.metrics.swiftremit_webhook_deliveries_total = {};
+      this.metrics.daddy-config_webhook_deliveries_total = {};
       result.rows.forEach(row => {
-        this.metrics.swiftremit_webhook_deliveries_total[row.status] = parseInt(row.count);
+        this.metrics.daddy-config_webhook_deliveries_total[row.status] = parseInt(row.count);
       });
 
       this.logger.debug('Webhook delivery metrics updated', {
-        metrics: this.metrics.swiftremit_webhook_deliveries_total,
+        metrics: this.metrics.daddy-config_webhook_deliveries_total,
       });
     } catch (error) {
       this.logger.error('Failed to update webhook delivery metrics', error);
@@ -130,10 +130,10 @@ export class MetricsService {
          WHERE status IN ('pending', 'processing', 'submitted')`
       );
 
-      this.metrics.swiftremit_active_remittances = parseInt(result.rows[0].count);
+      this.metrics.daddy-config_active_remittances = parseInt(result.rows[0].count);
 
       this.logger.debug('Active remittances updated', {
-        count: this.metrics.swiftremit_active_remittances,
+        count: this.metrics.daddy-config_active_remittances,
       });
     } catch (error) {
       this.logger.error('Failed to update active remittances', error);
@@ -151,10 +151,10 @@ export class MetricsService {
          WHERE status = 'completed'`
       );
 
-      this.metrics.swiftremit_accumulated_fees = parseFloat(result.rows[0].total_fees);
+      this.metrics.daddy-config_accumulated_fees = parseFloat(result.rows[0].total_fees);
 
       this.logger.debug('Accumulated fees updated', {
-        fees: this.metrics.swiftremit_accumulated_fees,
+        fees: this.metrics.daddy-config_accumulated_fees,
       });
     } catch (error) {
       this.logger.error('Failed to update accumulated fees', error);
@@ -163,7 +163,7 @@ export class MetricsService {
 
   setFxRateStalenessMetric(from: string, to: string, stalenessSeconds: number): void {
     const pairKey = `${from.toUpperCase()}/${to.toUpperCase()}`;
-    this.metrics.swiftremit_fx_rate_staleness_seconds[pairKey] = stalenessSeconds;
+    this.metrics.daddy-config_fx_rate_staleness_seconds[pairKey] = stalenessSeconds;
   }
 
   /**
@@ -175,10 +175,10 @@ export class MetricsService {
         `SELECT COUNT(*) as count FROM webhook_dead_letters WHERE replayed_at IS NULL`
       );
 
-      this.metrics.swiftremit_webhook_dead_letter_count = parseInt(result.rows[0].count);
+      this.metrics.daddy-config_webhook_dead_letter_count = parseInt(result.rows[0].count);
 
       this.logger.debug('Dead-letter count updated', {
-        count: this.metrics.swiftremit_webhook_dead_letter_count,
+        count: this.metrics.daddy-config_webhook_dead_letter_count,
       });
     } catch (error) {
       this.logger.error('Failed to update dead-letter count', error);
@@ -188,15 +188,15 @@ export class MetricsService {
   /** Increment rate-limit-exceeded counter for a given path. */
   incrementRateLimitExceeded(path: string): void {
     const key = path || 'unknown';
-    this.metrics.swiftremit_rate_limit_exceeded_total[key] =
-      (this.metrics.swiftremit_rate_limit_exceeded_total[key] ?? 0) + 1;
+    this.metrics.daddy-config_rate_limit_exceeded_total[key] =
+      (this.metrics.daddy-config_rate_limit_exceeded_total[key] ?? 0) + 1;
   }
 
   /**
    * Increment dead-letter counter (called by dispatcher on each DLQ insertion)
    */
   incrementDeadLetterCount(): void {
-    this.metrics.swiftremit_webhook_dead_letter_count++;
+    this.metrics.daddy-config_webhook_dead_letter_count++;
   }
 
   /**
@@ -204,14 +204,14 @@ export class MetricsService {
    */
   recordKycPollerRun(): void {
     this.metrics.kyc_poller_last_run_timestamp_seconds = Math.floor(Date.now() / 1000);
-    this.metrics.swiftremit_kyc_poll_runs_total += 1;
+    this.metrics.daddy-config_kyc_poll_runs_total += 1;
   }
 
   /**
    * Record a KYC poll failure.
    */
   recordKycPollFailure(): void {
-    this.metrics.swiftremit_kyc_poll_failures_total += 1;
+    this.metrics.daddy-config_kyc_poll_failures_total += 1;
   }
 
   /** Record a successful job run (updates last-run timestamp). */
@@ -268,34 +268,34 @@ export class MetricsService {
     const lines: string[] = [];
 
     // Settlements counter
-    lines.push('# HELP swiftremit_settlements_total Total number of settlements by status');
-    lines.push('# TYPE swiftremit_settlements_total counter');
-    Object.entries(this.metrics.swiftremit_settlements_total).forEach(([status, count]) => {
-      lines.push(`swiftremit_settlements_total{status="${this.sanitizeLabelValue(status)}"} ${count}`);
+    lines.push('# HELP daddy-config_settlements_total Total number of settlements by status');
+    lines.push('# TYPE daddy-config_settlements_total counter');
+    Object.entries(this.metrics.daddy-config_settlements_total).forEach(([status, count]) => {
+      lines.push(`daddy-config_settlements_total{status="${this.sanitizeLabelValue(status)}"} ${count}`);
     });
 
     // Webhook deliveries counter
-    lines.push('# HELP swiftremit_webhook_deliveries_total Total number of webhook deliveries by result');
-    lines.push('# TYPE swiftremit_webhook_deliveries_total counter');
-    Object.entries(this.metrics.swiftremit_webhook_deliveries_total).forEach(([result, count]) => {
-      lines.push(`swiftremit_webhook_deliveries_total{result="${this.sanitizeLabelValue(result)}"} ${count}`);
+    lines.push('# HELP daddy-config_webhook_deliveries_total Total number of webhook deliveries by result');
+    lines.push('# TYPE daddy-config_webhook_deliveries_total counter');
+    Object.entries(this.metrics.daddy-config_webhook_deliveries_total).forEach(([result, count]) => {
+      lines.push(`daddy-config_webhook_deliveries_total{result="${this.sanitizeLabelValue(result)}"} ${count}`);
     });
 
     // Active remittances gauge
-    lines.push('# HELP swiftremit_active_remittances Number of active remittances');
-    lines.push('# TYPE swiftremit_active_remittances gauge');
-    lines.push(`swiftremit_active_remittances ${this.metrics.swiftremit_active_remittances}`);
+    lines.push('# HELP daddy-config_active_remittances Number of active remittances');
+    lines.push('# TYPE daddy-config_active_remittances gauge');
+    lines.push(`daddy-config_active_remittances ${this.metrics.daddy-config_active_remittances}`);
 
     // Accumulated fees gauge
-    lines.push('# HELP swiftremit_accumulated_fees Total accumulated fees from completed transactions');
-    lines.push('# TYPE swiftremit_accumulated_fees gauge');
-    lines.push(`swiftremit_accumulated_fees ${this.metrics.swiftremit_accumulated_fees}`);
+    lines.push('# HELP daddy-config_accumulated_fees Total accumulated fees from completed transactions');
+    lines.push('# TYPE daddy-config_accumulated_fees gauge');
+    lines.push(`daddy-config_accumulated_fees ${this.metrics.daddy-config_accumulated_fees}`);
 
     // Anchor availability gauge
-    lines.push('# HELP swiftremit_anchor_availability Current availability status of each anchor');
-    lines.push('# TYPE swiftremit_anchor_availability gauge');
+    lines.push('# HELP daddy-config_anchor_availability Current availability status of each anchor');
+    lines.push('# TYPE daddy-config_anchor_availability gauge');
     this.anchorAvailability.forEach((status, anchorId) => {
-      lines.push(`swiftremit_anchor_availability{anchor_id="${this.sanitizeLabelValue(anchorId)}",status="${this.sanitizeLabelValue(status)}"} 1`);
+      lines.push(`daddy-config_anchor_availability{anchor_id="${this.sanitizeLabelValue(anchorId)}",status="${this.sanitizeLabelValue(status)}"} 1`);
     });
 
     // FX rate age gauge (per currency pair)
@@ -335,12 +335,12 @@ export class MetricsService {
     lines.push(`kyc_poller_last_run_timestamp_seconds ${this.metrics.kyc_poller_last_run_timestamp_seconds}`);
 
     // KYC poller counters
-    lines.push('# HELP swiftremit_kyc_poll_runs_total Total number of KYC poll cycles executed');
-    lines.push('# TYPE swiftremit_kyc_poll_runs_total counter');
-    lines.push(`swiftremit_kyc_poll_runs_total ${this.metrics.swiftremit_kyc_poll_runs_total}`);
-    lines.push('# HELP swiftremit_kyc_poll_failures_total Total number of KYC poll failures');
-    lines.push('# TYPE swiftremit_kyc_poll_failures_total counter');
-    lines.push(`swiftremit_kyc_poll_failures_total ${this.metrics.swiftremit_kyc_poll_failures_total}`);
+    lines.push('# HELP daddy-config_kyc_poll_runs_total Total number of KYC poll cycles executed');
+    lines.push('# TYPE daddy-config_kyc_poll_runs_total counter');
+    lines.push(`daddy-config_kyc_poll_runs_total ${this.metrics.daddy-config_kyc_poll_runs_total}`);
+    lines.push('# HELP daddy-config_kyc_poll_failures_total Total number of KYC poll failures');
+    lines.push('# TYPE daddy-config_kyc_poll_failures_total counter');
+    lines.push(`daddy-config_kyc_poll_failures_total ${this.metrics.daddy-config_kyc_poll_failures_total}`);
 
     // Contract event indexer lag
     lines.push('# HELP contract_event_indexer_lag_ledgers Number of ledgers the event indexer is behind the chain tip');
@@ -348,28 +348,28 @@ export class MetricsService {
     lines.push(`contract_event_indexer_lag_ledgers ${this.metrics.contract_event_indexer_lag_ledgers}`);
 
     // Dead-letter queue count
-    lines.push('# HELP swiftremit_webhook_dead_letter_count Total number of webhook deliveries in the dead-letter queue');
-    lines.push('# TYPE swiftremit_webhook_dead_letter_count gauge');
-    lines.push(`swiftremit_webhook_dead_letter_count ${this.metrics.swiftremit_webhook_dead_letter_count}`);
+    lines.push('# HELP daddy-config_webhook_dead_letter_count Total number of webhook deliveries in the dead-letter queue');
+    lines.push('# TYPE daddy-config_webhook_dead_letter_count gauge');
+    lines.push(`daddy-config_webhook_dead_letter_count ${this.metrics.daddy-config_webhook_dead_letter_count}`);
 
     // Rate limit exceeded counter
-    lines.push('# HELP swiftremit_rate_limit_exceeded_total Total number of rate limit exceeded events by path');
-    lines.push('# TYPE swiftremit_rate_limit_exceeded_total counter');
-    Object.entries(this.metrics.swiftremit_rate_limit_exceeded_total).forEach(([path, count]) => {
-      lines.push(`swiftremit_rate_limit_exceeded_total{path="${this.sanitizeLabelValue(path)}"} ${count}`);
+    lines.push('# HELP daddy-config_rate_limit_exceeded_total Total number of rate limit exceeded events by path');
+    lines.push('# TYPE daddy-config_rate_limit_exceeded_total counter');
+    Object.entries(this.metrics.daddy-config_rate_limit_exceeded_total).forEach(([path, count]) => {
+      lines.push(`daddy-config_rate_limit_exceeded_total{path="${this.sanitizeLabelValue(path)}"} ${count}`);
     });
 
     // Job monitoring metrics (#866)
-    lines.push('# HELP swiftremit_job_last_run_timestamp Unix timestamp of the last run for each background job');
-    lines.push('# TYPE swiftremit_job_last_run_timestamp gauge');
+    lines.push('# HELP daddy-config_job_last_run_timestamp Unix timestamp of the last run for each background job');
+    lines.push('# TYPE daddy-config_job_last_run_timestamp gauge');
     this.jobLastRunTimestamp.forEach((ts, jobName) => {
-      lines.push(`swiftremit_job_last_run_timestamp{job_name="${this.sanitizeLabelValue(jobName)}"} ${ts}`);
+      lines.push(`daddy-config_job_last_run_timestamp{job_name="${this.sanitizeLabelValue(jobName)}"} ${ts}`);
     });
 
-    lines.push('# HELP swiftremit_job_failure_total Total number of failures per background job');
-    lines.push('# TYPE swiftremit_job_failure_total counter');
+    lines.push('# HELP daddy-config_job_failure_total Total number of failures per background job');
+    lines.push('# TYPE daddy-config_job_failure_total counter');
     this.jobFailureTotal.forEach((count, jobName) => {
-      lines.push(`swiftremit_job_failure_total{job_name="${this.sanitizeLabelValue(jobName)}"} ${count}`);
+      lines.push(`daddy-config_job_failure_total{job_name="${this.sanitizeLabelValue(jobName)}"} ${count}`);
     });
 
     return lines.join('\n') + '\n';

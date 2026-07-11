@@ -1,8 +1,8 @@
 /**
- * SwiftRemitRNClient — React Native wrapper around the core TypeScript SDK.
+ * Daddy-configRNClient — React Native wrapper around the core TypeScript SDK.
  *
  * Differences from the Node SDK:
- * - Accepts a `SwiftRemitSigner` instead of a raw `Keypair` so wallet
+ * - Accepts a `Daddy-configSigner` instead of a raw `Keypair` so wallet
  *   implementations (expo-secure-store, WalletConnect, hardware wallets)
  *   can be swapped without changing call sites.
  * - `submitSigned` handles the sign → submit flow using the injected signer.
@@ -10,22 +10,22 @@
  */
 
 import { TransactionBuilder } from '@stellar/stellar-sdk';
-import { SwiftRemitClient } from '@swiftremit/sdk';
-import type { SwiftRemitClientOptions } from '@swiftremit/sdk';
-import type { SwiftRemitSigner } from './signer.js';
+import { Daddy-configClient } from '@daddy-config/sdk';
+import type { Daddy-configClientOptions } from '@daddy-config/sdk';
+import type { Daddy-configSigner } from './signer.js';
 
-export type { SwiftRemitSigner };
+export type { Daddy-configSigner };
 
-export interface SwiftRemitRNClientOptions extends SwiftRemitClientOptions {
+export interface Daddy-configRNClientOptions extends Daddy-configClientOptions {
   /** Wallet signer implementation. */
-  signer: SwiftRemitSigner;
+  signer: Daddy-configSigner;
 }
 
-export class SwiftRemitRNClient extends SwiftRemitClient {
-  private readonly signer: SwiftRemitSigner;
+export class Daddy-configRNClient extends Daddy-configClient {
+  private readonly signer: Daddy-configSigner;
   private readonly _networkPassphrase: string;
 
-  constructor(options: SwiftRemitRNClientOptions) {
+  constructor(options: Daddy-configRNClientOptions) {
     super(options);
     this.signer = options.signer;
     this._networkPassphrase = options.networkPassphrase;

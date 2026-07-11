@@ -1,5 +1,5 @@
 /**
- * Tests for withRetry / isTransientError behaviour in SwiftRemitClient.
+ * Tests for withRetry / isTransientError behaviour in Daddy-configClient.
  *
  * We test the helpers indirectly by stubbing the SorobanRpc.Server methods
  * that submitTransaction and simulateCall delegate to.

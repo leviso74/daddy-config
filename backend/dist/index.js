@@ -45,7 +45,7 @@ async function start() {
         (0, scheduler_1.startBackgroundJobs)();
         // Start API server
         api_1.default.listen(PORT, () => {
-            console.log(`SwiftRemit Verification Service running on port ${PORT}`);
+            console.log(`Daddy-config Verification Service running on port ${PORT}`);
             console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
         });
     }

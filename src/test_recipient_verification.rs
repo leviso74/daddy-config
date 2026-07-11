@@ -13,7 +13,7 @@ use crate::{
     recipient_verification::{
         BankRecipient, RecipientDetails, WalletRecipient, RECIPIENT_HASH_SCHEMA_VERSION,
     },
-    ContractError, SwiftRemitContract, SwiftRemitContractClient,
+    ContractError, Daddy-configContract, Daddy-configContractClient,
 };
 
 // ── Test helpers ──────────────────────────────────────────────────────────────
@@ -25,13 +25,13 @@ fn create_token_contract<'a>(env: &Env, admin: &Address) -> token::StellarAssetC
     token::StellarAssetClient::new(env, &address)
 }
 
-fn create_swiftremit_contract<'a>(env: &Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_daddy-config_contract<'a>(env: &Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 struct TestSetup<'a> {
     env: Env,
-    client: SwiftRemitContractClient<'a>,
+    client: Daddy-configContractClient<'a>,
     token: token::StellarAssetClient<'a>,
     admin: Address,
     agent: Address,
@@ -50,7 +50,7 @@ fn setup() -> TestSetup<'static> {
     let token = create_token_contract(&env, &token_admin);
     token.mint(&sender, &1_000_000_000i128);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
     client.register_agent(&agent, &None);
     client.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -58,8 +58,8 @@ fn setup() -> TestSetup<'static> {
     // SAFETY: We extend the lifetime here because the Env owns all data.
     // This is the same pattern used in other test files.
     let env_ref: &'static Env = unsafe { &*(&env as *const Env) };
-    let client_static: SwiftRemitContractClient<'static> =
-        SwiftRemitContractClient::new(env_ref, &client.address);
+    let client_static: Daddy-configContractClient<'static> =
+        Daddy-configContractClient::new(env_ref, &client.address);
     let token_static: token::StellarAssetClient<'static> =
         token::StellarAssetClient::new(env_ref, &token.address);
 
@@ -88,7 +88,7 @@ fn test_create_remittance_with_hash_stores_it() {
     let token = create_token_contract(&env, &token_admin);
     token.mint(&sender, &1_000_000_000i128);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
     client.register_agent(&agent, &None);
     client.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -129,7 +129,7 @@ fn test_create_remittance_without_hash_leaves_no_record() {
     let token = create_token_contract(&env, &token_admin);
     token.mint(&sender, &1_000_000_000i128);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
     client.register_agent(&agent, &None);
     client.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -165,7 +165,7 @@ fn test_get_recipient_hash_returns_none_for_exempt() {
     let token = create_token_contract(&env, &token_admin);
     token.mint(&sender, &1_000_000_000i128);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
     client.register_agent(&agent, &None);
     client.assign_role(&admin, &agent, &crate::Role::Settler);
@@ -197,7 +197,7 @@ fn test_get_recipient_hash_returns_not_found_for_unknown_id() {
 
     let token = create_token_contract(&env, &token_admin);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
 
     let result = client.try_get_recipient_hash(&9999u64);
@@ -218,7 +218,7 @@ fn test_compute_recipient_hash_wallet_deterministic() {
 
     let token = create_token_contract(&env, &token_admin);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
 
     let wallet_addr = Address::generate(&env);
@@ -244,7 +244,7 @@ fn test_compute_recipient_hash_bank_deterministic() {
 
     let token = create_token_contract(&env, &token_admin);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
 
     let details = RecipientDetails::Bank(BankRecipient {
@@ -269,7 +269,7 @@ fn test_rcpt_hash_schema_version() {
 
     let token = create_token_contract(&env, &token_admin);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
 
     let version = client.rcpt_hash_schema_version();
@@ -288,7 +288,7 @@ fn test_wallet_and_bank_produce_different_hashes() {
 
     let token = create_token_contract(&env, &token_admin);
 
-    let client = create_swiftremit_contract(&env);
+    let client = create_daddy-config_contract(&env);
     client.initialize(&admin, &token.address, &250u32, &0u64, &0u32, &admin);
 
     let wallet_addr = Address::generate(&env);

@@ -1,9 +1,9 @@
 # values.staging.yaml — staging cluster overrides
-# Usage: helm install swiftremit ./charts/swiftremit -f charts/swiftremit/values.staging.yaml
+# Usage: helm install daddy-config ./charts/daddy-config -f charts/daddy-config/values.staging.yaml
 #
 # Secrets with empty values MUST be injected at deploy time, e.g.:
-#   helm upgrade --install swiftremit ./charts/swiftremit \
-#     -f charts/swiftremit/values.staging.yaml \
+#   helm upgrade --install daddy-config ./charts/daddy-config \
+#     -f charts/daddy-config/values.staging.yaml \
 #     --set api.secret.DATABASE_URL="$DATABASE_URL" \
 #     --set backend.secret.DATABASE_URL="$DATABASE_URL" \
 #     --set backend.secret.CONTRACT_ID="$CONTRACT_ID" \
@@ -69,7 +69,7 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
   hosts:
-    - host: staging.swiftremit.example.com
+    - host: staging.daddy-config.example.com
       paths:
         - path: /api
           pathType: Prefix
@@ -81,6 +81,6 @@ ingress:
           pathType: Prefix
           service: frontend
   tls:
-    - secretName: swiftremit-staging-tls
+    - secretName: daddy-config-staging-tls
       hosts:
-        - staging.swiftremit.example.com
+        - staging.daddy-config.example.com

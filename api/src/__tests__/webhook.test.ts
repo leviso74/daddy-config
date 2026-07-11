@@ -120,8 +120,8 @@ describe('deliverWebhook', () => {
       samplePayload,
       expect.objectContaining({
         headers: expect.objectContaining({
-          'X-SwiftRemit-Event': 'remittance.completed',
-          'X-SwiftRemit-TxId': 'TX-001',
+          'X-Daddy-config-Event': 'remittance.completed',
+          'X-Daddy-config-TxId': 'TX-001',
         }),
       }),
     );

@@ -1,4 +1,4 @@
-# SwiftRemit Deployment Script for Windows (PowerShell)
+# Daddy-config Deployment Script for Windows (PowerShell)
 
 param (
     [string]$Network = $null
@@ -12,7 +12,7 @@ if (-not $Network) {
 }
 $Deployer = if ($env:DEPLOYER_IDENTITY) { $env:DEPLOYER_IDENTITY } else { "deployer" }
 $InitialFeeBps = if ($env:INITIAL_FEE_BPS) { [int]$env:INITIAL_FEE_BPS } else { 250 }
-$WasmPath = "target/wasm32-unknown-unknown/release/swiftremit.optimized.wasm"
+$WasmPath = "target/wasm32-unknown-unknown/release/daddy-config.optimized.wasm"
 
 # Validate INITIAL_FEE_BPS range (0-10000)
 if ($InitialFeeBps -lt 0 -or $InitialFeeBps -gt 10000) {
@@ -20,7 +20,7 @@ if ($InitialFeeBps -lt 0 -or $InitialFeeBps -gt 10000) {
     exit 1
 }
 
-Write-Host "🚀 SwiftRemit Deployment Script" -ForegroundColor Cyan
+Write-Host "🚀 Daddy-config Deployment Script" -ForegroundColor Cyan
 Write-Host "Network: $Network" -ForegroundColor Gray
 Write-Host "Deployer Identity: $Deployer" -ForegroundColor Gray
 
@@ -58,7 +58,7 @@ if ($Network -ne "mainnet") {
 Write-Host "🔨 Building and Optimizing Contract..." -ForegroundColor Yellow
 # Note: To enable debug logging for local testing, add: --features debug-log
 cargo build --target wasm32-unknown-unknown --release
-soroban contract optimize --wasm target/wasm32-unknown-unknown/release/swiftremit.wasm
+soroban contract optimize --wasm target/wasm32-unknown-unknown/release/daddy-config.wasm
 
 if (-not (Test-Path $WasmPath)) {
     Write-Host "❌ Build failed. $WasmPath not found." -ForegroundColor Red

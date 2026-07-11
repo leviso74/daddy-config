@@ -12,7 +12,7 @@ use soroban_sdk::{
     token, Address, BytesN, Env,
 };
 
-use crate::{ContractError, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{ContractError, Daddy-configContract, Daddy-configContractClient};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers
@@ -29,8 +29,8 @@ fn balance(env: &Env, token: &token::StellarAssetClient, addr: &Address) -> i128
     token::Client::new(env, &token.address).balance(addr)
 }
 
-fn make_contract(env: &Env) -> SwiftRemitContractClient<'static> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn make_contract(env: &Env) -> Daddy-configContractClient<'static> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 fn evidence_hash(env: &Env) -> BytesN<32> {
@@ -47,7 +47,7 @@ fn advance(env: &Env, seconds: u64) {
 
 struct DisputeFixture<'a> {
     env: Env,
-    contract: SwiftRemitContractClient<'a>,
+    contract: Daddy-configContractClient<'a>,
     token: token::StellarAssetClient<'a>,
     admin: Address,
     sender: Address,

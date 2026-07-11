@@ -3,13 +3,13 @@ const fs = require('fs');
 const spec = {
   openapi: '3.0.0',
   info: {
-    title: 'SwiftRemit Backend Service',
+    title: 'Daddy-config Backend Service',
     version: '1.0.0',
-    description: 'Asset verification, KYC, and webhook handling service for SwiftRemit'
+    description: 'Asset verification, KYC, and webhook handling service for Daddy-config'
   },
   servers: [
     { url: 'http://localhost:3001', description: 'Development server' },
-    { url: 'https://backend.swiftremit.com', description: 'Production server' }
+    { url: 'https://backend.daddy-config.com', description: 'Production server' }
   ],
   tags: [
     { name: 'Health' },

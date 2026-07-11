@@ -1,5 +1,5 @@
 [package]
-name = "swiftremit-fuzz"
+name = "daddy-config-fuzz"
 version = "0.0.1"
 edition = "2021"
 publish = false
@@ -11,7 +11,7 @@ cargo-fuzz = true
 libfuzzer-sys = "0.4"
 soroban-sdk = { version = "26.1.0", features = ["testutils"] }
 
-[dependencies.swiftremit]
+[dependencies.daddy-config]
 path = ".."
 default-features = false
 

@@ -1,8 +1,8 @@
 /**
- * SwiftRemit Deterministic Settlement ID Generator
+ * Daddy-config Deterministic Settlement ID Generator
  * 
  * Reference implementation for external systems (banks, anchors, APIs)
- * to generate identical settlement IDs as the SwiftRemit smart contract.
+ * to generate identical settlement IDs as the Daddy-config smart contract.
  * 
  * This implementation follows the canonical specification in:
  * DETERMINISTIC_HASHING_SPEC.md
@@ -23,7 +23,7 @@ export const HASH_SCHEMA_VERSION = 1;
 /**
  * Compute a deterministic settlement ID from remittance parameters.
  * 
- * This function produces identical output to the SwiftRemit smart contract's
+ * This function produces identical output to the Daddy-config smart contract's
  * compute_settlement_id() function when given the same inputs.
  * 
  * @param {number} remittanceId - Unique remittance counter ID (u64)

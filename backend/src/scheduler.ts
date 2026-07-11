@@ -5,7 +5,7 @@ import { storeVerificationOnChain } from './stellar';
 import { KycService } from './kyc-service';
 import { Sep24Service } from './sep24-service';
 import { SorobanRpc, Keypair } from '@stellar/stellar-sdk';
-import { SwiftRemitClient } from '@swiftremit/sdk';
+import { Daddy-configClient } from '@daddy-config/sdk';
 import { KycExpiryNotifier } from './kyc-expiry-notifier';
 import { createWebhookStore } from './webhooks/store';
 import { withAdvisoryLock } from './distributed-lock';
@@ -146,7 +146,7 @@ async function pollSep24Transactions() {
 
 /**
  * Extend contract storage TTLs to prevent data loss.
- * Calls `extend_storage_ttl` on the SwiftRemit contract using the admin keypair
+ * Calls `extend_storage_ttl` on the Daddy-config contract using the admin keypair
  * configured via environment variables. Runs daily so TTLs never expire between
  * scheduled runs.
  *
@@ -165,7 +165,7 @@ async function extendContractStorageTtl() {
   }
 
   try {
-    const client = new SwiftRemitClient({ contractId, rpcUrl, networkPassphrase });
+    const client = new Daddy-configClient({ contractId, rpcUrl, networkPassphrase });
     const keypair = Keypair.fromSecret(adminSecretKey);
     const adminAddress = keypair.publicKey();
 

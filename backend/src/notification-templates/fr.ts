@@ -24,7 +24,7 @@ const fr: LocaleTemplates = {
   kyc_expired: {
     subject: 'Votre vérification d\'identité a expiré',
     text: () =>
-      'Votre vérification KYC a expiré. Veuillez vérifier votre identité à nouveau pour continuer à utiliser SwiftRemit.',
+      'Votre vérification KYC a expiré. Veuillez vérifier votre identité à nouveau pour continuer à utiliser Daddy-config.',
   },
 };
 

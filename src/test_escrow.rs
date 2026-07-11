@@ -1,6 +1,6 @@
 #![cfg(test)]
 extern crate std;
-use crate::{SwiftRemitContract, SwiftRemitContractClient, EscrowStatus};
+use crate::{Daddy-configContract, Daddy-configContractClient, EscrowStatus};
 use soroban_sdk::{
     testutils::{Address as _, AuthorizedFunction, AuthorizedInvocation, Events, Ledger as _},
     token, Address, BytesN, Env, IntoVal, Symbol, Vec,
@@ -23,8 +23,8 @@ fn create_token_contract<'a>(env: &Env, admin: &Address) -> token::StellarAssetC
     token::StellarAssetClient::new(env, &env.register_stellar_asset_contract_v2(admin.clone()).address())
 }
 
-fn create_swiftremit_contract<'a>(env: &Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_daddy-config_contract<'a>(env: &Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 fn token_balance(token: &token::StellarAssetClient, address: &Address) -> i128 {
@@ -43,7 +43,7 @@ fn test_create_escrow() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let transfer_id = contract.create_escrow(&sender, &recipient, &500);
@@ -71,7 +71,7 @@ fn test_create_escrow_sets_expiry_from_ttl() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
     contract.update_escrow_ttl(&86400);
 
@@ -94,7 +94,7 @@ fn test_process_expired_escrows_refunds_ttl_expired() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
     contract.update_escrow_ttl(&1);
 
@@ -123,7 +123,7 @@ fn test_release_escrow() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let transfer_id = contract.create_escrow(&sender, &recipient, &500);
@@ -147,7 +147,7 @@ fn test_refund_escrow() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let transfer_id = contract.create_escrow(&sender, &recipient, &500);
@@ -172,7 +172,7 @@ fn test_double_release_prevented() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let transfer_id = contract.create_escrow(&sender, &recipient, &500);
@@ -193,7 +193,7 @@ fn test_double_refund_prevented() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let transfer_id = contract.create_escrow(&sender, &recipient, &500);
@@ -212,7 +212,7 @@ fn test_create_escrow_zero_amount() {
     let recipient = Address::generate(&env);
 
     let token = create_token_contract(&env, &admin);
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     contract.create_escrow(&sender, &recipient, &0);
@@ -230,7 +230,7 @@ fn test_escrow_events_emitted() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let transfer_id = contract.create_escrow(&sender, &recipient, &500);
@@ -254,7 +254,7 @@ fn test_raise_dispute_increments_agent_dispute_count() {
     let token = create_token_contract(&env, &admin);
     token.mint(&sender, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let transfer_id = contract.create_escrow(&sender, &recipient, &500);
@@ -279,7 +279,7 @@ fn test_get_agent_reputation_calculates_score() {
     let token = create_token_contract(&env, &admin);
     token.mint(&admin, &1000);
 
-    let contract = create_swiftremit_contract(&env);
+    let contract = create_daddy-config_contract(&env);
     contract.initialize(&admin, &token.address, &250, &3600, &0, &admin);
 
     let stats = crate::AgentStats {

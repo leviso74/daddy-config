@@ -1,4 +1,4 @@
-//! Debug logging module for SwiftRemit contract.
+//! Debug logging module for Daddy-config contract.
 //!
 //! This module provides conditional debug logging that is only enabled
 //! when the "debug-log" feature flag is active.

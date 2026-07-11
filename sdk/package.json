@@ -1,7 +1,7 @@
 {
-  "name": "@swiftremit/sdk",
+  "name": "@daddy-config/sdk",
   "version": "1.0.0",
-  "description": "TypeScript client SDK for the SwiftRemit Soroban smart contract",
+  "description": "TypeScript client SDK for the Daddy-config Soroban smart contract",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -37,7 +37,7 @@
   "keywords": [
     "stellar",
     "soroban",
-    "swiftremit",
+    "daddy-config",
     "remittance",
     "usdc"
   ],

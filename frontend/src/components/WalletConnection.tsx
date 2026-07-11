@@ -6,7 +6,7 @@ import type { NetworkType } from '../utils/freighter';
 
 export type { NetworkType };
 
-const STORAGE_KEY = 'swiftremit_wallet_address';
+const STORAGE_KEY = 'daddy-config_wallet_address';
 const DEFAULT_STORAGE_TTL_MS = 24 * 60 * 60 * 1000;
 
 interface StoredWalletSession {

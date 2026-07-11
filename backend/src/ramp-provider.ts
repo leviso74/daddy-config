@@ -29,7 +29,7 @@ export interface RampOrderEvent {
   fiatCurrency?: string;
   cryptoCurrency?: string;
   walletAddress?: string;
-  /** Populated when the order carries a SwiftRemit remittance reference. */
+  /** Populated when the order carries a Daddy-config remittance reference. */
   remittanceId?: string;
   /** Original provider payload for audit. */
   raw: unknown;

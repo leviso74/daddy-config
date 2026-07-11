@@ -86,8 +86,8 @@ jobs:
       - name: Upload WASM artifact
         uses: actions/upload-artifact@v4
         with:
-          name: swiftremit-mainnet-wasm-${{ github.sha }}
-          path: target/wasm32-unknown-unknown/release/swiftremit.wasm
+          name: daddy-config-mainnet-wasm-${{ github.sha }}
+          path: target/wasm32-unknown-unknown/release/daddy-config.wasm
           retention-days: 90
 
   # ── Deploy contract to mainnet ─────────────────────────────────────────────
@@ -103,7 +103,7 @@ jobs:
       - name: Download WASM artifact
         uses: actions/download-artifact@v4
         with:
-          name: swiftremit-mainnet-wasm-${{ github.sha }}
+          name: daddy-config-mainnet-wasm-${{ github.sha }}
           path: wasm/
 
       - name: Install Stellar CLI
@@ -116,7 +116,7 @@ jobs:
           MAINNET_SECRET_KEY: ${{ secrets.MAINNET_DEPLOYER_SECRET_KEY }}
         run: |
           stellar contract deploy \
-            --wasm wasm/swiftremit.wasm \
+            --wasm wasm/daddy-config.wasm \
             --source-account "$MAINNET_SECRET_KEY" \
             --network mainnet \
             --rpc-url "${{ vars.MAINNET_RPC_URL }}" \

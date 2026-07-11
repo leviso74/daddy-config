@@ -40,7 +40,7 @@ export interface KycNotificationPayload {
 
 async function sendEmail(to: string, subject: string, text: string): Promise<void> {
   const apiKey = process.env.SENDGRID_API_KEY;
-  const from = process.env.SENDGRID_FROM_EMAIL ?? 'noreply@swiftremit.io';
+  const from = process.env.SENDGRID_FROM_EMAIL ?? 'noreply@daddy-config.io';
   if (!apiKey) {
     console.warn('[notification] SENDGRID_API_KEY not set — skipping email');
     return;

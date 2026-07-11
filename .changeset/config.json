@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "Xaxxoo/SwiftRemit" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "Xaxxoo/Daddy-config" }],
   "commit": false,
   "fixed": [],
   "linked": [],

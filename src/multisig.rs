@@ -1,4 +1,4 @@
-//! Multi-signature admin operation module for SwiftRemit.
+//! Multi-signature admin operation module for Daddy-config.
 //!
 //! High-impact admin operations (fee changes, fee withdrawals, pause/unpause) require
 //! M-of-N admin approval before execution.  The flow is:

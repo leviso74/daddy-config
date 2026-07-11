@@ -1,7 +1,7 @@
 #![cfg(test)]
 extern crate std;
 
-use crate::{ContractError, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{ContractError, Daddy-configContract, Daddy-configContractClient};
 use soroban_sdk::{symbol_short, testutils::{Address as _, Events}, token, Address, Env};
 
 fn has_event(env: &Env, t0: &str, t1: &str) -> bool {
@@ -17,15 +17,15 @@ fn has_event(env: &Env, t0: &str, t1: &str) -> bool {
     })
 }
 
-fn setup<'a>(env: &'a Env) -> (SwiftRemitContractClient<'a>, Address) {
+fn setup<'a>(env: &'a Env) -> (Daddy-configContractClient<'a>, Address) {
     let admin = Address::generate(env);
     let token_client = token::StellarAssetClient::new(
         env,
         &env.register_stellar_asset_contract_v2(admin.clone()).address(),
     );
-    let contract = SwiftRemitContractClient::new(
+    let contract = Daddy-configContractClient::new(
         env,
-        &env.register_contract(None, SwiftRemitContract {}),
+        &env.register_contract(None, Daddy-configContract {}),
     );
     contract.initialize(&admin, &token_client.address, &250, &0, &0, &admin);
     (contract, admin)

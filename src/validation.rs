@@ -1,4 +1,4 @@
-//! Address validation utilities for the SwiftRemit contract.
+//! Address validation utilities for the Daddy-config contract.
 //!
 //! This module provides validation functions for Stellar addresses used in
 //! contract operations.

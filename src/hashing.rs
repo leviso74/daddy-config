@@ -1,4 +1,4 @@
-//! Deterministic Hashing Standard for SwiftRemit
+//! Deterministic Hashing Standard for Daddy-config
 //!
 //! This module defines the canonical method for generating settlement IDs
 //! so external systems (banks, anchors, APIs) can reproduce identical hashes

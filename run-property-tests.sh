@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Property-Based Testing Runner for SwiftRemit Fee Calculations
+# Property-Based Testing Runner for Daddy-config Fee Calculations
 # This script runs comprehensive fuzzing tests for fee calculation logic
 
 set -e
 
-echo "🧪 Running Property-Based Tests for SwiftRemit Fee Calculations"
+echo "🧪 Running Property-Based Tests for Daddy-config Fee Calculations"
 echo "=============================================================="
 
 # Colors for output

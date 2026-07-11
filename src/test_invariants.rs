@@ -1,4 +1,4 @@
-//! Property-based tests for SwiftRemit contract invariants.
+//! Property-based tests for Daddy-config contract invariants.
 //!
 //! Uses `proptest` to verify critical safety properties across randomized inputs.
 //!
@@ -17,7 +17,7 @@
 #![cfg(test)]
 extern crate std;
 
-use crate::{RemittanceStatus, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{RemittanceStatus, Daddy-configContract, Daddy-configContractClient};
 use proptest::prelude::*;
 use soroban_sdk::{testutils::Address as _, token, Address, Env};
 
@@ -30,8 +30,8 @@ fn make_token<'a>(env: &'a Env, admin: &Address) -> (token::Client<'a>, token::S
     (token::Client::new(env, &addr), token::StellarAssetClient::new(env, &addr))
 }
 
-fn make_contract<'a>(env: &'a Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn make_contract<'a>(env: &'a Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 /// Valid remittance amounts: 1 to 1_000_000 stroops

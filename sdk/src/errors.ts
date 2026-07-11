@@ -1,16 +1,16 @@
 /**
- * Typed error mapping for the SwiftRemit TypeScript SDK.
+ * Typed error mapping for the Daddy-config TypeScript SDK.
  *
  * Mirrors the 74 ContractError codes defined in src/errors.rs so callers
  * can catch and branch on named error codes instead of parsing raw strings.
  *
  * Usage:
- *   import { SwiftRemitError, ErrorCode } from '@swiftremit/sdk'
+ *   import { Daddy-configError, ErrorCode } from '@daddy-config/sdk'
  *
  *   try {
  *     await client.createRemittance(...)
  *   } catch (e) {
- *     if (e instanceof SwiftRemitError && e.code === ErrorCode.DailySendLimitExceeded) {
+ *     if (e instanceof Daddy-configError && e.code === ErrorCode.DailySendLimitExceeded) {
  *       // handle gracefully
  *     }
  *   }
@@ -198,10 +198,10 @@ const ERROR_MESSAGES: Record<ErrorCode, string> = {
 };
 
 /**
- * Typed error thrown by all SwiftRemitClient methods when the contract
+ * Typed error thrown by all Daddy-configClient methods when the contract
  * returns a known error code.
  */
-export class SwiftRemitError extends Error {
+export class Daddy-configError extends Error {
   /** The numeric error code from the contract. */
   readonly code: ErrorCode;
   /** The raw error string from the RPC response (for debugging). */
@@ -210,16 +210,16 @@ export class SwiftRemitError extends Error {
   constructor(code: ErrorCode, rawError: string) {
     const message = ERROR_MESSAGES[code] ?? `Contract error ${code}`;
     super(message);
-    this.name = "SwiftRemitError";
+    this.name = "Daddy-configError";
     this.code = code;
     this.rawError = rawError;
     // Maintain proper prototype chain in transpiled environments
-    Object.setPrototypeOf(this, SwiftRemitError.prototype);
+    Object.setPrototypeOf(this, Daddy-configError.prototype);
   }
 }
 
 /**
- * Parse a raw RPC/simulation error string and return a SwiftRemitError if
+ * Parse a raw RPC/simulation error string and return a Daddy-configError if
  * it contains a known contract error code, or re-throw the original error.
  *
  * Soroban encodes contract errors as `Error(Contract, <code>)` in the XDR
@@ -228,7 +228,7 @@ export class SwiftRemitError extends Error {
  * or the simpler form used in simulation failures:
  *   "Simulation failed: Error(Contract, #4)"
  */
-export function parseContractError(raw: unknown): SwiftRemitError | null {
+export function parseContractError(raw: unknown): Daddy-configError | null {
   const message = raw instanceof Error ? raw.message : String(raw);
 
   // Match patterns like "ContractError(4)", "Contract, #4", "contract_error:4"
@@ -244,7 +244,7 @@ export function parseContractError(raw: unknown): SwiftRemitError | null {
     if (match) {
       const code = parseInt(match[1], 10) as ErrorCode;
       if (Object.values(ErrorCode).includes(code)) {
-        return new SwiftRemitError(code, message);
+        return new Daddy-configError(code, message);
       }
     }
   }

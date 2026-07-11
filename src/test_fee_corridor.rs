@@ -1,17 +1,17 @@
 #![cfg(test)]
 
-use crate::{ContractError, FeeStrategy, FeeCorridor, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{ContractError, FeeStrategy, FeeCorridor, Daddy-configContract, Daddy-configContractClient};
 use soroban_sdk::{testutils::Address as _, token, Address, Env, String};
 
-fn setup<'a>(env: &'a Env) -> (SwiftRemitContractClient<'a>, Address, token::StellarAssetClient<'a>) {
+fn setup<'a>(env: &'a Env) -> (Daddy-configContractClient<'a>, Address, token::StellarAssetClient<'a>) {
     let admin = Address::generate(env);
     let token_client = token::StellarAssetClient::new(
         env,
         &env.register_stellar_asset_contract_v2(admin.clone()).address(),
     );
-    let contract = SwiftRemitContractClient::new(
+    let contract = Daddy-configContractClient::new(
         env,
-        &env.register_contract(None, SwiftRemitContract {}),
+        &env.register_contract(None, Daddy-configContract {}),
     );
     contract.initialize(&admin, &token_client.address, &250, &0, &0, &admin);
     (contract, admin, token_client)

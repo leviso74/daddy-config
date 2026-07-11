@@ -12,7 +12,7 @@ describe('OpenAPI Specification', () => {
     expect(spec).toBeDefined();
     expect(spec.openapi).toBe('3.0.0');
     expect(spec.info).toBeDefined();
-    expect(spec.info.title).toBe('SwiftRemit Backend Service');
+    expect(spec.info.title).toBe('Daddy-config Backend Service');
     expect(spec.paths).toBeDefined();
   });
 

@@ -21,7 +21,7 @@ export class AssetVerifier {
     this.httpClient = axios.create({
       timeout: REQUEST_TIMEOUT,
       headers: {
-        'User-Agent': 'SwiftRemit-Verifier/1.0',
+        'User-Agent': 'Daddy-config-Verifier/1.0',
       },
     });
   }

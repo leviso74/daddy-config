@@ -5,7 +5,7 @@
     { "type": "datasource", "id": "prometheus", "name": "Prometheus", "version": "1.0.0" }
   ],
   "annotations": { "list": [] },
-  "description": "SwiftRemit key business metrics",
+  "description": "Daddy-config key business metrics",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
@@ -20,7 +20,7 @@
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
       "targets": [
         {
-          "expr": "sum by (from_currency, to_country) (rate(swiftremit_remittance_volume_stroops_total[1h]))",
+          "expr": "sum by (from_currency, to_country) (rate(daddy-config_remittance_volume_stroops_total[1h]))",
           "legendFormat": "{{from_currency}} → {{to_country}}",
           "refId": "A"
         }
@@ -38,7 +38,7 @@
       "gridPos": { "h": 8, "w": 6, "x": 12, "y": 0 },
       "targets": [
         {
-          "expr": "100 * sum(swiftremit_kyc_approved_total) / (sum(swiftremit_kyc_approved_total) + sum(swiftremit_kyc_rejected_total) + 1e-9)",
+          "expr": "100 * sum(daddy-config_kyc_approved_total) / (sum(daddy-config_kyc_approved_total) + sum(daddy-config_kyc_rejected_total) + 1e-9)",
           "legendFormat": "Approval Rate",
           "refId": "A"
         }
@@ -68,7 +68,7 @@
       "gridPos": { "h": 8, "w": 6, "x": 18, "y": 0 },
       "targets": [
         {
-          "expr": "sum(rate(swiftremit_accumulated_fees_stroops_total[1h])) / 1e7",
+          "expr": "sum(rate(daddy-config_accumulated_fees_stroops_total[1h])) / 1e7",
           "legendFormat": "Fee Revenue USDC/hr",
           "refId": "A"
         }
@@ -96,7 +96,7 @@
       "gridPos": { "h": 8, "w": 6, "x": 0, "y": 8 },
       "targets": [
         {
-          "expr": "swiftremit_active_agents_total",
+          "expr": "daddy-config_active_agents_total",
           "legendFormat": "Active Agents",
           "refId": "A"
         }
@@ -125,7 +125,7 @@
       "gridPos": { "h": 8, "w": 18, "x": 6, "y": 8 },
       "targets": [
         {
-          "expr": "100 * rate(swiftremit_webhook_deliveries_total{result=\"success\"}[5m]) / (rate(swiftremit_webhook_deliveries_total[5m]) + 1e-9)",
+          "expr": "100 * rate(daddy-config_webhook_deliveries_total{result=\"success\"}[5m]) / (rate(daddy-config_webhook_deliveries_total[5m]) + 1e-9)",
           "legendFormat": "Delivery Success Rate",
           "refId": "A"
         }
@@ -150,7 +150,7 @@
   ],
   "refresh": "30s",
   "schemaVersion": 38,
-  "tags": ["swiftremit", "business"],
+  "tags": ["daddy-config", "business"],
   "templating": {
     "list": [
       {
@@ -166,7 +166,7 @@
   "time": { "from": "now-6h", "to": "now" },
   "timepicker": {},
   "timezone": "browser",
-  "title": "SwiftRemit Business Metrics",
-  "uid": "swiftremit-business",
+  "title": "Daddy-config Business Metrics",
+  "uid": "daddy-config-business",
   "version": 1
 }

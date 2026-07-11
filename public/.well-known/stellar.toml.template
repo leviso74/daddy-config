@@ -1,4 +1,4 @@
-# SwiftRemit stellar.toml
+# Daddy-config stellar.toml
 # Served at https://<your-domain>/.well-known/stellar.toml
 # Stellar Expert and other tooling discover contract metadata from this file.
 # See: https://developers.stellar.org/docs/issuing-assets/publishing-asset-info
@@ -11,24 +11,24 @@ NETWORK_PASSPHRASE = "Public Global Stellar Network ; September 2015"
 # Organization information and contact details
 
 [DOCUMENTATION]
-ORG_NAME = "SwiftRemit"
-ORG_URL = "https://swiftremit.example.com"
-ORG_LOGO = "https://swiftremit.example.com/logo.png"
+ORG_NAME = "Daddy-config"
+ORG_URL = "https://daddy-config.example.com"
+ORG_LOGO = "https://daddy-config.example.com/logo.png"
 ORG_DESCRIPTION = "Production-ready Soroban smart contract for USDC remittance on Stellar with escrow-based agent network and fee management"
-ORG_GITHUB = "https://github.com/Haroldwonder/SwiftRemit"
-ORG_OFFICIAL_EMAIL = "support@swiftremit.example.com"
-ORG_SUPPORT_EMAIL = "support@swiftremit.example.com"
-ORG_TWITTER = "SwiftRemit"
-ORG_KEYBASE = "swiftremit"
+ORG_GITHUB = "https://github.com/Haroldwonder/Daddy-config"
+ORG_OFFICIAL_EMAIL = "support@daddy-config.example.com"
+ORG_SUPPORT_EMAIL = "support@daddy-config.example.com"
+ORG_TWITTER = "Daddy-config"
+ORG_KEYBASE = "daddy-config"
 
 # ─── Principals ───────────────────────────────────────────────────────────────
 # Contact information for key personnel
 
 [[PRINCIPALS]]
 name = "Platform Administrator"
-email = "admin@swiftremit.example.com"
+email = "admin@daddy-config.example.com"
 github = "Haroldwonder"
-keybase = "swiftremit_admin"
+keybase = "daddy-config_admin"
 
 # ─── Currencies ───────────────────────────────────────────────────────────────
 # Asset definitions for tokens used by the platform
@@ -38,8 +38,8 @@ code = "USDC"
 issuer = "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
 display_decimals = 7
 name = "USD Coin"
-desc = "USDC stablecoin used for remittances on SwiftRemit platform"
-conditions = "Remittances are processed through the SwiftRemit smart contract with escrow protection"
+desc = "USDC stablecoin used for remittances on Daddy-config platform"
+conditions = "Remittances are processed through the Daddy-config smart contract with escrow protection"
 image = "https://www.centre.io/images/usdc/usdc-icon-86074d9d49.png"
 is_asset_anchored = true
 anchor_asset_type = "fiat"
@@ -52,22 +52,22 @@ status = "live"
 # each mainnet deployment. Do not edit these lines manually.
 
 [[CONTRACTS]]
-NAME = "SwiftRemit"
+NAME = "Daddy-config"
 DESCRIPTION = "Escrow-based USDC remittance contract with agent network and fee management"
 CONTRACT_ID = "${CONTRACT_ID}"
 WASM_HASH = "${WASM_HASH}"
 VERSION = "${CONTRACT_VERSION}"
-SOURCE_REPO = "https://github.com/Haroldwonder/SwiftRemit"
+SOURCE_REPO = "https://github.com/Haroldwonder/Daddy-config"
 
 # ─── Validators ───────────────────────────────────────────────────────────────
 # If running validators, list them here. Remove this section if not applicable.
 
 # [[VALIDATORS]]
-# ALIAS = "swiftremit-validator-1"
-# DISPLAY_NAME = "SwiftRemit Validator 1"
-# HOST = "validator1.swiftremit.example.com:11625"
+# ALIAS = "daddy-config-validator-1"
+# DISPLAY_NAME = "Daddy-config Validator 1"
+# HOST = "validator1.daddy-config.example.com:11625"
 # PUBLIC_KEY = "VALIDATOR_PUBLIC_KEY_HERE"
-# HISTORY = "https://history.swiftremit.example.com"
+# HISTORY = "https://history.daddy-config.example.com"
 
 # ─── Additional Information ───────────────────────────────────────────────────
 
@@ -78,9 +78,9 @@ SOURCE_REPO = "https://github.com/Haroldwonder/SwiftRemit"
 # ]
 
 # API endpoints (optional)
-# WEB_AUTH_ENDPOINT = "https://api.swiftremit.example.com/auth"
-# TRANSFER_SERVER = "https://api.swiftremit.example.com/sep24"
-# TRANSFER_SERVER_SEP0024 = "https://api.swiftremit.example.com/sep24"
+# WEB_AUTH_ENDPOINT = "https://api.daddy-config.example.com/auth"
+# TRANSFER_SERVER = "https://api.daddy-config.example.com/sep24"
+# TRANSFER_SERVER_SEP0024 = "https://api.daddy-config.example.com/sep24"
 
 # Compliance and regulatory information (optional)
 # ORG_LICENSE_TYPE = "Money Transmitter License"

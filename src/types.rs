@@ -1,4 +1,4 @@
-//! Type definitions for the SwiftRemit contract.
+//! Type definitions for the Daddy-config contract.
 //!
 //! This module defines the core data structures used throughout the contract,
 //! including remittance records and status enums.

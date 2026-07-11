@@ -4,7 +4,7 @@ import {
   nativeToScVal,
   Address,
 } from "@stellar/stellar-sdk";
-import { SwiftRemitError, ErrorCode } from "./errors.js";
+import { Daddy-configError, ErrorCode } from "./errors.js";
 import type {
   Remittance,
   RemittanceStatus,
@@ -52,7 +52,7 @@ export function parseRemittance(val: xdr.ScVal): Remittance {
 function assertDefined<T>(map: Record<string, unknown>, key: string): T {
   const value = map[key];
   if (value === undefined || value === null) {
-    throw new SwiftRemitError(
+    throw new Daddy-configError(
       ErrorCode.DataCorruption,
       `parseRemittance: missing required field "${key}"`
     );
@@ -62,7 +62,7 @@ function assertDefined<T>(map: Record<string, unknown>, key: string): T {
 
 function parseStatus(raw: Record<string, unknown>): RemittanceStatus {
   if (!raw || typeof raw !== "object") {
-    throw new SwiftRemitError(
+    throw new Daddy-configError(
       ErrorCode.DataCorruption,
       "parseRemittance: invalid status value"
     );
@@ -70,7 +70,7 @@ function parseStatus(raw: Record<string, unknown>): RemittanceStatus {
 
   const statusKeys = Object.keys(raw);
   if (statusKeys.length !== 1) {
-    throw new SwiftRemitError(
+    throw new Daddy-configError(
       ErrorCode.DataCorruption,
       "parseRemittance: invalid or missing status field"
     );
@@ -87,7 +87,7 @@ function parseStatus(raw: Record<string, unknown>): RemittanceStatus {
   ] as const;
 
   if (!validStatuses.includes(statusKey as RemittanceStatus)) {
-    throw new SwiftRemitError(
+    throw new Daddy-configError(
       ErrorCode.DataCorruption,
       `parseRemittance: unknown status \"${statusKey}\"`
     );

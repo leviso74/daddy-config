@@ -13,7 +13,7 @@ describe('pdfExportService', () => {
     status: 'completed',
     timestamp: '2026-06-27T11:00:00Z',
     memo: 'Test payment',
-    details: { fee: '2.5', platform: 'SwiftRemit' },
+    details: { fee: '2.5', platform: 'Daddy-config' },
   };
 
   beforeEach(() => {

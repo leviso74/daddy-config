@@ -114,7 +114,7 @@ class MockSep24AnchorServer {
 const createMockPool = () => {
     // In-memory mock - in real tests, use testcontainers or mocked pg
     return new pg_1.Pool({
-        connectionString: process.env.DATABASE_URL || 'postgresql://localhost:5432/swiftremit_test',
+        connectionString: process.env.DATABASE_URL || 'postgresql://localhost:5432/daddy-config_test',
     });
 };
 (0, vitest_1.describe)('Sep24Service', () => {

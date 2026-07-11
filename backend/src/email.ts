@@ -4,7 +4,7 @@ const host = process.env.SMTP_HOST;
 const port = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : undefined;
 const user = process.env.SMTP_USER;
 const pass = process.env.SMTP_PASS;
-const from = process.env.SMTP_FROM || 'no-reply@swiftremit.example';
+const from = process.env.SMTP_FROM || 'no-reply@daddy-config.example';
 
 let transporter: nodemailer.Transporter | null = null;
 

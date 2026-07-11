@@ -1,12 +1,12 @@
 #![cfg(test)]
 
-use crate::{ContractError, SwiftRemitContract, SwiftRemitContractClient};
+use crate::{ContractError, Daddy-configContract, Daddy-configContractClient};
 use soroban_sdk::{testutils::Address as _, token, Address, Env};
 
 #[test]
 fn test_protocol_fee_storage() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     env.as_contract(&contract_id, || {
         crate::storage::set_protocol_fee_bps(&env, 100).unwrap(); // 1%
@@ -20,7 +20,7 @@ fn test_protocol_fee_storage() {
 #[test]
 fn test_protocol_fee_cap() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     env.as_contract(&contract_id, || {
         assert!(crate::storage::set_protocol_fee_bps(&env, 200).is_ok());
@@ -36,7 +36,7 @@ fn test_protocol_fee_cap() {
 #[test]
 fn test_treasury_storage() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     env.as_contract(&contract_id, || {
         let treasury = Address::generate(&env);
@@ -53,7 +53,7 @@ fn test_treasury_storage() {
 #[test]
 fn test_protocol_fee_calculation() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     env.as_contract(&contract_id, || {
         crate::storage::set_protocol_fee_bps(&env, 100).unwrap();
@@ -73,7 +73,7 @@ fn test_protocol_fee_calculation() {
 #[test]
 fn test_zero_protocol_fee() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     env.as_contract(&contract_id, || {
         assert!(crate::storage::set_protocol_fee_bps(&env, 0).is_ok());
@@ -88,7 +88,7 @@ fn test_zero_protocol_fee() {
 #[test]
 fn test_default_protocol_fee() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
+    let contract_id = env.register_contract(None, Daddy-configContract {});
 
     env.as_contract(&contract_id, || {
         assert_eq!(crate::storage::get_protocol_fee_bps(&env), 0);
@@ -110,8 +110,8 @@ fn test_update_protocol_fee_admin_only() {
     let token_admin = Address::generate(&env);
     let token = env.register_stellar_asset_contract_v2(token_admin.clone());
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Initialize contract
     client.initialize(&admin, &token.address(), &250, &5, &50, &treasury);
@@ -141,8 +141,8 @@ fn test_update_protocol_fee_validation() {
     let token_admin = Address::generate(&env);
     let token = env.register_stellar_asset_contract_v2(token_admin.clone());
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Initialize contract
     client.initialize(&admin, &token.address(), &250, &5, &50, &treasury);
@@ -183,8 +183,8 @@ fn test_get_protocol_fee_bps_public() {
     let token_admin = Address::generate(&env);
     let token = env.register_stellar_asset_contract_v2(token_admin.clone());
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Initialize contract
     client.initialize(&admin, &token.address(), &250, &5, &50, &treasury);
@@ -215,8 +215,8 @@ fn test_get_treasury_public() {
     let token_admin = Address::generate(&env);
     let token = env.register_stellar_asset_contract_v2(token_admin.clone());
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Initialize contract
     client.initialize(&admin, &token.address(), &250, &5, &50, &treasury);
@@ -242,8 +242,8 @@ fn test_protocol_fee_event_emission() {
     let token_admin = Address::generate(&env);
     let token = env.register_stellar_asset_contract_v2(token_admin.clone());
 
-    let contract_id = env.register_contract(None, SwiftRemitContract {});
-    let client = SwiftRemitContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, Daddy-configContract {});
+    let client = Daddy-configContractClient::new(&env, &contract_id);
 
     // Initialize contract
     client.initialize(&admin, &token.address(), &250, &5, &50, &treasury);

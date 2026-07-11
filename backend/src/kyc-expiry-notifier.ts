@@ -16,7 +16,7 @@ import type { KycExpiryWarningPayload } from './webhooks/types';
 import { getAnchorKycConfigs } from './database';
 
 const WARN_DAYS = 7;
-const RENEWAL_BASE_URL = process.env.KYC_RENEWAL_BASE_URL ?? 'https://app.swiftremit.io/kyc/renew';
+const RENEWAL_BASE_URL = process.env.KYC_RENEWAL_BASE_URL ?? 'https://app.daddy-config.io/kyc/renew';
 
 export class KycExpiryNotifier {
   private dispatcher: WebhookDispatcher;

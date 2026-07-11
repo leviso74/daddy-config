@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Health Check Demo for SwiftRemit Smart Contract
+ * Health Check Demo for Daddy-config Smart Contract
  * 
  * This demonstrates how a health check would work in practice.
  * Since the contract has compilation issues, this shows the expected behavior.
@@ -51,7 +51,7 @@ async function checkHealth() {
 async function main() {
   const requestId = process.env.REQUEST_ID || uuidv4();
   logger = createLogger('health-check-demo', requestId);
-  logger.info('SwiftRemit Health Check Demo');
+  logger.info('Daddy-config Health Check Demo');
   
   // Run 5 health checks
   for (let i = 1; i <= 5; i++) {

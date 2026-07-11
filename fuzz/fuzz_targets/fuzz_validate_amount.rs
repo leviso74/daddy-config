@@ -1,7 +1,7 @@
 #![no_main]
 
 use libfuzzer_sys::fuzz_target;
-use swiftremit::validation::validate_amount;
+use daddy-config::validation::validate_amount;
 
 fuzz_target!(|data: &[u8]| {
     if data.len() < 16 {

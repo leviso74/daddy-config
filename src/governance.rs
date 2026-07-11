@@ -1,4 +1,4 @@
-//! Governance module for SwiftRemit.
+//! Governance module for Daddy-config.
 //!
 //! Implements the multi-sig / DAO proposal lifecycle:
 //! propose → vote → execute (with optional timelock) or expire.

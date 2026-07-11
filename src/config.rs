@@ -1,4 +1,4 @@
-//! Centralized configuration constants for the SwiftRemit contract.
+//! Centralized configuration constants for the Daddy-config contract.
 //!
 //! This module defines all contract-wide constants to ensure consistency
 //! and prevent duplicate definitions. All magic numbers should be defined

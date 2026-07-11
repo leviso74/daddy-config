@@ -14,23 +14,23 @@ use soroban_sdk::{
 };
 
 use crate::{
-    ContractError, ProposalAction, ProposalState, SwiftRemitContract,
-    SwiftRemitContractClient,
+    ContractError, ProposalAction, ProposalState, Daddy-configContract,
+    Daddy-configContractClient,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-fn setup() -> (Env, SwiftRemitContractClient<'static>) {
+fn setup() -> (Env, Daddy-configContractClient<'static>) {
     let env = Env::default();
     env.mock_all_auths();
-    let id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(&env, &id);
+    let id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(&env, &id);
     (env, client)
 }
 
-fn init(env: &Env, client: &SwiftRemitContractClient, admin: &Address) {
+fn init(env: &Env, client: &Daddy-configContractClient, admin: &Address) {
     let token = Address::generate(env);
     client.initialize(admin, &token, &30u32, &0u64, &0u32, admin);
 }
@@ -40,7 +40,7 @@ fn advance(env: &Env, secs: u64) {
 }
 
 // Bootstrap: 3 admins with quorum=3 and no timelock.
-fn setup_three_admin_governance() -> (Env, SwiftRemitContractClient<'static>, Address, Address, Address) {
+fn setup_three_admin_governance() -> (Env, Daddy-configContractClient<'static>, Address, Address, Address) {
     let (env, client) = setup();
     let admin1 = Address::generate(&env);
     let admin2 = Address::generate(&env);

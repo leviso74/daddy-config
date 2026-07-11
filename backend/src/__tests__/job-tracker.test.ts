@@ -92,20 +92,20 @@ describe('getJobSummaries', () => {
 });
 
 describe('MetricsService job metrics', () => {
-  it('exposes swiftremit_job_last_run_timestamp in Prometheus output', async () => {
+  it('exposes daddy-config_job_last_run_timestamp in Prometheus output', async () => {
     const { MetricsService } = await import('../metrics');
     const service = new MetricsService({} as Pool);
     service.recordJobRun('poll-kyc-statuses');
     const output = service.generatePrometheusText();
-    expect(output).toContain('swiftremit_job_last_run_timestamp{job_name="poll-kyc-statuses"}');
+    expect(output).toContain('daddy-config_job_last_run_timestamp{job_name="poll-kyc-statuses"}');
   });
 
-  it('exposes swiftremit_job_failure_total in Prometheus output', async () => {
+  it('exposes daddy-config_job_failure_total in Prometheus output', async () => {
     const { MetricsService } = await import('../metrics');
     const service = new MetricsService({} as Pool);
     service.recordJobFailure('revalidate-stale-assets');
     service.recordJobFailure('revalidate-stale-assets');
     const output = service.generatePrometheusText();
-    expect(output).toContain('swiftremit_job_failure_total{job_name="revalidate-stale-assets"} 2');
+    expect(output).toContain('daddy-config_job_failure_total{job_name="revalidate-stale-assets"} 2');
   });
 });

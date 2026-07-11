@@ -14,7 +14,7 @@ export default function AddressBook({ onSelectRecipient }) {
 
   const loadRecipients = () => {
     try {
-      const saved = localStorage.getItem('swiftremit_recipients')
+      const saved = localStorage.getItem('daddy-config_recipients')
       if (saved) {
         setRecipients(JSON.parse(saved))
       }
@@ -25,7 +25,7 @@ export default function AddressBook({ onSelectRecipient }) {
 
   const saveRecipients = (newRecipients) => {
     try {
-      localStorage.setItem('swiftremit_recipients', JSON.stringify(newRecipients))
+      localStorage.setItem('daddy-config_recipients', JSON.stringify(newRecipients))
       setRecipients(newRecipients)
     } catch (err) {
       setError('Failed to save recipients')

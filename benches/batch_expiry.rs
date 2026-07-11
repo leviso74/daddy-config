@@ -1,13 +1,13 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use soroban_sdk::{Env, Address, Vec, testutils::{Address as _, Ledger}};
-use swiftremit::{SwiftRemitContract, SwiftRemitContractClient};
+use daddy-config::{Daddy-configContract, Daddy-configContractClient};
 
 fn setup_contract_with_expired_remittances(
     env: &Env,
     count: u32,
-) -> (SwiftRemitContractClient, Vec<u64>) {
-    let contract_id = env.register_contract(None, SwiftRemitContract);
-    let client = SwiftRemitContractClient::new(env, &contract_id);
+) -> (Daddy-configContractClient, Vec<u64>) {
+    let contract_id = env.register_contract(None, Daddy-configContract);
+    let client = Daddy-configContractClient::new(env, &contract_id);
     
     let admin = Address::generate(env);
     let usdc_token = Address::generate(env);

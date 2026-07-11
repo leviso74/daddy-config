@@ -112,15 +112,15 @@ jobs:
 
       - name: Report WASM size
         run: |
-          WASM=target/wasm32-unknown-unknown/release/swiftremit.wasm
+          WASM=target/wasm32-unknown-unknown/release/daddy-config.wasm
           SIZE=$(stat -c%s "$WASM")
           echo "WASM binary: $((SIZE / 1024)) KB ($SIZE bytes)"
 
       - name: Upload WASM artifact
         uses: actions/upload-artifact@v4
         with:
-          name: swiftremit-wasm
-          path: target/wasm32-unknown-unknown/release/swiftremit.wasm
+          name: daddy-config-wasm
+          path: target/wasm32-unknown-unknown/release/daddy-config.wasm
           retention-days: 7
 
   # Gate job — required status check. Passes only when all jobs above pass.

@@ -2,7 +2,7 @@
 
 use crate::{
     migration::{MigrationBatch, MigrationSnapshot},
-    ContractError, RemittanceStatus, SwiftRemitContract, SwiftRemitContractClient,
+    ContractError, RemittanceStatus, Daddy-configContract, Daddy-configContractClient,
 };
 use soroban_sdk::{testutils::Address as _, token, xdr::ToXdr, Address, Bytes, BytesN, Env};
 
@@ -15,12 +15,12 @@ fn create_token<'a>(env: &Env, admin: &Address) -> token::StellarAssetClient<'a>
     )
 }
 
-fn create_contract<'a>(env: &Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_contract<'a>(env: &Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 /// Initialise a fresh contract and return (client, admin, token_client).
-fn setup(env: &Env) -> (SwiftRemitContractClient, Address, token::StellarAssetClient) {
+fn setup(env: &Env) -> (Daddy-configContractClient, Address, token::StellarAssetClient) {
     let admin = Address::generate(env);
     let token = create_token(env, &admin);
     let contract = create_contract(env);

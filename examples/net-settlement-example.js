@@ -1,5 +1,5 @@
 /**
- * Net Settlement Example for SwiftRemit
+ * Net Settlement Example for Daddy-config
  * 
  * This example demonstrates how to use the batch settlement with netting
  * functionality to optimize on-chain transfers by offsetting opposing flows.
@@ -393,7 +393,7 @@ async function batchSettleWithNetting(entries) {
 async function main() {
   const requestId = process.env.REQUEST_ID || uuidv4();
   logger = createLogger('net-settlement-example', requestId);
-  logger.info('=== SwiftRemit Net Settlement Examples ===');
+  logger.info('=== Daddy-config Net Settlement Examples ===');
 
   try {
     // Run examples

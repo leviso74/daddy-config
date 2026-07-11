@@ -2,7 +2,7 @@
 
 use libfuzzer_sys::fuzz_target;
 use soroban_sdk::{Bytes, Env};
-use swiftremit::validation::validate_evidence_hash;
+use daddy-config::validation::validate_evidence_hash;
 
 // Create the Soroban test environment once for the lifetime of the fuzzer
 // process.  OnceLock is stable since Rust 1.70 and avoids the overhead of

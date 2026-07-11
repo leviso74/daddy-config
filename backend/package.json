@@ -1,7 +1,7 @@
 {
-  "name": "swiftremit-verification-service",
+  "name": "daddy-config-verification-service",
   "version": "1.0.0",
-  "description": "Asset verification backend service for SwiftRemit",
+  "description": "Asset verification backend service for Daddy-config",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
@@ -29,7 +29,7 @@
     "@opentelemetry/sdk-node": "^0.215.0",
     "@opentelemetry/semantic-conventions": "^1.40.0",
     "@stellar/stellar-sdk": "^12.0.0",
-    "@swiftremit/sdk": "file:../sdk",
+    "@daddy-config/sdk": "file:../sdk",
     "axios": "^1.8.2",
     "cors": "^2.8.5",
     "csv-stringify": "^6.8.1",

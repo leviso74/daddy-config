@@ -1,7 +1,7 @@
 /**
- * SwiftRemit Client Example
+ * Daddy-config Client Example
  * 
- * This example demonstrates how to interact with the SwiftRemit smart contract
+ * This example demonstrates how to interact with the Daddy-config smart contract
  * from an external JavaScript/TypeScript client using the Stellar SDK.
  * 
  * Prerequisites:
@@ -137,7 +137,7 @@ async function invokeContract(sourceKeypair, contractId, method, args = []) {
 // === Contract Interaction Functions ===
 
 /**
- * Initialize the SwiftRemit contract
+ * Initialize the Daddy-config contract
  * This should be called once by the admin
  */
 async function initializeContract() {
@@ -529,7 +529,7 @@ async function getPlatformFeeBps() {
 
 async function main() {
   console.log('╔════════════════════════════════════════╗');
-  console.log('║     SwiftRemit Client Example          ║');
+  console.log('║     Daddy-config Client Example          ║');
   console.log('╚════════════════════════════════════════╝');
   
   console.log('\n📋 Configuration:');

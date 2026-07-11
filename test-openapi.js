@@ -13,7 +13,7 @@ try {
   if (!apiSpec.includes('openapi: 3.0.0')) {
     throw new Error('Missing OpenAPI version');
   }
-  if (!apiSpec.includes('SwiftRemit API Service')) {
+  if (!apiSpec.includes('Daddy-config API Service')) {
     throw new Error('Missing API title');
   }
   if (!apiSpec.includes('/api/currencies')) {
@@ -44,7 +44,7 @@ try {
   if (!backendSpec.includes('openapi: 3.0.0')) {
     throw new Error('Missing OpenAPI version');
   }
-  if (!backendSpec.includes('SwiftRemit Backend Service')) {
+  if (!backendSpec.includes('Daddy-config Backend Service')) {
     throw new Error('Missing Backend title');
   }
   if (!backendSpec.includes('/api/verification')) {

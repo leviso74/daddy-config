@@ -126,7 +126,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: swiftremit_test
+          POSTGRES_DB: daddy-config_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -146,12 +146,12 @@ jobs:
       - name: Run migrations
         working-directory: backend
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
         run: psql $DATABASE_URL -f migrations/webhook_schema.sql
       - run: npm test
         working-directory: backend
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/swiftremit_test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/daddy-config_test
           NODE_ENV: test
 
   # ── API (Node.js / TypeScript) ─────────────────────────────────────────────
@@ -275,16 +275,16 @@ jobs:
           version: "3.17.0"
 
       - name: Lint chart (default values)
-        run: helm lint charts/swiftremit
+        run: helm lint charts/daddy-config
 
       - name: Lint chart (dev values)
-        run: helm lint charts/swiftremit -f charts/swiftremit/values.dev.yaml
+        run: helm lint charts/daddy-config -f charts/daddy-config/values.dev.yaml
 
       - name: Lint chart (staging values)
-        run: helm lint charts/swiftremit -f charts/swiftremit/values.staging.yaml
+        run: helm lint charts/daddy-config -f charts/daddy-config/values.staging.yaml
 
       - name: Lint chart (production values)
-        run: helm lint charts/swiftremit -f charts/swiftremit/values.production.yaml
+        run: helm lint charts/daddy-config -f charts/daddy-config/values.production.yaml
 
   # ── Summary gate ───────────────────────────────────────────────────────────
   ci:

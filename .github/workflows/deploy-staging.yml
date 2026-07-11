@@ -108,7 +108,7 @@ jobs:
           key: ${{ secrets.STAGING_SSH_KEY }}
           port: ${{ secrets.STAGING_SSH_PORT || 22 }}
           source: "docker-compose.yml,docker-compose.override.yml,.env.testnet"
-          target: "~/swiftremit"
+          target: "~/daddy-config"
 
       - name: Deploy via Docker Compose
         uses: appleboy/ssh-action@v1.0.3
@@ -119,7 +119,7 @@ jobs:
           port: ${{ secrets.STAGING_SSH_PORT || 22 }}
           script: |
             set -euo pipefail
-            cd ~/swiftremit
+            cd ~/daddy-config
 
             # Log into GHCR
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin

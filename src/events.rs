@@ -1,4 +1,4 @@
-//! Event emission functions for the SwiftRemit contract.
+//! Event emission functions for the Daddy-config contract.
 //!
 //! This module provides functions to emit structured events for all significant
 //! contract operations. Events include schema versioning and ledger metadata
@@ -58,7 +58,7 @@ use crate::config::SCHEMA_VERSION;
 //   )
 // ============================================================================
 
-/// Emit a contract event with the standard SwiftRemit envelope.
+/// Emit a contract event with the standard Daddy-config envelope.
 ///
 /// Prepends `(SCHEMA_VERSION, ledger_sequence, ledger_timestamp)` to every
 /// event payload so consumers always have versioning and timing metadata.

@@ -1,5 +1,5 @@
 # values.dev.yaml — local / dev cluster overrides
-# Usage: helm install swiftremit ./charts/swiftremit -f charts/swiftremit/values.dev.yaml
+# Usage: helm install daddy-config ./charts/daddy-config -f charts/daddy-config/values.dev.yaml
 
 global:
   nodeEnv: development
@@ -13,7 +13,7 @@ api:
   config:
     NODE_ENV: development
   secret:
-    DATABASE_URL: "postgres://swiftremit:swiftremit@swiftremit-postgres:5432/swiftremit"
+    DATABASE_URL: "postgres://daddy-config:daddy-config@daddy-config-postgres:5432/daddy-config"
     CONTRACT_RPC_URL: "https://soroban-testnet.stellar.org"
     ANCHORS_ADMIN_API_KEY: "dev-admin-key"
 
@@ -30,7 +30,7 @@ backend:
     SOROBAN_RPC_URL: "https://soroban-testnet.stellar.org"
     NETWORK_PASSPHRASE: "Test SDF Network ; September 2015"
   secret:
-    DATABASE_URL: "postgres://swiftremit:swiftremit@swiftremit-postgres:5432/swiftremit"
+    DATABASE_URL: "postgres://daddy-config:daddy-config@daddy-config-postgres:5432/daddy-config"
     CONTRACT_ID: ""
     ADMIN_SECRET_KEY: ""
 

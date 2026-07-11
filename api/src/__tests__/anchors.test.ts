@@ -96,8 +96,8 @@ describe('Anchors API', () => {
   describe('Admin anchor management', () => {
     const newAnchor = {
       id: 'anchor-4',
-      name: 'SwiftRemit Partner',
-      domain: 'partner.swiftremit.io',
+      name: 'Daddy-config Partner',
+      domain: 'partner.daddy-config.io',
       logo_url: 'https://example.com/partner-logo.png',
       description: 'Regional payout partner',
       status: 'active',
@@ -148,7 +148,7 @@ describe('Anchors API', () => {
         .get('/api/anchors/anchor-4')
         .expect(200);
 
-      expect(getCreated.body.data.name).toBe('SwiftRemit Partner');
+      expect(getCreated.body.data.name).toBe('Daddy-config Partner');
 
       const updateResponse = await request(app)
         .put('/api/anchors/admin/anchor-4')

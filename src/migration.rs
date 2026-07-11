@@ -1,4 +1,4 @@
-//! Migration module for SwiftRemit contract upgrades.
+//! Migration module for Daddy-config contract upgrades.
 //!
 //! # Overview
 //!

@@ -31,7 +31,7 @@ export function generateReceiptPdf(remittance: Remittance): Promise<Buffer> {
   doc
     .fontSize(22)
     .fillColor(BRAND_COLOR)
-    .text('SwiftRemit', { align: 'left' })
+    .text('Daddy-config', { align: 'left' })
     .fontSize(10)
     .fillColor(LABEL_COLOR)
     .text('Blockchain-Powered Remittances', { align: 'left' })
@@ -108,7 +108,7 @@ export function generateReceiptPdf(remittance: Remittance): Promise<Buffer> {
     .fillColor(LABEL_COLOR)
     .text(
       `This receipt was generated on ${new Date().toUTCString()}. ` +
-        'SwiftRemit is not responsible for exchange rate fluctuations after settlement.',
+        'Daddy-config is not responsible for exchange rate fluctuations after settlement.',
       { align: 'center', width: 495 },
     );
 

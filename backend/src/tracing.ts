@@ -1,12 +1,12 @@
 /**
- * OpenTelemetry instrumentation for SwiftRemit backend.
+ * OpenTelemetry instrumentation for Daddy-config backend.
  *
  * Import this module FIRST (before any other imports) in index.ts so that
  * auto-instrumentation patches are applied before the libraries are loaded.
  *
  * Environment variables:
  *   OTEL_EXPORTER_OTLP_ENDPOINT  – OTLP HTTP endpoint (default: http://localhost:4318)
- *   OTEL_SERVICE_NAME            – Service name reported in traces (default: swiftremit-backend)
+ *   OTEL_SERVICE_NAME            – Service name reported in traces (default: daddy-config-backend)
  *   OTEL_ENABLED                 – Set to "false" to disable tracing (default: true)
  */
 
@@ -31,7 +31,7 @@ if (enabled) {
 
   sdk = new NodeSDK({
     resource: resourceFromAttributes({
-      [ATTR_SERVICE_NAME]: process.env.OTEL_SERVICE_NAME ?? 'swiftremit-backend',
+      [ATTR_SERVICE_NAME]: process.env.OTEL_SERVICE_NAME ?? 'daddy-config-backend',
       [ATTR_SERVICE_VERSION]: process.env.npm_package_version ?? '1.0.0',
     }),
     traceExporter: exporter,
@@ -55,7 +55,7 @@ if (enabled) {
 }
 
 /** Returns the active tracer for manual span creation. */
-export function getTracer(name = 'swiftremit') {
+export function getTracer(name = 'daddy-config') {
   return trace.getTracer(name);
 }
 

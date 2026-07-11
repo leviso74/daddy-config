@@ -8,11 +8,11 @@ class MetricsService {
     logger = (0, correlation_id_1.createLogger)('MetricsService');
     // Metrics storage
     metrics = {
-        swiftremit_settlements_total: {},
-        swiftremit_webhook_deliveries_total: {},
-        swiftremit_active_remittances: 0,
-        swiftremit_accumulated_fees: 0,
-        swiftremit_fx_rate_staleness_seconds: {},
+        daddy-config_settlements_total: {},
+        daddy-config_webhook_deliveries_total: {},
+        daddy-config_active_remittances: 0,
+        daddy-config_accumulated_fees: 0,
+        daddy-config_fx_rate_staleness_seconds: {},
     };
     constructor(pool) {
         this.pool = pool;
@@ -26,12 +26,12 @@ class MetricsService {
          FROM transactions 
          WHERE kind = 'withdrawal' 
          GROUP BY status`);
-            this.metrics.swiftremit_settlements_total = {};
+            this.metrics.daddy-config_settlements_total = {};
             result.rows.forEach(row => {
-                this.metrics.swiftremit_settlements_total[row.status] = parseInt(row.count);
+                this.metrics.daddy-config_settlements_total[row.status] = parseInt(row.count);
             });
             this.logger.debug('Settlement metrics updated', {
-                metrics: this.metrics.swiftremit_settlements_total,
+                metrics: this.metrics.daddy-config_settlements_total,
             });
         }
         catch (error) {
@@ -46,12 +46,12 @@ class MetricsService {
             const result = await this.pool.query(`SELECT status, COUNT(*) as count 
          FROM webhook_deliveries 
          GROUP BY status`);
-            this.metrics.swiftremit_webhook_deliveries_total = {};
+            this.metrics.daddy-config_webhook_deliveries_total = {};
             result.rows.forEach(row => {
-                this.metrics.swiftremit_webhook_deliveries_total[row.status] = parseInt(row.count);
+                this.metrics.daddy-config_webhook_deliveries_total[row.status] = parseInt(row.count);
             });
             this.logger.debug('Webhook delivery metrics updated', {
-                metrics: this.metrics.swiftremit_webhook_deliveries_total,
+                metrics: this.metrics.daddy-config_webhook_deliveries_total,
             });
         }
         catch (error) {
@@ -66,9 +66,9 @@ class MetricsService {
             const result = await this.pool.query(`SELECT COUNT(*) as count 
          FROM transactions 
          WHERE status IN ('pending', 'processing', 'submitted')`);
-            this.metrics.swiftremit_active_remittances = parseInt(result.rows[0].count);
+            this.metrics.daddy-config_active_remittances = parseInt(result.rows[0].count);
             this.logger.debug('Active remittances updated', {
-                count: this.metrics.swiftremit_active_remittances,
+                count: this.metrics.daddy-config_active_remittances,
             });
         }
         catch (error) {
@@ -83,9 +83,9 @@ class MetricsService {
             const result = await this.pool.query(`SELECT COALESCE(SUM(amount_fee), 0) as total_fees 
          FROM transactions 
          WHERE status = 'completed'`);
-            this.metrics.swiftremit_accumulated_fees = parseFloat(result.rows[0].total_fees);
+            this.metrics.daddy-config_accumulated_fees = parseFloat(result.rows[0].total_fees);
             this.logger.debug('Accumulated fees updated', {
-                fees: this.metrics.swiftremit_accumulated_fees,
+                fees: this.metrics.daddy-config_accumulated_fees,
             });
         }
         catch (error) {
@@ -94,7 +94,7 @@ class MetricsService {
     }
     setFxRateStalenessMetric(from, to, stalenessSeconds) {
         const pairKey = `${from.toUpperCase()}/${to.toUpperCase()}`;
-        this.metrics.swiftremit_fx_rate_staleness_seconds[pairKey] = stalenessSeconds;
+        this.metrics.daddy-config_fx_rate_staleness_seconds[pairKey] = stalenessSeconds;
     }
     /**
      * Update all metrics
@@ -113,31 +113,31 @@ class MetricsService {
     generatePrometheusText() {
         const lines = [];
         // Settlements counter
-        lines.push('# HELP swiftremit_settlements_total Total number of settlements by status');
-        lines.push('# TYPE swiftremit_settlements_total counter');
-        Object.entries(this.metrics.swiftremit_settlements_total).forEach(([status, count]) => {
-            lines.push(`swiftremit_settlements_total{status="${status}"} ${count}`);
+        lines.push('# HELP daddy-config_settlements_total Total number of settlements by status');
+        lines.push('# TYPE daddy-config_settlements_total counter');
+        Object.entries(this.metrics.daddy-config_settlements_total).forEach(([status, count]) => {
+            lines.push(`daddy-config_settlements_total{status="${status}"} ${count}`);
         });
         // Webhook deliveries counter
-        lines.push('# HELP swiftremit_webhook_deliveries_total Total number of webhook deliveries by result');
-        lines.push('# TYPE swiftremit_webhook_deliveries_total counter');
-        Object.entries(this.metrics.swiftremit_webhook_deliveries_total).forEach(([result, count]) => {
-            lines.push(`swiftremit_webhook_deliveries_total{result="${result}"} ${count}`);
+        lines.push('# HELP daddy-config_webhook_deliveries_total Total number of webhook deliveries by result');
+        lines.push('# TYPE daddy-config_webhook_deliveries_total counter');
+        Object.entries(this.metrics.daddy-config_webhook_deliveries_total).forEach(([result, count]) => {
+            lines.push(`daddy-config_webhook_deliveries_total{result="${result}"} ${count}`);
         });
         // Active remittances gauge
-        lines.push('# HELP swiftremit_active_remittances Number of active remittances');
-        lines.push('# TYPE swiftremit_active_remittances gauge');
-        lines.push(`swiftremit_active_remittances ${this.metrics.swiftremit_active_remittances}`);
+        lines.push('# HELP daddy-config_active_remittances Number of active remittances');
+        lines.push('# TYPE daddy-config_active_remittances gauge');
+        lines.push(`daddy-config_active_remittances ${this.metrics.daddy-config_active_remittances}`);
         // Accumulated fees gauge
-        lines.push('# HELP swiftremit_accumulated_fees Total accumulated fees from completed transactions');
-        lines.push('# TYPE swiftremit_accumulated_fees gauge');
-        lines.push(`swiftremit_accumulated_fees ${this.metrics.swiftremit_accumulated_fees}`);
+        lines.push('# HELP daddy-config_accumulated_fees Total accumulated fees from completed transactions');
+        lines.push('# TYPE daddy-config_accumulated_fees gauge');
+        lines.push(`daddy-config_accumulated_fees ${this.metrics.daddy-config_accumulated_fees}`);
         // FX rate staleness gauge by currency pair
-        lines.push('# HELP swiftremit_fx_rate_staleness_seconds FX rate staleness in seconds by currency pair');
-        lines.push('# TYPE swiftremit_fx_rate_staleness_seconds gauge');
-        Object.entries(this.metrics.swiftremit_fx_rate_staleness_seconds).forEach(([pair, stalenessSeconds]) => {
+        lines.push('# HELP daddy-config_fx_rate_staleness_seconds FX rate staleness in seconds by currency pair');
+        lines.push('# TYPE daddy-config_fx_rate_staleness_seconds gauge');
+        Object.entries(this.metrics.daddy-config_fx_rate_staleness_seconds).forEach(([pair, stalenessSeconds]) => {
             const [fromCurrency, toCurrency] = pair.split('/');
-            lines.push(`swiftremit_fx_rate_staleness_seconds{from_currency="${fromCurrency}",to_currency="${toCurrency}"} ${stalenessSeconds}`);
+            lines.push(`daddy-config_fx_rate_staleness_seconds{from_currency="${fromCurrency}",to_currency="${toCurrency}"} ${stalenessSeconds}`);
         });
         return lines.join('\n') + '\n';
     }

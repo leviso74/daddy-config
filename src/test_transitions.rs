@@ -3,7 +3,7 @@ extern crate std;
 #[allow(unused_imports)]
 use std::prelude::rust_2021::*;
 
-use crate::{SwiftRemitContract, SwiftRemitContractClient, RemittanceStatus};
+use crate::{Daddy-configContract, Daddy-configContractClient, RemittanceStatus};
 use soroban_sdk::{testutils::Address as _, token, Address, Env};
 use proptest::prelude::*;
 
@@ -12,14 +12,14 @@ fn create_token_contract<'a>(env: &Env, admin: &Address) -> token::StellarAssetC
     token::StellarAssetClient::new(env, &contract_id.address())
 }
 
-fn create_swiftremit_contract<'a>(env: &Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn create_daddy-config_contract<'a>(env: &Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 fn setup_contract(
     env: &Env,
 ) -> (
-    SwiftRemitContractClient,
+    Daddy-configContractClient,
     token::StellarAssetClient,
     Address,
     Address,
@@ -31,7 +31,7 @@ fn setup_contract(
     let agent = Address::generate(env);
     let sender = Address::generate(env);
 
-    let contract = create_swiftremit_contract(env);
+    let contract = create_daddy-config_contract(env);
 
     env.mock_all_auths();
     contract.initialize(&admin, &token.address, &250, &0, &0, &admin);

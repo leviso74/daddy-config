@@ -1,5 +1,5 @@
 {
-  "name": "swiftremit-frontend",
+  "name": "daddy-config-frontend",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -20,7 +20,8 @@
     "i18next": "^26.3.4",
     "jspdf": "^2.5.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.7.4"
   },
   "devDependencies": {
     "@pact-foundation/pact": "^13.1.0",

@@ -35,7 +35,7 @@ jobs:
 
       - name: Verify WASM artifact exists
         run: |
-          WASM_FILE="target/wasm32-unknown-unknown/release/swiftremit.wasm"
+          WASM_FILE="target/wasm32-unknown-unknown/release/daddy-config.wasm"
           if [ ! -f "$WASM_FILE" ]; then
             echo "❌ WASM artifact not found at $WASM_FILE"
             exit 1

@@ -4,9 +4,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "swiftremit.fullname" $ }}-{{ . }}
+  name: {{ include "daddy-config.fullname" $ }}-{{ . }}
   labels:
-    {{- include "swiftremit.labels" $ | nindent 4 }}
+    {{- include "daddy-config.labels" $ | nindent 4 }}
     app.kubernetes.io/component: {{ . }}
 spec:
   type: {{ $svc.service.type }}
@@ -16,5 +16,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "swiftremit.selectorLabels" (merge (dict "component" .) $) | nindent 4 }}
+    {{- include "daddy-config.selectorLabels" (merge (dict "component" .) $) | nindent 4 }}
 {{- end }}

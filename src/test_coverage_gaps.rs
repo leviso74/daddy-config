@@ -1,4 +1,4 @@
-//! Coverage gap tests for SwiftRemit — Issue #395
+//! Coverage gap tests for Daddy-config — Issue #395
 //!
 //! Covers error conditions, branch paths, and query functions not exercised
 //! by the existing test suite.
@@ -7,7 +7,7 @@
 
 use crate::{
     fee_service::{FeeBreakdown},
-    SwiftRemitContract, SwiftRemitContractClient,
+    Daddy-configContract, Daddy-configContractClient,
 };
 use soroban_sdk::{testutils::Address as _, token, Address, Env};
 
@@ -18,12 +18,12 @@ fn create_token<'a>(env: &Env, admin: &Address) -> token::StellarAssetClient<'a>
     token::StellarAssetClient::new(env, &id.address())
 }
 
-fn new_contract<'a>(env: &Env) -> SwiftRemitContractClient<'a> {
-    SwiftRemitContractClient::new(env, &env.register_contract(None, SwiftRemitContract {}))
+fn new_contract<'a>(env: &Env) -> Daddy-configContractClient<'a> {
+    Daddy-configContractClient::new(env, &env.register_contract(None, Daddy-configContract {}))
 }
 
 /// Returns (contract, token, admin, agent, sender) with 10_000 tokens minted to sender.
-fn setup(env: &Env) -> (SwiftRemitContractClient, token::StellarAssetClient, Address, Address, Address) {
+fn setup(env: &Env) -> (Daddy-configContractClient, token::StellarAssetClient, Address, Address, Address) {
     let admin = Address::generate(env);
     let token_admin = Address::generate(env);
     let token = create_token(env, &token_admin);

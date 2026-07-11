@@ -15,7 +15,7 @@ const js_yaml_1 = __importDefault(require("js-yaml"));
         (0, vitest_1.expect)(spec).toBeDefined();
         (0, vitest_1.expect)(spec.openapi).toBe('3.0.0');
         (0, vitest_1.expect)(spec.info).toBeDefined();
-        (0, vitest_1.expect)(spec.info.title).toBe('SwiftRemit Backend Service');
+        (0, vitest_1.expect)(spec.info.title).toBe('Daddy-config Backend Service');
         (0, vitest_1.expect)(spec.paths).toBeDefined();
     });
     (0, vitest_1.it)('should document all asset verification endpoints', () => {

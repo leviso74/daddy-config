@@ -1,4 +1,4 @@
-//! Centralized fee calculation service for the SwiftRemit contract.
+//! Centralized fee calculation service for the Daddy-config contract.
 //!
 //! This module provides a unified interface for all fee calculations, supporting:
 //! - Multiple fee strategies (Percentage, Flat, Dynamic)
