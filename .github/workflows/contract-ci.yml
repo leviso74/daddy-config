@@ -117,7 +117,7 @@ jobs:
           echo "WASM binary: $((SIZE / 1024)) KB ($SIZE bytes)"
 
       - name: Upload WASM artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: daddy-config-wasm
           path: target/wasm32-unknown-unknown/release/daddy-config.wasm

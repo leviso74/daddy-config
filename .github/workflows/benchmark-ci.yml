@@ -56,14 +56,14 @@ jobs:
           ls -la bench-results/
 
       - name: Upload benchmark results as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: benchmark-results-${{ github.sha }}
           path: bench-results/
           retention-days: 30
 
       - name: Upload bench output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: bench-output-${{ github.sha }}
           path: bench_output.txt
