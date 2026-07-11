@@ -33,7 +33,7 @@ jobs:
           - fuzz_validate_recipient_hash
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install nightly toolchain
         uses: dtolnay/rust-toolchain@nightly
